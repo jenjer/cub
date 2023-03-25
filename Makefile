@@ -6,14 +6,14 @@
 #    By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/03/25 17:30:22 by gyopark          ###   ########.fr        #
+#    Updated: 2023/03/25 20:20:17 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3d
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror 
+CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
 MLXDIR		= ./mlx
 FT_PRINTF	= ft_printf
@@ -21,6 +21,7 @@ PRINTF_LIB	= libftprintf.a
 
 SRCS_MAN 	= main.c					\
 			  map_setting.c				\
+			  map_valid.c				\
 			  utils.c					\
 			  gnl/get_next_line.c		\
 			  gnl/get_next_line_utils.c	

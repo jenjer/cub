@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/25 16:17:47 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/25 17:42:50 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ int	ft_strrncmp(char *s1, char *s2, int n)
 	else
 		return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/25 17:20:06 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/25 20:26:25 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ typedef struct s_meta_data
 	char	**sp_map;
 }	t_meta_data;
 
-int	map_init(t_meta_data *meta, int width_temp, char **tmp_map, int idx);
+int	map_init(t_meta_data *meta, char **tmp_map, int idx);
 int	ft_strrncmp(char *s1, char *s2, int n);
 int	free_all(t_meta_data meta);
+int	map_valid_check(t_meta_data *meta);
 
 #endif
