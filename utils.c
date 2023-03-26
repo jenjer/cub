@@ -6,11 +6,40 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/25 17:42:50 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/26 19:42:48 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	exit_error(char *message, int code)
+{
+	write(2, message, ft_strlen(message));
+	exit(code);
+}
+
+void	skip_space(char **str)
+{
+	while (*str[0] == '\t' || *str[0] == '\v' || \
+			*str[0] == '\f' || *str[0] == '\r' || *str[0] == ' ')
+		(*str)++;
+}
+
+int	ft_isnum(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			;
+		else
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	free_all(t_meta_data meta)
 {

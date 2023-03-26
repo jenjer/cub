@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/25 20:47:08 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/26 19:42:01 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void	print_map(t_meta_data meta)
 		printf("%s\n", meta.sp_map[i]);
 		i++;
 	}
+	printf("north : %s\n", meta.north);
+	printf("south : %s\n", meta.south);
+	printf("west : %s\n", meta.west);
+	printf("east : %s\n", meta.east);
+	printf("F RED : %d\n", meta.f_color->red);
+	printf("F GREEN : %d\n", meta.f_color->green);
+	printf("F BLUE : %d\n", meta.f_color->blue);
+	printf("C RED : %d\n", meta.c_color->red);
+	printf("C GREEN : %d\n", meta.c_color->green);
+	printf("C BLUE : %d\n", meta.c_color->blue);
 }
 
 void	leakcheck(void)
@@ -48,6 +58,8 @@ void	init_meta_data(char *name, t_meta_data *meta)
 	meta->map = 0;
 	meta->sp_map = 0;
 	meta->max_width = 0;
+	meta->f_color = NULL;
+	meta->c_color = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -58,14 +70,16 @@ int	main(int argc, char **argv)
 	init_meta_data(argv[1], &meta);
 	if (argc != 2 || ft_strrncmp(argv[1], ".cub", 4))
 		return (write(2, "Invalid Argument!\n", 18) * 0 + 1);
+	if (map_direction_init(&meta))
+		return (write(2, "File open err!\n", 15) * 0 + 1);
 	if (map_init(&meta, NULL, 0))
 		return (write(2, "File open err!\n", 15) * 0 + 1);
 	printf("height : %d\n", meta.height);
 	printf("width : %d\n\n", meta.max_width);
-	print_map(meta);
 	//map_init에서 gnl할 때마다 0, 1, ' ', \n, 동서남북 제외 다른거 나오면 에러
-	if (map_valid_check(&meta))
+	if (map_valid_check(meta))
 		return (write(2, "Invalid map!\n", 13) * 0 + 1);
 	write(1, "valid\n", ft_strlen("valid\n"));
+	print_map(meta);
 	return (free_all(meta));
 }

@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/25 20:26:25 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/26 19:38:02 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,36 @@
 # define KEY_D 2
 # define BUTTON_X 17
 
+typedef struct s_color
+{
+	int	red;
+	int	green;
+	int	blue;
+}	t_color;
+
 typedef struct s_meta_data
 {
+	t_color	*f_color;
+	t_color	*c_color;
 	int		fd;
 	int		height;
 	int		max_width;
 	int		add_height;
 	char	**map;
 	char	**sp_map;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
 }	t_meta_data;
 
-int	map_init(t_meta_data *meta, char **tmp_map, int idx);
-int	ft_strrncmp(char *s1, char *s2, int n);
-int	free_all(t_meta_data meta);
-int	map_valid_check(t_meta_data *meta);
+int		map_init(t_meta_data *meta, char **tmp_map, int idx);
+int		ft_strrncmp(char *s1, char *s2, int n);
+int		free_all(t_meta_data meta);
+int		map_valid_check(t_meta_data meta);
+int		ft_isnum(char *str);
+int		map_direction_init(t_meta_data *meta);
+void	skip_space(char **str);
+int		add_color(t_meta_data *meta, char *tmp, int flag);
 
 #endif

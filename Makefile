@@ -6,7 +6,7 @@
 #    By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/03/25 20:20:17 by gyopark          ###   ########.fr        #
+#    Updated: 2023/03/26 18:31:46 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ PRINTF_LIB	= libftprintf.a
 SRCS_MAN 	= main.c					\
 			  map_setting.c				\
 			  map_valid.c				\
+			  map_direction.c			\
+			  map_color.c				\
 			  utils.c					\
 			  gnl/get_next_line.c		\
 			  gnl/get_next_line_utils.c	

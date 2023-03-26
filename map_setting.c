@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/25 20:47:47 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/26 19:17:45 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int	map_init(t_meta_data *meta, char **tmp_map, int idx)
 {
 	char	*line;
 
-	if (meta->fd <= 0)
-		return (1);
 	while (1)
 	{
 		line = get_next_line(meta->fd);
