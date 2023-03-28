@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/28 21:58:40 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 22:56:33 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include "gnl/get_next_line.h"
-# include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 
 # define X_EVENT_KEY_PRESS 2
