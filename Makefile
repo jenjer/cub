@@ -6,7 +6,7 @@
 #    By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/03/26 18:31:46 by gyopark          ###   ########.fr        #
+#    Updated: 2023/03/28 20:33:37 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_MAN 	= main.c					\
 			  map_direction.c			\
 			  map_color.c				\
 			  utils.c					\
+			  utils2.c					\
 			  gnl/get_next_line.c		\
 			  gnl/get_next_line_utils.c	
 
@@ -38,7 +39,7 @@ $(NAME) : $(OBJS_MAN)
 		make all -C $(FT_PRINTF)
 		$(CC) $(CFLAGS) -o $(NAME) $(MLX) $^ $(FT_PRINTF)/$(PRINTF_LIB)
 
-all : $(OBJS_MAN)
+all : $(NAME)
 
 fclean : clean
 		rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/03/26 19:22:59 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 20:30:36 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	see_flag(t_meta_data *meta, char *tmp, int flag)
 	if (fd == -1)
 		return (1);
 	if (flag == 1)
-		meta->north = tmp;
+		meta->north = ft_strdup(tmp);
 	else if (flag == 2)
-		meta->south = tmp;
+		meta->south = ft_strdup(tmp);
 	else if (flag == 3)
-		meta->west = tmp;
+		meta->west = ft_strdup(tmp);
 	else if (flag == 4)
-		meta->east = tmp;
+		meta->east = ft_strdup(tmp);
 	return (0);
 }
 
@@ -73,9 +73,11 @@ int	add_direction(t_meta_data *meta, char *line)
 {
 	int		flag;
 	char	*tmp;
+	char	*for_free;
 
 	flag = 0;
 	tmp = ft_strdup(line);
+	for_free = tmp;
 	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0
 		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0
 		|| ft_strncmp(line, "F", 1) == 0 || ft_strncmp(line, "C", 1) == 0)
@@ -87,6 +89,8 @@ int	add_direction(t_meta_data *meta, char *line)
 		return (1);
 	if (see_flag(meta, tmp, flag))
 		return (1);
+	free(for_free);
+	for_free = NULL;
 	return (0);
 }
 
@@ -104,13 +108,20 @@ int	map_direction_init(t_meta_data *meta)
 		if (!line)
 			return (1);
 		if (ft_strlen(line) == 1 && line[0] == '\n')
+		{
+			free(line);
 			continue ;
+		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (!add_direction(meta, line))
 			flag++;
 		else
+		{
+			free(line);
 			return (1);
+		}
+		free(line);
 		if (flag == 6)
 			break ;
 	}

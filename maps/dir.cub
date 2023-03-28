@@ -1,18 +1,18 @@
-
-F 255,222,0
-
+NO ./test/this_is_north
+SO ./test/this_is_south
+WE ./test/this_is_west
 EA ./test/this_is_east
 
-NO ./test/this_is_north
-
-SO ./test/this_is_south
-
-WE ./test/this_is_west
-
+F 255,222,0
 C 255,211,1
 
+111111111   111
+110100001    101
+10001N011     111
 111111111
-110000001
-1000N0011
-11111111
-111111111
+
+111
+111
+111
+11
+1111

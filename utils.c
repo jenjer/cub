@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/26 19:42:48 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 20:32:03 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,23 @@ int	ft_isnum(char *str)
 	return (0);
 }
 
-int	free_all(t_meta_data meta)
+int	map_free_all(t_meta_data meta)
 {
 	int		i;
 
 	i = 0;
+	if (meta.f_color)
+		free(meta.f_color);
+	if (meta.c_color)
+		free(meta.c_color);
+	if (meta.north)
+		free(meta.north);
+	if (meta.south)
+		free(meta.south);
+	if (meta.west)
+		free(meta.west);
+	if (meta.east)
+		free(meta.east);
 	while (meta.map[i])
 		free(meta.map[i++]);
 	free(meta.map);

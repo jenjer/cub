@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 18:06:26 by gyopark           #+#    #+#             */
-/*   Updated: 2023/03/26 19:06:11 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 20:25:20 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ int	add_color(t_meta_data *meta, char *tmp, int flag)
 	if (i != 3)
 		return (1);
 	if (match_color(color, rgb))
+	{
+		free_spl(rgb);
+		rgb = NULL;
 		return (1);
+	}
+	free_spl(rgb);
+	rgb = NULL;
 	return (0);
 }

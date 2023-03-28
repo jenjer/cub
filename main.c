@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/26 19:42:01 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 20:33:41 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 {
 	t_meta_data	meta;
 
-	// atexit(leakcheck);
+	atexit(leakcheck);
 	init_meta_data(argv[1], &meta);
 	if (argc != 2 || ft_strrncmp(argv[1], ".cub", 4))
 		return (write(2, "Invalid Argument!\n", 18) * 0 + 1);
@@ -81,5 +81,5 @@ int	main(int argc, char **argv)
 		return (write(2, "Invalid map!\n", 13) * 0 + 1);
 	write(1, "valid\n", ft_strlen("valid\n"));
 	print_map(meta);
-	return (free_all(meta));
+	return (map_free_all(meta));
 }
