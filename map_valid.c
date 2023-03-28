@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/28 19:52:27 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 22:00:59 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	valid_char_check(char c)
 		|| c == 'W' || c == 'X');
 }
 
-int	map_valid_check(t_meta_data meta)
+int	map_valid_check(t_meta_data *meta)
 {
 	int	r;
 	int	c;
@@ -49,19 +49,31 @@ int	map_valid_check(t_meta_data meta)
 
 	flag = 0;
 	r = -1;
-	while (meta.sp_map[++r])
+	while (meta->sp_map[++r])
 	{
 		c = -1;
-		while (meta.sp_map[r][++c])
+		while (meta->sp_map[r][++c])
 		{
-			if (!valid_char_check(meta.sp_map[r][c]))
-				return (1);
-			if (meta.sp_map[r][c] == 'X')
-				if (map_check_func(&meta, r, c))
-					return (1);
-			if (meta.sp_map[r][c] == 'N' || meta.sp_map[r][c] == 'S'
-				|| meta.sp_map[r][c] == 'E' || meta.sp_map[r][c] == 'W')
+			if (!valid_char_check(meta->sp_map[r][c]))
+			{
+				write(2, "Invalid map!", ft_strlen("Invalid map!"));
+				exit(1);
+			}
+			if (meta->sp_map[r][c] == 'X')
+			{
+				if (map_check_func(meta, r, c))
+				{
+					write(2, "Invalid map!", ft_strlen("Invalid map!"));
+					exit(1);
+				}
+			}
+			if (meta->sp_map[r][c] == 'N' || meta->sp_map[r][c] == 'S'
+				|| meta->sp_map[r][c] == 'E' || meta->sp_map[r][c] == 'W')
+			{
+				meta->player_x = c;
+				meta->player_y = r;
 				flag++;
+			}
 		}
 	}
 	return (flag != 1);

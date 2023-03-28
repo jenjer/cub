@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/28 20:33:41 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 22:01:26 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	print_map(t_meta_data meta)
 	printf("C RED : %d\n", meta.c_color->red);
 	printf("C GREEN : %d\n", meta.c_color->green);
 	printf("C BLUE : %d\n", meta.c_color->blue);
+	printf("player X : %d\n", meta.player_x);
+	printf("player Y : %d\n", meta.player_y);
 }
 
 void	leakcheck(void)
@@ -60,26 +62,28 @@ void	init_meta_data(char *name, t_meta_data *meta)
 	meta->max_width = 0;
 	meta->f_color = NULL;
 	meta->c_color = NULL;
+	meta->player_x = 0;
+	meta->player_y = 0;
 }
 
 int	main(int argc, char **argv)
 {
 	t_meta_data	meta;
+	// t_param		param;
 
 	atexit(leakcheck);
 	init_meta_data(argv[1], &meta);
 	if (argc != 2 || ft_strrncmp(argv[1], ".cub", 4))
 		return (write(2, "Invalid Argument!\n", 18) * 0 + 1);
-	if (map_direction_init(&meta))
+	if (map_direction_init(&meta) || map_init(&meta, NULL, 0))
 		return (write(2, "File open err!\n", 15) * 0 + 1);
-	if (map_init(&meta, NULL, 0))
-		return (write(2, "File open err!\n", 15) * 0 + 1);
-	printf("height : %d\n", meta.height);
-	printf("width : %d\n\n", meta.max_width);
-	//map_init에서 gnl할 때마다 0, 1, ' ', \n, 동서남북 제외 다른거 나오면 에러
-	if (map_valid_check(meta))
+	if (map_valid_check(&meta))
 		return (write(2, "Invalid map!\n", 13) * 0 + 1);
-	write(1, "valid\n", ft_strlen("valid\n"));
 	print_map(meta);
+	// param_init(argv[1], &param);
+	// if (param.fd <= 0)
+		// return (write(2, "Invalid Map File\n", 17) * 0 + 1);
+	// param.win = mlx_new_window(param.mlx, 1920, 1080, "cub3d");
+	write(1, "valid\n", ft_strlen("valid\n"));
 	return (map_free_all(meta));
 }

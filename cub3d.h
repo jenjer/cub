@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/28 20:18:29 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 21:58:40 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_meta_data
 	int		height;
 	int		max_width;
 	int		add_height;
+	int		player_x;
+	int		player_y;
 	char	**map;
 	char	**sp_map;
 	char	*north;
@@ -54,13 +56,21 @@ typedef struct s_meta_data
 	char	*east;
 }	t_meta_data;
 
+typedef struct s_param
+{
+	int		fd;
+	void	*mlx;
+	void	*win;
+}	t_param;
+
 //init function
 int		map_init(t_meta_data *meta, char **tmp_map, int idx);
 int		map_direction_init(t_meta_data *meta);
+void	param_init(char *argv1, t_param *param);
 
 //parsing function
 int		add_color(t_meta_data *meta, char *tmp, int flag);
-int		map_valid_check(t_meta_data meta);
+int		map_valid_check(t_meta_data *meta);
 
 //freeing function
 int		map_free_all(t_meta_data meta);

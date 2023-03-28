@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/28 19:52:25 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/03/28 21:54:35 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	make_sp_map(t_meta_data *meta)
 	idx = 0;
 	while (++i < meta->height + 1)
 		deep_copy_space(meta->sp_map[i], meta->map[idx++], meta->max_width);
+	
 	if (temp_sp_map)
 		free(temp_sp_map);
 }
