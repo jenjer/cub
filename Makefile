@@ -6,14 +6,14 @@
 #    By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/04/09 18:11:03 by gyopark          ###   ########.fr        #
+#    Updated: 2023/04/11 15:37:25 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3d
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS      = -Wall -Wextra -Werror -g #-fsanitize=address
 MLX         = -L./mlx -lmlx -framework OpenGL -framework AppKit
 MLXDIR      = ./mlx
 LIBFTDIR    = ./libft
