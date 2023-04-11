@@ -1,7 +1,7 @@
-NO ./test/this_is_north
-SO ./test/this_is_south
-WE ./test/this_is_west
-EA ./test/this_is_east
+NO ./texture/1.xpm
+SO ./texture/2.xpm
+WE ./texture/3.xpm
+EA ./texture/4.xpm
 
 F 255,222,0
 C 255,211,1
@@ -15,8 +15,8 @@ C 255,211,1
 
 
 111111111   1111
-110100001   1101
-10001N011   11111
+1101N0001   1101
+100011011   11111
 111111111
 
 111

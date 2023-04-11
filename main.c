@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/28 22:01:26 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/09 17:41:52 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,30 @@ void	init_meta_data(char *name, t_meta_data *meta)
 int	main(int argc, char **argv)
 {
 	t_meta_data	meta;
-	// t_param		param;
+	t_param		*param;
 
+	param = (t_param *)malloc(sizeof(t_param));
+	if (!param)
+		ft_exit("asdf");
+	memset(param, 0, sizeof(t_param));
 	atexit(leakcheck);
 	init_meta_data(argv[1], &meta);
 	if (argc != 2 || ft_strrncmp(argv[1], ".cub", 4))
-		return (write(2, "Invalid Argument!\n", 18) * 0 + 1);
+		return (ft_exit("Invalid Argument\n"));
 	if (map_direction_init(&meta) || map_init(&meta, NULL, 0))
-		return (write(2, "File open err!\n", 15) * 0 + 1);
+		return (ft_exit("file open error\n"));
 	if (map_valid_check(&meta))
-		return (write(2, "Invalid map!\n", 13) * 0 + 1);
+		return (ft_exit("Invalid map\n"));
 	print_map(meta);
+
+	if (map_cast(param))
+		exit(1);	
+
+	write(1, "valid\n", ft_strlen("valid\n"));
+	return (map_free_all(meta));
+}
+
 	// param_init(argv[1], &param);
 	// if (param.fd <= 0)
 		// return (write(2, "Invalid Map File\n", 17) * 0 + 1);
 	// param.win = mlx_new_window(param.mlx, 1920, 1080, "cub3d");
-	write(1, "valid\n", ft_strlen("valid\n"));
-	return (map_free_all(meta));
-}
