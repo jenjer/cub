@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_mlx.c                                          :+:      :+:    :+:   */
+/*   map_origin_valid.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/22 19:58:14 by gyopark          ###   ########.fr       */
+/*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
+/*   Updated: 2023/04/22 20:58:05 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	param_init(char *argv1, t_param *param)
+int	check_map_space(char *line)
 {
-	param->fd = open(argv1, O_RDONLY);
-	if (param->fd <= 0)
-		return ;
-	param->mlx = mlx_init();
-	param->win = NULL;
+	if (ft_strlen(line) == 1 && line[0] == '\n')
+		
+}
+
+int	check_original_map(char **map)
+{
+	int	r;
+
+	r = -1;
+	if (check_map_space(map[++r]))
+		ft_exit("Invalid map\n");
 }

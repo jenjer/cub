@@ -6,7 +6,7 @@
 #    By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/04/17 15:00:06 by youngski         ###   ########.fr        #
+#    Updated: 2023/04/22 20:50:26 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS_MAN    = main.c                    \
 			  utils.c                   \
 			  utils2.c                  \
 			  map_cast.c				\
-			  map_loop.c				\
+			  map_origin_valid.c		\
 			  gnl/get_next_line.c       
 
 OBJS_MAN    = ${SRCS_MAN:.c=.o}

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_loop.c                                         :+:      :+:    :+:   */
+/*   cub2d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 17:01:43 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/09 17:08:20 by gyopark          ###   ########.fr       */
+/*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
+/*   Updated: 2023/04/22 19:55:46 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef CUB2D_H
+# define CUB2D_H
 
-// int	main_loop(t_param *param)
-// {
-// 	while (1)
-// 		;
-// }
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+}	t_mlx;
 
-// int	key_press(int key, t_param *param)
-// {
-// 	while (1)
-// 		;
-// }
+typedef struct s_img
+{
+	void	*img;
+	int		*data;
+	int		bpp;
+	int		line_size;
+	int		endian;
+}	t_img;
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/09 14:58:09 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/22 20:52:10 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	map_valid_check(t_meta_data *meta)
 
 	flag = 0;
 	r = -1;
+	if (check_original_map(meta->map))
+		ft_exit("Invalid map!\n");
 	while (meta->sp_map[++r])
 	{
 		c = -1;

@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/20 17:55:47 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:51:00 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ typedef struct s_meta_data
 }	t_meta_data;
 
 // after parse
-
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img;		//	pointer to the image data
-	void		*data;		//	pointer to the first pixel of image
+	void	*data;		//	pointer to the first pixel of image
 	int		size_l;		//	size of a line in bytes
 	int		bpp;		//	number of bits per pixel
 	int		endian;		//	endian of image data
@@ -104,6 +103,7 @@ void	param_init(char *argv1, t_param *param);
 // parsing function
 int		add_color(t_meta_data *meta, char *tmp, int flag);
 int		map_valid_check(t_meta_data *meta);
+int		map_valid_ch
 
 // freeing function
 int		map_free_all(t_meta_data meta);
