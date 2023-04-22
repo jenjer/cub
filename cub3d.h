@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/09 19:48:22 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/20 17:55:47 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_color
 	int	red;
 	int	green;
 	int	blue;
+	int	all;
 }	t_color;
 
 typedef struct s_meta_data
@@ -61,7 +62,7 @@ typedef struct s_meta_data
 typedef struct	s_img
 {
 	void	*img;		//	pointer to the image data
-	int		*data;		//	pointer to the first pixel of image
+	void		*data;		//	pointer to the first pixel of image
 	int		size_l;		//	size of a line in bytes
 	int		bpp;		//	number of bits per pixel
 	int		endian;		//	endian of image data
@@ -115,7 +116,10 @@ int		ft_strrncmp(char *s1, char *s2, int n);
 int		ft_exit(char *str);
 
 // casting
-int		map_cast(t_param *param);
+int		map_cast(t_param *param, t_meta_data meta);
 void	load_image(t_param *param, int *texture, char *path, t_img *img);
+
+//color
+int		make_rgb_bit(t_meta_data *meta);
 
 #endif

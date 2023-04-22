@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/11 15:32:54 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/20 14:08:21 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	param_texture_init(int **texture, int width, int height)
 		memset(texture[i++], 0, sizeof(int) * (width * height));
 	return (0);
 }
+/*
 
 void	load_image(t_param *param, int *texture, char *path, t_img *img)
 {
@@ -66,7 +67,8 @@ void	load_image(t_param *param, int *texture, char *path, t_img *img)
 	}
 	mlx_destroy_image(param->mlx, img->img);
 }
-
+*/
+/*
 t_img	load_texture(t_param *param)
 {
 	t_img	img;
@@ -77,6 +79,7 @@ t_img	load_texture(t_param *param)
 	load_image(param, param->texture[3], "texture/4.xpm", &img);
 	return (img);
 }
+*/
 
 // ----
 int	main_loop(t_param *param)
@@ -95,7 +98,7 @@ int	key_press(int key, t_param *param)
 }
 // ----
 
-int	map_cast(t_param *param)
+int	map_cast(t_param *param, t_meta_data data)
 {	
 	if (fill_param(param))
 		return (1);
@@ -105,7 +108,7 @@ int	map_cast(t_param *param)
 	param->win = mlx_new_window(param->mlx, 1920, 1080, "cub3d"); 
 	// param->img = load_texture(param);
 	param->img.img = mlx_new_image(param->mlx, 1920, 1080);
-	param->img.data = (int *)mlx_get_data_addr(param->img.img, &(param->img.bpp), \
+	param->img.data = mlx_get_data_addr(param->img.img, &(param->img.bpp), \
 	&(param->img.size_l), &(param->img.endian));
 
 	mlx_loop_hook(param->mlx, &main_loop, param);
