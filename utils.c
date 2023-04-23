@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/03/28 20:32:03 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:52:31 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	map_free_all(t_meta_data meta)
 	i = 0;
 	while (meta.sp_map[i])
 		free(meta.sp_map[i++]);
+	i = 0;
 	free(meta.sp_map);
 	return (0);
 }

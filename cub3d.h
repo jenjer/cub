@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/23 15:39:45 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:04:00 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ typedef struct s_meta_data
 	char	*south;
 	char	*west;
 	char	*east;
+	int		pos1_r;
+	int		pos1_c;
+	int		num1;
+	int		**visited;
 }	t_meta_data;
 
 // after parse

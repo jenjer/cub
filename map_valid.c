@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/23 16:12:09 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:43:52 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,53 @@ int	valid_char_check(char c)
 		|| c == 'W' || c == 'X');
 }
 
+void	do_dfs1(t_meta_data *meta, int r, int c)
+{
+	const int	dr[4] = {0, 0, -1, 1};
+	const int	dc[4] = {-1, 1, 0, 0};
+	int			nr;
+	int			nc;
+	int			i;
+
+	meta->visited[r][c] = 1;
+	if (meta->sp_map[r][c] == '1')
+		meta->num1--;
+	i = -1;
+	while (++i < 4)
+	{
+		nr = r + dr[i];
+		nc = c + dc[i];
+		if (meta->visited[nr][nc] == 0 && meta->sp_map[nr][nc] == '1')
+			do_dfs1(meta, nr, nc);
+	}
+}
+
+int	dfs1_start(t_meta_data *meta)
+{
+	int		i;
+
+	meta->visited = (int **)malloc(sizeof(int *) * meta->height + 2);
+	i = -1;
+	while (++i < meta->height + 2)
+	{
+		meta->visited[i] = (int *)malloc(sizeof(int) * meta->max_width + 2);
+		memset(meta->visited[i], 0, sizeof(int) * meta->max_width + 2);
+	}
+	do_dfs1(meta, meta->pos1_r, meta->pos1_c);
+	printf("num1 after dfs : %d\n", meta->num1);
+	i = -1;
+	return (0);
+}
+
 int	map_valid_check(t_meta_data *meta)
 {
 	int	r;
 	int	c;
 	int	flag;
+	int	first1;
 
 	flag = 0;
+	first1 = 0;
 	r = -1;
 	while (meta->sp_map[++r])
 	{
@@ -72,7 +112,21 @@ int	map_valid_check(t_meta_data *meta)
 				meta->player_y = r;
 				flag++;
 			}
+			if (meta->sp_map[r][c] == '1')
+			{
+				if (first1 == 0)
+				{
+					meta->pos1_r = r;
+					meta->pos1_c = c;
+					first1++;
+				}
+				meta->num1++;
+			}	
 		}	
 	}
+	printf("num1 : %d\n", meta->num1);
+	dfs1_start(meta);
+	if (meta->num1 != 0)
+		ft_exit("dfs error\n");
 	return (flag != 1);
 }

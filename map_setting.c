@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/23 16:20:20 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/23 22:01:39 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	make_sp_map(t_meta_data *meta)
 		free(temp_sp_map);
 }
 
+#include <stdio.h>
+
 int	map_init(t_meta_data *meta, char **tmp_map, int idx)
 {
 	char	*line;
@@ -79,9 +81,14 @@ int	map_init(t_meta_data *meta, char **tmp_map, int idx)
 		if (s_flag == 0 && line[0] == '\n')
 			s_flag = 1;
 		if (s_flag == 1 && line[0] == '\n')
+		{
+			free(line);
 			continue ;
+		}
 		if (s_flag == 1 && line[0] != '\n')
 			s_flag++;
+		if (line[0] == '\n')
+			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (meta->max_width < (int) ft_strlen(line))
@@ -92,11 +99,21 @@ int	map_init(t_meta_data *meta, char **tmp_map, int idx)
 		idx = -1;
 		while (++idx < meta->height)
 			meta->map[idx] = tmp_map[idx];
-		meta->map[idx] = line;
+		meta->map[idx] = ft_strdup(line);
 		if (tmp_map)
 			free(tmp_map);
 		meta->height++;
+		free(line);
 	}
+	while (1)
+	{
+		line = get_next_line(meta->fd);
+		if (!line)
+			break ;
+		if (ft_strlen(line) > 1 || line[0] != '\n')
+			ft_exit("word after feed ERROR!!!\n");
+	}
+	printf("end_cut_end_feed\n");
 	make_sp_map(meta);
 	return (0);
 }
