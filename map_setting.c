@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/08 15:32:21 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/23 16:20:20 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,20 @@ void	make_sp_map(t_meta_data *meta)
 int	map_init(t_meta_data *meta, char **tmp_map, int idx)
 {
 	char	*line;
+	int		s_flag;
 
+	s_flag = 0;
 	while (1)
 	{
 		line = get_next_line(meta->fd);
 		if (!line)
 			break ;
+		if (s_flag == 0 && line[0] == '\n')
+			s_flag = 1;
+		if (s_flag == 1 && line[0] == '\n')
+			continue ;
+		if (s_flag == 1 && line[0] != '\n')
+			s_flag++;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (meta->max_width < (int) ft_strlen(line))

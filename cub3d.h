@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/22 20:51:00 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/23 15:39:45 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	param_init(char *argv1, t_param *param);
 // parsing function
 int		add_color(t_meta_data *meta, char *tmp, int flag);
 int		map_valid_check(t_meta_data *meta);
-int		map_valid_ch
 
 // freeing function
 int		map_free_all(t_meta_data meta);

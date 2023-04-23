@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/22 20:25:50 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/23 15:11:53 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	print_map(t_meta_data meta)
 		printf("%s\n", meta.sp_map[i]);
 		i++;
 	}
-
 	printf("north : %s\n", meta.north);
 	printf("south : %s\n", meta.south);
 	printf("west : %s\n", meta.west);
