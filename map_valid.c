@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/23 21:43:52 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/24 16:10:14 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ int	dfs1_start(t_meta_data *meta)
 {
 	int		i;
 
-	meta->visited = (int **)malloc(sizeof(int *) * meta->height + 2);
-	i = -1;
-	while (++i < meta->height + 2)
+	meta->visited = (int **)malloc(sizeof(int *) * (meta->height + 2));
+	i = 0;
+	while (i < meta->height + 2)
 	{
-		meta->visited[i] = (int *)malloc(sizeof(int) * meta->max_width + 2);
-		memset(meta->visited[i], 0, sizeof(int) * meta->max_width + 2);
+		meta->visited[i] = (int *)malloc(sizeof(int) * (meta->max_width + 2));
+		memset(meta->visited[i], 0, sizeof(int) * (meta->max_width + 2));
+		i++;
 	}
 	do_dfs1(meta, meta->pos1_r, meta->pos1_c);
 	printf("num1 after dfs : %d\n", meta->num1);
-	i = -1;
 	return (0);
 }
 
@@ -96,13 +96,13 @@ int	map_valid_check(t_meta_data *meta)
 		{
 			if (!valid_char_check(meta->sp_map[r][c]))
 			{
-				ft_exit("Invalid map! 1");
+				ft_exit("Invalid map! 1\n");
 			}
 			if (meta->sp_map[r][c] == 'X')
 			{
 				if (map_check_func(meta, r, c))
 				{
-					ft_exit("Invalid map! 2");
+					ft_exit("Invalid map! 2\n");
 				}
 			}
 			if (meta->sp_map[r][c] == 'N' || meta->sp_map[r][c] == 'S'

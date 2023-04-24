@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/23 21:04:00 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/24 20:57:31 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,14 @@ typedef struct s_param
 // init function
 int		map_init(t_meta_data *meta, char **tmp_map, int idx);
 int		map_direction_init(t_meta_data *meta);
-void	param_init(char *argv1, t_param *param);
+// void	param_init(char *argv1, t_param *param);
 
 // parsing function
 int		add_color(t_meta_data *meta, char *tmp, int flag);
 int		map_valid_check(t_meta_data *meta);
 
 // freeing function
-int		map_free_all(t_meta_data meta);
+int		map_free_all(t_meta_data meta, t_param *param);
 void	free_spl(char **temp);
 
 // utils
@@ -119,8 +119,8 @@ int		ft_strrncmp(char *s1, char *s2, int n);
 int		ft_exit(char *str);
 
 // casting
-int		map_cast(t_param *param, t_meta_data meta);
-void	load_image(t_param *param, int *texture, char *path, t_img *img);
+int		map_cast(t_param *param, t_meta_data *meta);
+// void	load_image(t_param *param, int *texture, char *path, t_img *img);
 
 //color
 int		make_rgb_bit(t_meta_data *meta);

@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/23 22:01:39 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/24 14:39:11 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ int	map_init(t_meta_data *meta, char **tmp_map, int idx)
 		if (s_flag == 1 && line[0] != '\n')
 			s_flag++;
 		if (line[0] == '\n')
+		{
+			free(line);
 			break ;
+		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (meta->max_width < (int) ft_strlen(line))

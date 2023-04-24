@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/23 22:00:34 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/24 20:51:45 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_map(t_meta_data meta)
 		i++;
 	}
 	printf("height : %d\n", meta.height);
-	printf("width : %d\n", meta.max_width);
+	printf("max_width : %d\n", meta.max_width);
 	printf("add_height : %d\n", meta.add_height);
 	printf("north : %s\n", meta.north);
 	printf("south : %s\n", meta.south);
@@ -88,16 +88,12 @@ int	main(int argc, char **argv)
 		return (ft_exit("Invalid Argument\n"));
 	if (map_direction_init(&meta) || map_init(&meta, NULL, 0))
 		return (ft_exit("file open error\n"));
+	print_map(meta);
 	if (map_valid_check(&meta))
 		return (ft_exit("Invalid map\n"));
-	print_map(meta);
-	// if (make_rgb_bit(&meta) && map_cast(param, meta))
-		// exit(1);	
+	if (make_rgb_bit(&meta) && map_cast(param, &meta))
+		exit(1);	
 	write(1, "valid\n", ft_strlen("valid\n"));
-	exit(0);
-	return (map_free_all(meta));
+	// exit(0);
+	return (map_free_all(meta, param));
 }
-	// param_init(argv[1], &param);
-	// if (param.fd <= 0)
-		// return (write(2, "Invalid Map File\n", 17) * 0 + 1);
-	// param.win = mlx_new_window(param.mlx, 1920, 1080, "cub3d");
