@@ -91,7 +91,7 @@ int	map_cast(t_param *param, t_meta_data *meta)
 {	
 	t_img_2d		*imgs;
 	t_mini_map		*info_mini;
-
+ㅎ
 	map_cast_init(meta, &imgs, &info_mini);
 	param_init(param, info_mini, imgs);
 	imgs->data = (int *)mlx_get_data_addr(imgs->img, \
