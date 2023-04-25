@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/25 17:21:24 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:52:19 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_player(t_meta_data *meta, t_mini_map *info_mini)
 	info_mini->player2 = (t_player *)malloc(sizeof(t_player));
 	info_mini->player2->x = meta->player_x;
 	info_mini->player2->y = meta->player_y;
-	info_mini->player2->thickness = 5;
+	info_mini->player2->thickness = 10;
 }
 
 void	init_mini(t_mini_map *info_mini, t_meta_data *meta, t_img_2d *imgs)
@@ -40,7 +40,7 @@ void	init_imgs(t_img_2d *imgs)
 	imgs->line_size = 0;
 	imgs->endian = 0;
 	imgs->scale = 1;
-	imgs->tile_size = 40;
+	imgs->tile_size = 100;
 }
 
 void	param_init(t_param *param, t_mini_map *info_mini, t_img_2d *imgs)

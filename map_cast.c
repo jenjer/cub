@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/25 17:22:41 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/25 18:55:53 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,14 @@ int	draw_player(t_param *param, t_mini_map *info_mini, t_img_2d *imgs)
 	int row;
 	int col;
 	
-	row = -(info_mini->player2->thickness) / 2;
+	// row = -(info_mini->player2->thickness) / 2;
+	// 음수로 하면 삐져나옴
+	row = 0;
 	while (row <= (info_mini->player2->thickness) / 2)
 	{
-		col = -(info_mini->player2->thickness) / 2;
+		// col = -(info_mini->player2->thickness) / 2;
+		// 같이 바꿔서 비율 맞춰줌
+		col = 0;
 		while (col <= (info_mini->player2->thickness) / 2)
 		{
 			imgs->data[(int)((info_mini->win_width) * ((info_mini->player2->y * info_mini->tile_size) + row) \
