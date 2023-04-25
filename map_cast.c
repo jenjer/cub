@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/25 18:55:53 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/25 21:45:41 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	map_cast(t_param *param, t_meta_data *meta)
 {	
 	t_img_2d		*imgs;
 	t_mini_map		*info_mini;
-ㅎ
+
 	map_cast_init(meta, &imgs, &info_mini);
 	param_init(param, info_mini, imgs);
 	imgs->data = (int *)mlx_get_data_addr(imgs->img, \
