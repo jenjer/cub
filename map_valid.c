@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/24 16:10:14 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/25 15:54:02 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,55 @@ int	dfs1_start(t_meta_data *meta)
 		i++;
 	}
 	do_dfs1(meta, meta->pos1_r, meta->pos1_c);
+	//
+	printf("visited array\n");
+	i = 0;
+	while (i < meta->height + 2)
+	{
+		int j = 0;
+		while (j < meta->max_width + 2)
+			printf("%d", meta->visited[i][j++]);
+		printf("\n");
+		i++;
+	}
+	//
 	printf("num1 after dfs : %d\n", meta->num1);
+	return (0);
+}
+
+int	check_four_side(t_meta_data *meta, int r, int c)
+{
+	const int	dr[4] = {0, 0, -1, 1};
+	const int	dc[4] = {-1, 1, 0, 0};
+	int			nr;
+	int			nc;
+	int			i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		nr = r + dr[i];
+		nc = c + dc[i];
+		if (meta->sp_map[nr][nc] == 'X')
+			return (1);
+	}
+	return (0);
+}
+
+int	is_one_in(t_meta_data *meta, int r, int c)
+{
+	while (meta->sp_map[++r])
+	{
+		c = -1;
+		while (meta->sp_map[r][++c])
+		{
+			if (meta->sp_map[r][c] == '1' && meta->visited[r][c] == 0)
+			{
+				if (check_four_side(meta, r, c))
+					return (1);
+			}
+		}
+	}
 	return (0);
 }
 
@@ -127,6 +175,9 @@ int	map_valid_check(t_meta_data *meta)
 	printf("num1 : %d\n", meta->num1);
 	dfs1_start(meta);
 	if (meta->num1 != 0)
-		ft_exit("dfs error\n");
+	{
+		if (is_one_in(meta, -1, -1))
+			ft_exit("dfs error\n");
+	}
 	return (flag != 1);
 }

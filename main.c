@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/24 20:51:45 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:27:57 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ int	main(int argc, char **argv)
 	if (!param)
 		ft_exit("parameter allocation error!\n");
 	memset(param, 0, sizeof(t_param));
-	atexit(leakcheck);
+	// atexit(leakcheck);
 	init_meta_data(argv[1], &meta);
 	if (argc != 2 || ft_strrncmp(argv[1], ".cub", 4))
 		return (ft_exit("Invalid Argument\n"));
 	if (map_direction_init(&meta) || map_init(&meta, NULL, 0))
 		return (ft_exit("file open error\n"));
-	print_map(meta);
 	if (map_valid_check(&meta))
 		return (ft_exit("Invalid map\n"));
+	print_map(meta);
 	if (make_rgb_bit(&meta) && map_cast(param, &meta))
 		exit(1);	
 	write(1, "valid\n", ft_strlen("valid\n"));

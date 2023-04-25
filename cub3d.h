@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/24 20:57:31 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:27:56 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
+# include "cub2d.h"
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
@@ -62,38 +63,37 @@ typedef struct s_meta_data
 }	t_meta_data;
 
 // after parse
-typedef struct s_img
-{
-	void	*img;		//	pointer to the image data
-	void	*data;		//	pointer to the first pixel of image
-	int		size_l;		//	size of a line in bytes
-	int		bpp;		//	number of bits per pixel
-	int		endian;		//	endian of image data
-	int		img_width;	//	width of the image in pixel
-	int		img_height;	//	height of the image in pixel
-}	t_img;
+// typedef struct s_img
+// {
+// 	void	*img;		//	pointer to the image data
+// 	void	*data;		//	pointer to the first pixel of image
+// 	int		size_l;		//	size of a line in bytes
+// 	int		bpp;		//	number of bits per pixel
+// 	int		endian;		//	endian of image data
+// 	int		img_width;	//	width of the image in pixel
+// 	int		img_height;	//	height of the image in pixel
+// }	t_img;
 
 typedef struct s_param
 {
-	int		fd;
 	void	*mlx;
 	void	*win;
-	int		win_width;
-	int		win_height;
 
 	//	define cast options
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	int		**texture;
-	t_img	img;
+	// int		win_width;
+	// int		win_height;
+	// double	posX;
+	// double	posY;
+	// double	dirX;
+	// double	dirY;
+	// double	planeX;
+	// double	planeY;
+	// int		**texture;
+	// t_img	img;
 	// int	buf[height][width]
 	// int		**texture;	// stores texture datas, two-dimensional integar array
-	double	moveSpeed;	// player movement speed
-	double	rotSpeed;	// player rotation speed
+	// double	moveSpeed;	// player movement speed
+	// double	rotSpeed;	// player rotation speed
 	// int		re_buf;	//	An integer that determines whether or not the game should redraw the screen.
 }	t_param;
 
@@ -102,7 +102,6 @@ typedef struct s_param
 // init function
 int		map_init(t_meta_data *meta, char **tmp_map, int idx);
 int		map_direction_init(t_meta_data *meta);
-// void	param_init(char *argv1, t_param *param);
 
 // parsing function
 int		add_color(t_meta_data *meta, char *tmp, int flag);
@@ -120,6 +119,9 @@ int		ft_exit(char *str);
 
 // casting
 int		map_cast(t_param *param, t_meta_data *meta);
+void	map_cast_init(t_meta_data *meta, t_img_2d **imgs, t_mini_map **info_mini);
+void	param_init(t_param *param, t_mini_map *info_mini, t_img_2d *imgs);
+void	init_player(t_meta_data *meta, t_mini_map *info_mini);
 // void	load_image(t_param *param, int *texture, char *path, t_img *img);
 
 //color
