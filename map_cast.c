@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/25 21:45:41 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/26 14:17:39 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	map_cast(t_param *param, t_meta_data *meta)
 					&(imgs->bpp), &(imgs->line_size), &(imgs->endian));
 	render_map(param, info_mini, imgs, meta);
 	draw_player(param, info_mini, imgs);
+	hooking_func(param, meta);
 	mlx_loop(param->mlx);
 	return (0);
 }

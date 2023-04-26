@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/25 18:41:41 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/26 14:18:13 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,8 @@ void	init_player(t_meta_data *meta, t_mini_map *info_mini);
 
 //color
 int		make_rgb_bit(t_meta_data *meta);
+
+//hooking
+void	hooking_func(t_param *param, t_meta_data *meta);
 
 #endif
