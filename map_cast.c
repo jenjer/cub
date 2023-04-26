@@ -6,11 +6,16 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/26 14:17:39 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:51:21 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+
+
+
+#include <stdio.h> //delete
 
 void	fill_squares(t_img_2d *imgs, int x, int y, int color)
 {
@@ -83,7 +88,8 @@ int	draw_player(t_param *param, t_mini_map *info_mini, t_img_2d *imgs)
 		row++;
 	}
 	mlx_put_image_to_window(param->mlx, param->win, imgs->img, \
-								0, 0);
+							0, 0);
+	printf("working\n");
 	return (0);
 }
 
@@ -98,7 +104,7 @@ int	map_cast(t_param *param, t_meta_data *meta)
 					&(imgs->bpp), &(imgs->line_size), &(imgs->endian));
 	render_map(param, info_mini, imgs, meta);
 	draw_player(param, info_mini, imgs);
-	hooking_func(param, meta);
+	hooking_func(param, meta, info_mini, imgs);
 	mlx_loop(param->mlx);
 	return (0);
 }

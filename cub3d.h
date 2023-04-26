@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/26 14:18:13 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:23:19 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_meta_data
 	int		**visited;
 }	t_meta_data;
 
+
 // after parse
 // typedef struct s_img
 // {
@@ -97,6 +98,14 @@ typedef struct s_param
 	// int		re_buf;	//	An integer that determines whether or not the game should redraw the screen.
 }	t_param;
 
+typedef struct s_for_press
+{
+	t_param *param;
+   	t_meta_data *meta;
+   	t_mini_map *info_mini;
+   	t_img_2d *imgs;
+}	t_for_press;
+
 // -------------------------------------------- functions ---------------------------------------- // 
 
 // init function
@@ -128,6 +137,11 @@ void	init_player(t_meta_data *meta, t_mini_map *info_mini);
 int		make_rgb_bit(t_meta_data *meta);
 
 //hooking
-void	hooking_func(t_param *param, t_meta_data *meta);
+void	hooking_func(t_param *param, t_meta_data *meta, t_mini_map *info_mini, t_img_2d *imgs);
+
+//rendering
+void    render_map(t_param *param, t_mini_map *info_mini, t_img_2d *imgs, \
+                        t_meta_data *meta);
+int draw_player(t_param *param, t_mini_map *info_mini, t_img_2d *imgs);
 
 #endif

@@ -166,6 +166,7 @@ height	cub3d.h	/^	int		height;$/;"	m	struct:s_meta_data
 height	mlx/font.c	/^  unsigned int 	 height;$/;"	m	struct:__anon1	file:
 height	mlx/mlx_int.h	/^  int			height;$/;"	m	struct:mlx_img_list_s
 height	mlx/mlx_png.c	/^  unsigned int	height;$/;"	m	struct:png_info_s	file:
+hooking_func	hooking.c	/^void	hooking_func(t_param *param, t_meta_data *meta)$/;"	f
 image_fshader	mlx/mlx_int.h	/^  GLuint	image_fshader;$/;"	m	struct:glsl_info_s
 image_program	mlx/mlx_int.h	/^  GLuint	image_program;$/;"	m	struct:glsl_info_s
 image_vshader	mlx/mlx_int.h	/^  GLuint	image_vshader;$/;"	m	struct:glsl_info_s
@@ -181,6 +182,7 @@ init_player	map_cast_init.c	/^void	init_player(t_meta_data *meta, t_mini_map *in
 inserting	libft/ft_split.c	/^static char	**inserting(char **ret, size_t count_word, char *s, char c)$/;"	f	file:
 interlace	mlx/mlx_png.c	/^  int		interlace;$/;"	m	struct:png_info_s	file:
 is_one_in	map_valid.c	/^int	is_one_in(t_meta_data *meta, int r, int c)$/;"	f
+key_press	hooking.c	/^int	key_press(int keycode, t_meta_data *meta)$/;"	f
 leakcheck	main.c	/^void	leakcheck(void)$/;"	f
 line_size	cub2d.h	/^	int		line_size;$/;"	m	struct:s_img2
 loc_font_atlassize	mlx/mlx_int.h	/^  GLint		loc_font_atlassize;$/;"	m	struct:glsl_info_s

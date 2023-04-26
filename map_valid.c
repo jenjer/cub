@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/25 15:54:02 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/26 15:30:28 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ int	map_valid_check(t_meta_data *meta)
 				meta->player_x = c;
 				meta->player_y = r;
 				flag++;
+				meta->sp_map[r][c] = '0'; // 0으로 변경사항이 있다.
 			}
 			if (meta->sp_map[r][c] == '1')
 			{
