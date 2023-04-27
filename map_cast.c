@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/27 15:46:55 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:42:20 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	render_map(t_press *press)
 			else if (press->meta->sp_map[row][col] == 'X')
 				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
 								(int)(press->info2->scale * press->info2->tile_size * row), 0xff00ff);			
-			else
+			else if (press->meta->sp_map[row][col] == '0')
 				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
 								(int)(press->info2->scale * press->info2->tile_size * row), 0xffffff);
 			col++;
@@ -83,7 +83,6 @@ int	draw_player(t_press *press)
 	}
 	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img, \
 							0, 0);
-	printf("working\n");
 	return (0);
 }
 

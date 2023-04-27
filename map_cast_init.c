@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/27 15:01:40 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:36:24 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void	init_img2(t_img2 *img2)
 	img2->line_size = 0;
 	img2->endian = 0;
 	img2->scale = 1;
-	img2->tile_size = 100;
+	img2->tile_size = 80;
 }
 
 void	param_init(t_press *press)
 {
 	press->param->mlx = mlx_init();
-	press->param->win = mlx_new_window(press->param->mlx, 1920, \
-									1080, "mini");
+	press->param->win = mlx_new_window(press->param->mlx, press->info2->win_width, \
+									press->info2->win_height, "mini");
 	press->img2->img = mlx_new_image(press->param->mlx, (int)press->info2->scale * \
 								press->info2->win_width, (int)press->info2->scale * \
 									press->info2->win_height);

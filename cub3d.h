@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/27 15:00:55 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:12:06 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
+# include <math.h>
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
 # include "cub2d.h"
