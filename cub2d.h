@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/25 16:30:13 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/27 15:38:24 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 typedef struct s_player2
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 	int	thickness;
-}	t_player;
+}	t_player2;
 
 typedef struct s_img2
 {
@@ -30,8 +30,9 @@ typedef struct s_img2
 	double	scale;
 	int		tile_size;
 	int		win_width;
-}	t_img_2d;
-typedef struct s_mini_map
+}	t_img2;
+
+typedef struct s_map2
 {
 	double		scale;
 	int			tile_size;
@@ -39,7 +40,7 @@ typedef struct s_mini_map
 	int			map_cols;
 	int			win_width;
 	int			win_height;
-	t_player	*player2;
-}	t_mini_map;
+	t_player2	*player2;
+}	t_map2;
 
 #endif

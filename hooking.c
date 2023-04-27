@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hooking.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 14:18:52 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/26 18:07:34 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:45:38 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "cub2d.h"
-
 
 #include <stdio.h> //delete
 

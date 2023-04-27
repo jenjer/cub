@@ -6,58 +6,57 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/26 14:14:48 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:01:40 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_player(t_meta_data *meta, t_mini_map *info_mini)
+void	init_player(t_meta_data *meta, t_map2 *info2)
 {
-	info_mini->player2 = (t_player *)malloc(sizeof(t_player));
-	info_mini->player2->x = meta->player_x;
-	info_mini->player2->y = meta->player_y;
-	info_mini->player2->thickness = 10;
+	info2->player2 = (t_player2 *)malloc(sizeof(t_player2));
+	info2->player2->x = meta->player_x;
+	info2->player2->y = meta->player_y;
+	info2->player2->thickness = 10;
 }
 
-void	init_mini(t_mini_map *info_mini, t_meta_data *meta, t_img_2d *imgs)
+void	init_mini(t_map2 *info2, t_meta_data *meta, t_img2 *img2)
 {
-	info_mini->scale = imgs->scale;
-	info_mini->tile_size = imgs->tile_size;
-	info_mini->map_rows = meta->height + 2;
-	info_mini->map_cols = meta->max_width + 2;
-	info_mini->win_width = info_mini->map_cols * info_mini->tile_size;
-	info_mini->win_height = info_mini->map_rows * info_mini->tile_size;
-	init_player(meta, info_mini);
-	imgs->win_width = info_mini->map_cols * info_mini->tile_size;
+	info2->scale = img2->scale;
+	info2->tile_size = img2->tile_size;
+	info2->map_rows = meta->height + 2;
+	info2->map_cols = meta->max_width + 2;
+	info2->win_width = info2->map_cols * info2->tile_size;
+	info2->win_height = info2->map_rows * info2->tile_size;
+	init_player(meta, info2);
+	img2->win_width = info2->map_cols * info2->tile_size;
 }
 
-void	init_imgs(t_img_2d *imgs)
+void	init_img2(t_img2 *img2)
 {
-	// imgs->img = NULL;
-	// imgs->data = NULL;
-	imgs->bpp = 0;
-	imgs->line_size = 0;
-	imgs->endian = 0;
-	imgs->scale = 1;
-	imgs->tile_size = 20;
+	// img2->img = NULL;
+	// img2->data = NULL;
+	img2->bpp = 0;
+	img2->line_size = 0;
+	img2->endian = 0;
+	img2->scale = 1;
+	img2->tile_size = 100;
 }
 
-void	param_init(t_param *param, t_mini_map *info_mini, t_img_2d *imgs)
+void	param_init(t_press *press)
 {
-	param->mlx = mlx_init();
-	param->win = mlx_new_window(param->mlx, 2400, \
-									1300, "mini");
-	imgs->img = mlx_new_image(param->mlx, (int)info_mini->scale * \
-								info_mini->win_width, (int)info_mini->scale * \
-									info_mini->win_height);
+	press->param->mlx = mlx_init();
+	press->param->win = mlx_new_window(press->param->mlx, 1920, \
+									1080, "mini");
+	press->img2->img = mlx_new_image(press->param->mlx, (int)press->info2->scale * \
+								press->info2->win_width, (int)press->info2->scale * \
+									press->info2->win_height);
 }
 
-void	map_cast_init(t_meta_data *meta, t_img_2d **imgs, \
-						t_mini_map **info_mini)
+void	map_cast_init(t_press *press)
 {
-	*imgs = (t_img_2d *)malloc(sizeof(t_img_2d));
-	init_imgs(*imgs);
-	*info_mini = (t_mini_map *)malloc(sizeof(t_mini_map));
-	init_mini(*info_mini, meta, *imgs);
+	press->img2 = (t_img2 *)malloc(sizeof(t_img2));
+	init_img2(press->img2);
+	press->info2 = (t_map2 *)malloc(sizeof(t_map2));
+	init_mini(press->info2, press->meta, press->img2);
 }

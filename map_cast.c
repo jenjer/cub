@@ -6,105 +6,102 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/26 17:51:21 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:46:55 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-
-
 #include <stdio.h> //delete
 
-void	fill_squares(t_img_2d *imgs, int x, int y, int color)
+void	fill_squares(t_img2 *img2, int x, int y, int color)
 {
 	int	i;
 	int	j;
 
 	j = 0;
-	while (j < (int)(imgs->scale * imgs->tile_size))
+	while (j < (int)(img2->scale * img2->tile_size))
 	{
 		i = 0;
-		while (i < (int)(imgs->scale * imgs->tile_size))
+		while (i < (int)(img2->scale * img2->tile_size))
 		{
-			imgs->data[(int)(imgs->scale * (imgs->win_width)) * (y + j) + (x + i)] = color;
+			img2->data[(int)(img2->scale * (img2->win_width)) * (y + j) + (x + i)] = color;
 			i++;
 		}
 		j++;
 	}
 }
 
-void	render_map(t_param *param, t_mini_map *info_mini, t_img_2d *imgs, \
-						t_meta_data *meta)
+void	render_map(t_press *press)
 {
 	int	col;
 	int	row;
-
-	(void) param;
-	// imgs->data = (int *)mlx_get_data_addr(imgs->img, \
-	// 				&(imgs->bpp), &(imgs->line_size), &(imgs->endian));
+	// img2->data = (int *)mlx_get_data_addr(img2->img, \
+	// 				&(img2->bpp), &(img2->line_size), &(img2->endian));
 	row = 0;
-	while (row < info_mini->map_rows)
+	while (row < press->info2->map_rows)
 	{
 		col = 0;
-		while (col < info_mini->map_cols)
+		while (col < press->info2->map_cols)
 		{
-			if (meta->sp_map[row][col] == '1')
-				fill_squares(imgs, (int)(info_mini->scale * info_mini->tile_size * col), \
-								(int)(info_mini->scale * info_mini->tile_size * row), 0x000000);
-			else if (meta->sp_map[row][col] == 'X')
-				fill_squares(imgs, (int)(info_mini->scale * info_mini->tile_size * col), \
-								(int)(info_mini->scale * info_mini->tile_size * row), 0xff00ff);			
+			if (press->meta->sp_map[row][col] == '1')
+				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
+								(int)(press->info2->scale * press->info2->tile_size * row), 0x000000);
+			else if (press->meta->sp_map[row][col] == 'X')
+				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
+								(int)(press->info2->scale * press->info2->tile_size * row), 0xff00ff);			
 			else
-				fill_squares(imgs, (int)(info_mini->scale * info_mini->tile_size * col), \
-								(int)(info_mini->scale * info_mini->tile_size * row), 0xffffff);
+				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
+								(int)(press->info2->scale * press->info2->tile_size * row), 0xffffff);
 			col++;
 		}
 		row++;
 	}
-	//mlx_put_image_to_window(param->mlx, param->win, imgs->img, 0, 0);
+	//mlx_put_image_to_window(param->mlx, param->win, img2->img, 0, 0);
 }
 
-int	draw_player(t_param *param, t_mini_map *info_mini, t_img_2d *imgs)
+int	draw_player(t_press *press)
 {
-	int row;
+	int	row;
 	int col;
-	
-	// row = -(info_mini->player2->thickness) / 2;
+
+	// row = -(press->info2->player2->thickness) / 2;
 	// 음수로 하면 삐져나옴
 	row = 0;
-	while (row <= (info_mini->player2->thickness) / 2)
+	while (row <= (press->info2->player2->thickness) / 2)
 	{
-		// col = -(info_mini->player2->thickness) / 2;
+		// col = -(press->info2->player2->thickness) / 2;
 		// 같이 바꿔서 비율 맞춰줌
 		col = 0;
-		while (col <= (info_mini->player2->thickness) / 2)
+		while (col <= (press->info2->player2->thickness) / 2)
 		{
-			imgs->data[(int)((info_mini->win_width) * ((info_mini->player2->y * info_mini->tile_size) + row) \
-											+ ((info_mini->player2->x * info_mini->tile_size) + col))] = 0x0000FF;
+			press->img2->data[(int)((press->info2->win_width) * (((int)(press->info2->player2->y * (int)press->info2->tile_size) + row)) \
+											+ ((int)(press->info2->player2->x * (int)press->info2->tile_size) + col))] = 0x0000FF;
 			col++;
 		}
 		row++;
 	}
-	mlx_put_image_to_window(param->mlx, param->win, imgs->img, \
+	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img, \
 							0, 0);
 	printf("working\n");
 	return (0);
 }
 
-int	map_cast(t_param *param, t_meta_data *meta)
+int	map_cast(t_param *param_, t_meta_data *meta_)
 {	
-	t_img_2d		*imgs;
-	t_mini_map		*info_mini;
+	t_press		*press;
 
-	map_cast_init(meta, &imgs, &info_mini);
-	param_init(param, info_mini, imgs);
-	imgs->data = (int *)mlx_get_data_addr(imgs->img, \
-					&(imgs->bpp), &(imgs->line_size), &(imgs->endian));
-	render_map(param, info_mini, imgs, meta);
-	draw_player(param, info_mini, imgs);
-	hooking_func(param, meta, info_mini, imgs);
-	mlx_loop(param->mlx);
+	press = (t_press *)malloc(sizeof(t_press));
+	press->param = param_;
+	press->meta = meta_;
+	map_cast_init(press);
+	param_init(press);
+	press->img2->data = (int *)mlx_get_data_addr(press->img2->img, \
+					&(press->img2->bpp), &(press->img2->line_size), &((press->img2->endian)));
+	render_map(press);
+	draw_player(press);
+	// hooking_func(param, meta, press->info2, img2);
+	mlx_hook(press->param->win, X_EVENT_KEY_PRESS, 1L<<0, key_press, press);
+	mlx_loop(press->param->mlx);
 	return (0);
 }

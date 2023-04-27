@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/26 15:23:19 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:00:55 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ typedef struct s_meta_data
 	int		**visited;
 }	t_meta_data;
 
-
 // after parse
 // typedef struct s_img
 // {
@@ -79,7 +78,6 @@ typedef struct s_param
 {
 	void	*mlx;
 	void	*win;
-
 	//	define cast options
 	// int		win_width;
 	// int		win_height;
@@ -98,13 +96,13 @@ typedef struct s_param
 	// int		re_buf;	//	An integer that determines whether or not the game should redraw the screen.
 }	t_param;
 
-typedef struct s_for_press
+typedef struct s_press
 {
-	t_param *param;
-   	t_meta_data *meta;
-   	t_mini_map *info_mini;
-   	t_img_2d *imgs;
-}	t_for_press;
+	t_param		*param;
+	t_meta_data	*meta;
+	t_map2		*info2;
+	t_img2		*img2;
+}	t_press;
 
 // -------------------------------------------- functions ---------------------------------------- // 
 
@@ -128,20 +126,22 @@ int		ft_exit(char *str);
 
 // casting
 int		map_cast(t_param *param, t_meta_data *meta);
-void	map_cast_init(t_meta_data *meta, t_img_2d **imgs, t_mini_map **info_mini);
-void	param_init(t_param *param, t_mini_map *info_mini, t_img_2d *imgs);
-void	init_player(t_meta_data *meta, t_mini_map *info_mini);
+void	map_cast_init(t_press *press);
+void	param_init(t_press *press);
+void	init_player(t_meta_data *meta, t_map2 *info2);
 // void	load_image(t_param *param, int *texture, char *path, t_img *img);
 
 //color
 int		make_rgb_bit(t_meta_data *meta);
 
 //hooking
-void	hooking_func(t_param *param, t_meta_data *meta, t_mini_map *info_mini, t_img_2d *imgs);
+int		key_press(int keycode, t_press *press);
+// int		ft_loop(t_press *press);
+// void	hooking_func(t_param *param, t_meta_data *meta, t_map2 *info2, t_img2 *img2);
 
 //rendering
-void    render_map(t_param *param, t_mini_map *info_mini, t_img_2d *imgs, \
-                        t_meta_data *meta);
-int draw_player(t_param *param, t_mini_map *info_mini, t_img_2d *imgs);
+void	render_map(t_press *press);
+void	fill_squares(t_img2 *img2, int x, int y, int color);
+int		draw_player(t_press *press);
 
 #endif

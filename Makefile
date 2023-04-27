@@ -6,7 +6,7 @@
 #    By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/04/26 15:27:19 by youngski         ###   ########.fr        #
+#    Updated: 2023/04/27 14:41:31 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,13 @@ SRCS_MAN    = main.c                    \
 			  map_direction.c           \
 			  map_color.c               \
 			  map_mlx.c                 \
-			  utils.c                   \
-			  utils2.c                  \
 			  map_cast.c				\
 			  map_cast_init.c			\
+			  map_mlx.c					\
 			  gnl/get_next_line.c       \
-			  hooking.c
+			  utils.c                   \
+			  utils2.c
+			#   hooking.c
 
 OBJS_MAN    = ${SRCS_MAN:.c=.o}
 
