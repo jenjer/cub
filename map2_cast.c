@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_cast.c                                         :+:      :+:    :+:   */
+/*   map2_cast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/27 18:42:20 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/27 22:02:02 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	render_map(t_press *press)
 {
 	int	col;
 	int	row;
-	// img2->data = (int *)mlx_get_data_addr(img2->img, \
-	// 				&(img2->bpp), &(img2->line_size), &(img2->endian));
+
 	row = 0;
 	while (row < press->info2->map_rows)
 	{
@@ -57,7 +56,6 @@ void	render_map(t_press *press)
 		}
 		row++;
 	}
-	//mlx_put_image_to_window(param->mlx, param->win, img2->img, 0, 0);
 }
 
 int	draw_player(t_press *press)
@@ -86,6 +84,16 @@ int	draw_player(t_press *press)
 	return (0);
 }
 
+void	param_init(t_press *press)
+{
+	press->param->mlx = mlx_init();
+	press->param->win = mlx_new_window(press->param->mlx, press->info2->win_width, \
+									press->info2->win_height, "mini");
+	press->img2->img = mlx_new_image(press->param->mlx, (int)press->info2->scale * \
+								press->info2->win_width, (int)press->info2->scale * \
+									press->info2->win_height);
+}
+
 int	map_cast(t_param *param_, t_meta_data *meta_)
 {	
 	t_press		*press;
@@ -99,7 +107,6 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 					&(press->img2->bpp), &(press->img2->line_size), &((press->img2->endian)));
 	render_map(press);
 	draw_player(press);
-	// hooking_func(param, meta, press->info2, img2);
 	mlx_hook(press->param->win, X_EVENT_KEY_PRESS, 1L<<0, key_press, press);
 	mlx_loop(press->param->mlx);
 	return (0);

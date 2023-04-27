@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/25 16:27:57 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/27 22:01:34 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 		return (ft_exit("Invalid map\n"));
 	print_map(meta);
 	if (make_rgb_bit(&meta) && map_cast(param, &meta))
-		exit(1);	
+		exit(1);
 	write(1, "valid\n", ft_strlen("valid\n"));
 	// exit(0);
 	return (map_free_all(meta, param));

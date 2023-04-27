@@ -6,18 +6,23 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/27 18:01:24 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/27 22:21:22 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB2D_H
 # define CUB2D_H
 
+# define PI 3.14
+
 typedef struct s_player2
 {
 	double	x;
 	double	y;
-	int	thickness;
+	int		thickness;
+	double	rotation_angle;
+	double	walkspeed;
+	double	turnspeed;
 }	t_player2;
 
 typedef struct s_img2
@@ -42,5 +47,13 @@ typedef struct s_map2
 	int			win_height;
 	t_player2	*player2;
 }	t_map2;
+
+typedef struct s_key
+{
+	int	up;
+	int	down;
+	int	right;
+	int	left;
+}	t_key;
 
 #endif
