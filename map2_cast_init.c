@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/28 14:29:57 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/28 15:59:36 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_player(t_meta_data *meta, t_map2 *info2)
 	info2->player2->y = meta->player_y;
 	info2->player2->thickness = 10;
 	info2->player2->rotation_angle = PI / 2;
-	info2->player2->walkspeed = 1;
+	info2->player2->walkspeed = 0.2;
 	info2->player2->turnspeed = 4 * (PI / 180);
 }
 
@@ -41,7 +41,7 @@ void	init_img2(t_img2 *img2)
 	img2->line_size = 0;
 	img2->endian = 0;
 	img2->scale = 1;
-	img2->tile_size = 80;
+	img2->tile_size = 60;
 }
 
 void	init_key2(t_key *key2)

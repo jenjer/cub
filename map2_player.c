@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 22:04:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/28 15:03:14 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/28 15:58:22 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	update_player2(t_press *press)
 	double	walk_direction;
 	double	nx;
 	double	ny;
-	int		move_step;
+	double	move_step;
 
 	turn_direction = 0;
 	walk_direction = 0;
@@ -50,14 +50,28 @@ int	update_player2(t_press *press)
 		turn_direction = -1;
 	if (press->key2->turn_right == 1)
 		turn_direction = 1;
-	// if (press->key2->left = 1)
-	// 	walk_direction = 
-	// if (press->key2->right = 1)
-	// 	walk_direction =
+	if (press->key2->left == 1)
+	{
+		walk_direction = -1;
+	}
+	if (press->key2->right == 1)
+	{
+		walk_direction = 1;
+	}
 	press->info2->player2->rotation_angle += turn_direction * (press->info2->player2->turnspeed);
 	move_step = walk_direction * (press->info2->player2->walkspeed);
 	nx = press->info2->player2->x + move_step * cos(press->info2->player2->rotation_angle);
 	ny = press->info2->player2->y + move_step * sin(press->info2->player2->rotation_angle);
+	if (press->key2->left == 1)
+	{
+		nx = press->info2->player2->x + move_step * sin(press->info2->player2->rotation_angle);
+		ny = press->info2->player2->y - move_step * cos(press->info2->player2->rotation_angle);
+	}
+	if (press->key2->right == 1)
+	{
+		nx = press->info2->player2->x + move_step * sin(press->info2->player2->rotation_angle);
+		ny = press->info2->player2->y - move_step * cos(press->info2->player2->rotation_angle);
+	}
 	if (!check_wall(press, nx, ny))
 	{
 		press->info2->player2->x = nx;
