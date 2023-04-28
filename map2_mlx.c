@@ -6,13 +6,23 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/27 22:41:30 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/28 14:54:08 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #include <stdio.h>
+
+void	erase_key(t_press *press)
+{
+	press->key2->up = 0;
+	press->key2->down = 0;
+	press->key2->left = 0;
+	press->key2->right = 0;
+	press->key2->turn_left = 0;
+	press->key2->turn_right = 0;
+}
 
 void	reset_image(t_press *press)
 {
@@ -29,39 +39,26 @@ void	reset_image(t_press *press)
 
 int	key_press(int keycode, t_press *press)
 {
-	if (keycode == KEY_A)
-	{
-		// press->info2->player2->x -= 0.05;
-		press->key2->left = 1;
-		// if (check_wall(press))
-			// press->info2->player2->x = ox;
-	}
-	if (keycode == KEY_D)
-	{
-		// press->info2->player2->x += 0.05;
-		press->key2->right = 1;
-		// if (check_wall(press))
-		// 	press->info2->player2->x = ox;
-	}
+	if (keycode == KEY_LEFT)
+		press->key2->turn_left = 1;
+	if (keycode == KEY_RIGHT)
+		press->key2->turn_right = 1;
 	if (keycode == KEY_W)
-	{
-		// press->info2->player2->y -= 0.05;
 		press->key2->up = 1;
-		// if (check_wall(press))
-		// 	press->info2->player2->y = oy;
-	}
 	if (keycode == KEY_S)
-	{
-		// press->info2->player2->y += 0.05;
 		press->key2->down = 1;
-		// if (check_wall(press))
-		// 	press->info2->player2->y = oy;
-	}
+	if (keycode == KEY_A)
+		press->key2->left = 1;
+	if (keycode == KEY_D)
+		press->key2->right = 1;
+	printf("up : %d, down : %d, turn_left : %d, turn_right : %d, left : %d, right : %d\n", press->key2->up, press->key2->down, \
+				press->key2->turn_left, press->key2->turn_right, press->key2->left, press->key2->right);
 	if (keycode == KEY_ESC)
 		exit(0);
 	update_player2(press);
 	reset_image(press);
 	render_map(press);
 	draw_player(press);
+	erase_key(press);
 	return (0);
 }

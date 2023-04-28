@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/27 22:33:23 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/28 14:44:53 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
 # define BUTTON_X 17
 
 typedef struct s_color
@@ -110,7 +112,7 @@ int		make_rgb_bit(t_meta_data *meta);
 //hooking
 int		key_press(int keycode, t_press *press);
 int		update_player2(t_press *press);
-int		check_wall(t_press *press);
+int		check_wall(t_press *press, double x, double y);
 // int		ft_loop(t_press *press);
 
 //rendering
