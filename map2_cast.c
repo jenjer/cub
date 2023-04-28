@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/27 22:02:02 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/28 18:42:21 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	render_map(t_press *press)
 								(int)(press->info2->scale * press->info2->tile_size * row), 0x000000);
 			else if (press->meta->sp_map[row][col] == 'X')
 				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
-								(int)(press->info2->scale * press->info2->tile_size * row), 0xff00ff);			
+								(int)(press->info2->scale * press->info2->tile_size * row), 0xff00ff);
 			else if (press->meta->sp_map[row][col] == '0')
 				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
 								(int)(press->info2->scale * press->info2->tile_size * row), 0xffffff);
@@ -61,20 +61,16 @@ void	render_map(t_press *press)
 int	draw_player(t_press *press)
 {
 	int	row;
-	int col;
+	int	col;
 
-	// row = -(press->info2->player2->thickness) / 2;
-	// 음수로 하면 삐져나옴
 	row = 0;
-	while (row <= (press->info2->player2->thickness) / 2)
+	while (row <= (press->player2->thickness) / 2)
 	{
-		// col = -(press->info2->player2->thickness) / 2;
-		// 같이 바꿔서 비율 맞춰줌
 		col = 0;
-		while (col <= (press->info2->player2->thickness) / 2)
+		while (col <= (press->player2->thickness) / 2)
 		{
-			press->img2->data[(int)((press->info2->win_width) * (((int)(press->info2->player2->y * (int)press->info2->tile_size) + row)) \
-											+ ((int)(press->info2->player2->x * (int)press->info2->tile_size) + col))] = 0x0000FF;
+			press->img2->data[(int)((press->info2->win_width) * (((int)(press->player2->y * (int)press->info2->tile_size) + row)) \
+											+ ((int)(press->player2->x * (int)press->info2->tile_size) + col))] = 0x0000FF;
 			col++;
 		}
 		row++;

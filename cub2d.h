@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/28 14:47:47 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/28 18:34:26 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_map2
 	int			map_cols;
 	int			win_width;
 	int			win_height;
-	t_player2	*player2;
 }	t_map2;
 
 typedef struct s_key
@@ -54,8 +53,14 @@ typedef struct s_key
 	int	down;
 	int	left;
 	int	right;
-	int turn_left;
-	int turn_right;
+	int	turn_left;
+	int	turn_right;
 }	t_key;
+
+// typedef	struct s_ray2
+// {
+//		double	ray_range; // (PI / 3.0)
+//		int		ray_count; // 121
+// }
 
 #endif
