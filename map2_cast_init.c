@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/28 18:45:35 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/29 20:29:00 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_img2(t_img2 *img2)
 	img2->line_size = 0;
 	img2->endian = 0;
 	img2->scale = 1;
-	img2->tile_size = 60;
+	img2->tile_size = 40;
 }
 
 void	init_key2(t_key *key2)
@@ -50,6 +50,8 @@ void	init_key2(t_key *key2)
 	key2->down = 0;
 	key2->left = 0;
 	key2->right = 0;
+	key2->turn_left = 0;
+	key2->turn_right = 0;
 }
 
 void	map_cast_init(t_press *press)
@@ -62,5 +64,5 @@ void	map_cast_init(t_press *press)
 	init_key2(press->key2);
 	press->player2 = (t_player2 *)malloc(sizeof(t_player2));
 	init_player(press->meta, &(press->player2));
-	printf("x : %f, y : %f\n", press->player2->x, press->player2->y);
+	press->ray2 = (t_ray2 *)malloc(sizeof(t_ray2));
 }

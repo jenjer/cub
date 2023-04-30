@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/28 18:46:56 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/29 20:12:27 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
 # include "cub2d.h"
+# include <float.h> // for double max(DBL_MAX)
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
@@ -79,6 +80,7 @@ typedef struct s_press
 	t_img2		*img2;
 	t_key		*key2;
 	t_player2	*player2;
+	t_ray2		*ray2;
 }	t_press;
 
 //------------------------ functions ---------------------------// 
@@ -106,6 +108,8 @@ int		map_cast(t_param *param, t_meta_data *meta);
 void	map_cast_init(t_press *press);
 void	param_init(t_press *press);
 void	init_player(t_meta_data *meta, t_player2 **player2);
+int		check_wall(t_press *press, double x, double y);
+void	draw_ray(t_press *press);
 
 //color
 int		make_rgb_bit(t_meta_data *meta);

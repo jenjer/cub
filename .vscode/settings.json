@@ -9,6 +9,8 @@
 		"vector": "c",
 		"fcntl.h": "c",
 		"type_traits": "c",
-		"get_next_line.h": "c"
+		"get_next_line.h": "c",
+		"string.h": "c",
+		"unistd.h": "c"
 	}
 }

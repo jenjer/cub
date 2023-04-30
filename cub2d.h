@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/28 18:34:26 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/29 16:07:32 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,29 @@ typedef struct s_key
 	int	turn_right;
 }	t_key;
 
-// typedef	struct s_ray2
-// {
-//		double	ray_range; // (PI / 3.0)
-//		int		ray_count; // 121
-// }
+typedef struct s_dp_ray
+{
+	double	xintercept;
+	double	yintercept;
+	double	xstep;
+	double	ystep;
+	int		found_wallhit;
+	double	wall_hitx;
+	double	wall_hity;
+	double	distance;
+}	t_dp_ray;
+
+typedef struct s_ray2
+{
+	double	ray_angle;
+	double	wall_hit_x;
+	double	wall_hit_y;
+	double	distance;
+	int		was_hit_vertical;
+	int		is_ray_facingdown;
+	int		is_ray_facingup;
+	int		is_ray_facingright;
+	int		is_ray_facingleft;
+}	t_ray2;
 
 #endif

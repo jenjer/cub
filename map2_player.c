@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 22:04:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/28 17:21:51 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/29 20:45:28 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ int	check_wall(t_press *press, double x, double y) // update player 함수에서
 {
 	int	ix;
 	int	iy;
-	
+
 	if (x < 0 || x > press->info2->win_width || y < 0 || y > press->info2->win_height)
 		return (1);
 	ix = floor(x);
 	iy = floor(y);
 	printf("ix : %d, iy : %d\n", ix, iy);
-	if (press->meta->sp_map[iy][ix] == '1')
+	if (press->meta->sp_map[iy][ix] == '1' || press->meta->sp_map[iy][ix] == 'X')
 		return (1);
 	return (0);
 }
 
-// info2->player2->rotation_angle = PI / 2;
+// info2->player2->rotation_angle = PI / 2; 거의 90도 1.57
 // info2->player2->walkspeed = 1;
-// info2->player2->turnspeed = 4 * (PI / 180);
+// info2->player2->turnspeed = 4 * (PI / 180); 거의 4도
 
 int	update_player2(t_press *press)
 {

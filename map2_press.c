@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map2_mlx.c                                         :+:      :+:    :+:   */
+/*   map2_press.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/28 18:35:15 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/29 21:06:42 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	key_press(int keycode, t_press *press)
 	reset_image(press);
 	render_map(press);
 	draw_player(press);
-	// draw_ray(press);
+	draw_ray(press);
 	erase_key(press);
 	return (0);
 }
