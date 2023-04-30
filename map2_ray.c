@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/30 16:56:44 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/30 20:10:30 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,55 @@ int	check_wall_light(t_press *press, double x, double y)
 	int ix;
 	int iy;
 
-	if (x < 0 || x > press->info2->win_width || y < 0 || y > press->info2->win_height)
+	if (x < 0 || x > press->meta->max_width || y < 0 || y > press->meta->height)
 		return (1);
-	ix = floor(x / press->info2->tile_size);
-	iy = floor(y / press->info2->tile_size);
+	ix = floor(x); /// press->info2->tile_size);
+	iy = floor(y); /// press->info2->tile_size);
 	printf("lix : %d, liy : %d\n", ix, iy);
-	// if (press->meta->sp_map[iy][ix] == '1' || press->meta->sp_map[iy][ix] == 'X')
-	// {
-	// 	printf("return 1\n");
-	// 	return (1);
-	// }
-	return (0);
+//	if (press->meta->sp_map[iy][ix] == '1' || press->meta->sp_map[iy][ix] == 'X')
+//	{
+//		printf("return 1\n");
+//		return (1);
+//	}
+//	return (0);
+	return (press->meta->sp_map[iy][ix] != '0');
 }
 
-void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
+void    draw_line(t_press *press, double x1, double y1, double x2, double y2)
 {
-	double	ray_x;
-	double	ray_y;
-	double	dx;
-	double	dy;
-	double	max_value;
-
-	ray_x = press->player2->x;
-	ray_y = press->player2->y;
-	dx = x2 - x1;
-	dy = y2 - y1;
-	max_value = fmax(fabs(dx), fabs(dy));
-	dx /= max_value;
-	dy /= max_value;
-	while (1)
-	{
-		printf("ray_x : %f, ray_y : %f\n", ray_x, ray_y);
-		if (!check_wall_light(press, ray_x, ray_y))
-			press->img2->data[(press->info2->win_width * \
-								(int)(floor(ray_y)*(press->info2->tile_size))) + \
-										(int)(floor(ray_x)*(press->info2->tile_size))] = 0xff0000;
-		else
-			break ;
-		printf("dx : %f, dy : %f\n", dx, dy);
-		ray_x += dx;
-		ray_y += dy;
-	}
+    double  ray_x;
+    double  ray_y;
+    double  dx;
+    double  dy;
+    double  max_value;
+    ray_x = press->player2->x;
+    ray_y = press->player2->y;
+    dx = x2 - x1;
+    dy = y2 - y1;
+    max_value = fmax(fabs(dx), fabs(dy));
+    dx /= max_value;
+    dy /= max_value;
+    while (1)
+    {
+        printf("ray_x : %f, ray_y : %f\n", ray_x, ray_y);
+        if (!check_wall_light(press, ray_x, ray_y))
+        {
+            for (int i = -2; i < 3; ++i)
+            {
+                for (int j = -2; j < 3; ++j)
+                {
+                    press->img2->data[(press->info2->win_width * \
+                        (int)(floor(ray_y)*(press->info2->tile_size) + i)) + \
+                        (int)(floor(ray_x)*(press->info2->tile_size)) + j] = 0xff0000;
+                }
+            }
+        }
+        else
+            break ;
+        printf("dx : %f, dy : %f\n", dx, dy);
+        ray_x += dx;
+        ray_y += dy;
+    }
 }
 
 double	distance_between_points(double x1, double y1, double x2, double y2)
@@ -109,14 +117,14 @@ void	cal_vert_ray(t_press *press, t_dp_ray *vert)
 	vert->found_wallhit = 0;
 	vert->wall_hitx = 0;
 	vert->wall_hity = 0;
-	vert->xintercept = floor(press->player2->x);
+	vert->xintercept = floor(press->player2->x / press->info2->tile_size) * press->info2->tile_size;
 	if (press->ray2->is_ray_facingright)
 		vert->xintercept += press->info2->tile_size; // press->info2->tile_size
-	vert->yintercept = press->player2->y + (vert->xintercept - press->player2->x) / tan(press->ray2->ray_angle);
+	vert->yintercept = press->player2->y + (vert->xintercept - press->player2->x) * tan(press->ray2->ray_angle);
 	vert->xstep = press->info2->tile_size; // press->info2->tile_size
 	if (press->ray2->is_ray_facingleft)
 		vert->xstep *= -1;
-	vert->ystep = press->info2->tile_size / tan(press->ray2->ray_angle);
+	vert->ystep = press->info2->tile_size * tan(press->ray2->ray_angle);
 	if (press->ray2->is_ray_facingleft && vert->ystep > 0)
 		vert->ystep *= -1;
 	if (press->ray2->is_ray_facingright && vert->ystep < 0)
@@ -129,10 +137,12 @@ void	cal_horz_ray(t_press *press, t_dp_ray *horz)
 	horz->found_wallhit = 0;
 	horz->wall_hitx = 0;
 	horz->wall_hity = 0;
-	horz->yintercept = floor(press->player2->y);
+	horz->yintercept = floor(press->player2->y / press->info2->tile_size) * press->info2->tile_size;
 	if (press->ray2->is_ray_facingdown)
 		horz->yintercept += press->info2->tile_size; // press->info2->tile_size
+													 //
 	horz->xintercept = press->player2->x + (horz->yintercept - press->player2->y) / tan(press->ray2->ray_angle);
+
 	horz->ystep = press->info2->tile_size; // press->info2->tile_size
 	if (press->ray2->is_ray_facingup)
 		horz->ystep *= -1;
@@ -144,9 +154,25 @@ void	cal_horz_ray(t_press *press, t_dp_ray *horz)
 	cal_ray(press, horz);
 }
 
+double	normalize_angle(double angle)
+{
+	if (angle >= 0)
+	{
+		while (angle >= 2*PI)
+			angle -= 2*PI;
+	}
+	else
+	{
+		while (angle <= 0)
+			angle += 2*PI;
+	}
+	return angle;
+}
+
 void	ray_init(t_ray2 *ray2, double ray_angle)
 {
-	ray2->ray_angle = ray_angle; // 그대로 넣어줌, 매개변수 angle
+	//ray2->ray_angle = ray_angle;
+	ray2->ray_angle = 	normalize_angle(ray_angle);//ray_angle; // 그대로 넣어줌, 매개변수 angle
 	ray2->wall_hit_x = 0;
 	ray2->wall_hit_y = 0;
 	ray2->distance = 0;

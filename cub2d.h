@@ -6,14 +6,14 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/29 16:07:32 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/30 19:13:47 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB2D_H
 # define CUB2D_H
 
-# define PI 3.14
+# define PI 3.141592653589793
 
 typedef struct s_player2
 {
