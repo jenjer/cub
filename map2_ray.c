@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/30 20:10:30 by youngski         ###   ########.fr       */
+/*   Updated: 2023/04/30 20:29:18 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void    draw_line(t_press *press, double x1, double y1, double x2, double y2)
                 for (int j = -2; j < 3; ++j)
                 {
                     press->img2->data[(press->info2->win_width * \
-                        (int)(floor(ray_y)*(press->info2->tile_size) + i)) + \
-                        (int)(floor(ray_x)*(press->info2->tile_size)) + j] = 0xff0000;
+                        (int)(floor(ray_y) * (press->info2->tile_size) + i)) + \
+                        (int)(floor(ray_x) * (press->info2->tile_size) ) + j] = 0xff0000;
                 }
             }
         }
