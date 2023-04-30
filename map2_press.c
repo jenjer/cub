@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/29 21:06:42 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/30 17:54:54 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,32 @@ void	reset_image(t_press *press)
 	mlx_clear_window(press->param->mlx, press->param->win);
 }
 
+void	my_ray(t_press *press)
+{
+	double nx;
+	double	ny;
+	int	i;
+
+	i = 0;
+	nx = press->player2->x;
+	ny = press->player2->y;
+	while (!check_wall(press, nx, ny))
+	{
+		
+		press->img2->data[(int)((press->img2->win_width) * (ny) * press->info2->tile_size +  /*press->map2->win_height **/ (nx) * press->info2->tile_size)] = 0x000000;
+		nx += -1;
+	}
+	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img, \
+							0, 0);
+}
+
+/*
+press->img2->data[(int)((press->info2->win_width) * (((int)(press->player2->y * (int)press->info2->tile_size) + row)) \
++ ((int)(press->player2->x * (int)press->info2->tile_size) + col))] = 0x0000FF;
+
+*/
+
+
 int	key_press(int keycode, t_press *press)
 {
 	if (keycode == KEY_LEFT)
@@ -59,7 +85,8 @@ int	key_press(int keycode, t_press *press)
 	reset_image(press);
 	render_map(press);
 	draw_player(press);
-	draw_ray(press);
+//	draw_ray(press);
+	my_ray(press);
 	erase_key(press);
 	return (0);
 }

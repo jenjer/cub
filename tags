@@ -10,7 +10,7 @@ BONUSSRCS	libft/Makefile	/^BONUSSRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.
 BUFFER_SIZE	gnl/get_next_line.h	/^#  define BUFFER_SIZE /;"	d
 BUTTON_X	cub3d.h	/^# define BUTTON_X /;"	d
 CC	Makefile	/^CC          = cc$/;"	m
-CFLAGS	Makefile	/^CFLAGS      = -Wall -Wextra -Werror -g3 -fsanitize=address$/;"	m
+CFLAGS	Makefile	/^CFLAGS      = -Wall -Wextra -Werror -g3 #-fsanitize=address$/;"	m
 CFLAGS	libft/Makefile	/^CFLAGS = -Wall -Wextra -Werror$/;"	m
 CUB2D_H	cub2d.h	/^# define CUB2D_H$/;"	d
 CUB3D_H	cub3d.h	/^# define CUB3D_H$/;"	d
@@ -32,6 +32,8 @@ GET_NEXT_LINE_H	gnl/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
 KEY_A	cub3d.h	/^# define KEY_A /;"	d
 KEY_D	cub3d.h	/^# define KEY_D /;"	d
 KEY_ESC	cub3d.h	/^# define KEY_ESC /;"	d
+KEY_LEFT	cub3d.h	/^# define KEY_LEFT /;"	d
+KEY_RIGHT	cub3d.h	/^# define KEY_RIGHT /;"	d
 KEY_S	cub3d.h	/^# define KEY_S /;"	d
 KEY_W	cub3d.h	/^# define KEY_W /;"	d
 LIBFT	Makefile	/^LIBFT       = libft.a$/;"	m
@@ -50,6 +52,7 @@ OBJ1	mlx/Makefile	/^OBJ1=$(SRC:.c=.o)$/;"	m
 OBJS	libft/Makefile	/^OBJS = ${SRCS:.c=.o}$/;"	m
 OBJS_MAN	Makefile	/^OBJS_MAN    = ${SRCS_MAN:.c=.o}$/;"	m
 OPEN_MAX	gnl/get_next_line.h	/^#  define OPEN_MAX /;"	d
+PI	cub2d.h	/^# define PI /;"	d
 PNG_HDR_SIZE	mlx/mlx_png.c	/^#define PNG_HDR_SIZE	/;"	d	file:
 PNG_MAGIC_SIZE	mlx/mlx_png.c	/^#define	PNG_MAGIC_SIZE	/;"	d	file:
 RETURN	mlx/mlx_xpm.c	/^#define	RETURN	/;"	d	file:
@@ -72,8 +75,14 @@ bpp	mlx/mlx_png.c	/^  int		bpp;$/;"	m	struct:png_info_s	file:
 buffer	mlx/mlx_int.h	/^  char			*buffer;$/;"	m	struct:mlx_img_list_s
 bytes_per_pixel	mlx/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RGB, 4:RGBA *\/ $/;"	m	struct:__anon1	file:
 c_color	cub3d.h	/^	t_color	*c_color;$/;"	m	struct:s_meta_data
+cal_distance	map2_ray.c	/^void	cal_distance(t_press *press, t_dp_ray *hv)$/;"	f
+cal_horz_ray	map2_ray.c	/^void	cal_horz_ray(t_press *press, t_dp_ray *horz)$/;"	f
+cal_ray	map2_ray.c	/^void	cal_ray(t_press *press, t_dp_ray *hv)$/;"	f
+cal_vert_ray	map2_ray.c	/^void	cal_vert_ray(t_press *press, t_dp_ray *vert)$/;"	f
 check_direction	map_direction.c	/^int	check_direction(t_meta_data *meta)$/;"	f
 check_four_side	map_valid.c	/^int	check_four_side(t_meta_data *meta, int r, int c)$/;"	f
+check_wall	map2_player.c	/^int	check_wall(t_press *press, double x, double y) \/\/ update player 함수에서 조정해야함$/;"	f
+check_wall_light	map2_ray.c	/^int	check_wall_light(t_press *press, double x, double y)$/;"	f
 col	mlx/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
 color	mlx/mlx_png.c	/^  int		color;$/;"	m	struct:png_info_s	file:
 color	mlx/mlx_xpm.c	/^  int   color;$/;"	m	struct:s_col_name	file:
@@ -91,20 +100,29 @@ deling	libft/ft_lstmap.c	/^static t_list	*deling(void *content, void (*del)(void
 depth	mlx/mlx_png.c	/^  int		depth;$/;"	m	struct:png_info_s	file:
 dfs1_start	map_valid.c	/^int	dfs1_start(t_meta_data *meta)$/;"	f
 display_log	mlx/mlx_shaders.c	/^void display_log(GLuint object, void (*param_func)(), void (*getlog_func)())$/;"	f
+distance	cub2d.h	/^	double	distance;$/;"	m	struct:s_dp_ray
+distance	cub2d.h	/^	double	distance;$/;"	m	struct:s_ray2
+distance_between_points	map2_ray.c	/^double	distance_between_points(double x1, double y1, double x2, double y2)$/;"	f
 do_dfs1	map_valid.c	/^void	do_dfs1(t_meta_data *meta, int r, int c)$/;"	f
-draw_player	map_cast.c	/^int	draw_player(t_param *param, t_mini_map *info_mini, t_img_2d *imgs)$/;"	f
+down	cub2d.h	/^	int	down;$/;"	m	struct:s_key
+draw_line	map2_ray.c	/^void	draw_line(t_press *press, double x1, double y1, double x2, double y2)$/;"	f
+draw_one_ray	map2_ray.c	/^void	draw_one_ray(t_press *press, double angle)$/;"	f
+draw_player	map2_cast.c	/^int	draw_player(t_press *press)$/;"	f
+draw_ray	map2_ray.c	/^void	draw_ray(t_press *press)$/;"	f
 east	cub3d.h	/^	char	*east;$/;"	m	struct:s_meta_data
 endian	cub2d.h	/^	int		endian;$/;"	m	struct:s_img2
+erase_key	map2_press.c	/^void	erase_key(t_press *press)$/;"	f
 exit_error	utils.c	/^void	exit_error(char *message, int code)$/;"	f
 f_color	cub3d.h	/^	t_color	*f_color;$/;"	m	struct:s_meta_data
 fd	cub3d.h	/^	int		fd;$/;"	m	struct:s_meta_data
 fill_sp_map	map_setting.c	/^void	fill_sp_map(char *sp_map, int idx)$/;"	f
-fill_squares	map_cast.c	/^void	fill_squares(t_img_2d *imgs, int x, int y, int color)$/;"	f
+fill_squares	map2_cast.c	/^void	fill_squares(t_img2 *img2, int x, int y, int color)$/;"	f
 font	mlx/mlx_int.h	/^  mlx_img_list_t	*font;$/;"	m	struct:mlx_ptr_s
 font_atlas	mlx/font.c	/^} font_atlas = {$/;"	v	typeref:struct:__anon1	file:
 font_fshader	mlx/mlx_int.h	/^  GLuint	font_fshader;$/;"	m	struct:glsl_info_s
 font_program	mlx/mlx_int.h	/^  GLuint	font_program;$/;"	m	struct:glsl_info_s
 font_vshader	mlx/mlx_int.h	/^  GLuint	font_vshader;$/;"	m	struct:glsl_info_s
+found_wallhit	cub2d.h	/^	int		found_wallhit;$/;"	m	struct:s_dp_ray
 free_spl	utils2.c	/^void	free_spl(char **temp)$/;"	f
 ft_atoi	libft/ft_atoi.c	/^int	ft_atoi(const char *str)$/;"	f
 ft_bzero	libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
@@ -166,24 +184,32 @@ height	cub3d.h	/^	int		height;$/;"	m	struct:s_meta_data
 height	mlx/font.c	/^  unsigned int 	 height;$/;"	m	struct:__anon1	file:
 height	mlx/mlx_int.h	/^  int			height;$/;"	m	struct:mlx_img_list_s
 height	mlx/mlx_png.c	/^  unsigned int	height;$/;"	m	struct:png_info_s	file:
-hooking_func	hooking.c	/^void	hooking_func(t_param *param, t_meta_data *meta)$/;"	f
 image_fshader	mlx/mlx_int.h	/^  GLuint	image_fshader;$/;"	m	struct:glsl_info_s
 image_program	mlx/mlx_int.h	/^  GLuint	image_program;$/;"	m	struct:glsl_info_s
 image_vshader	mlx/mlx_int.h	/^  GLuint	image_vshader;$/;"	m	struct:glsl_info_s
 img	cub2d.h	/^	void	*img;$/;"	m	struct:s_img2
 img	mlx/mlx_int.h	/^  mlx_img_list_t	*img;$/;"	m	struct:mlx_img_ctx_s
+img2	cub3d.h	/^	t_img2		*img2;$/;"	m	struct:s_press
 img_list	mlx/mlx_int.h	/^  mlx_img_ctx_t		*img_list;$/;"	m	struct:mlx_win_list_s
 img_list	mlx/mlx_int.h	/^  mlx_img_list_t	*img_list;$/;"	m	struct:mlx_ptr_s
+info2	cub3d.h	/^	t_map2		*info2;$/;"	m	struct:s_press
 init_color	map_color.c	/^void	init_color(t_color *color)$/;"	f
-init_imgs	map_cast_init.c	/^void	init_imgs(t_img_2d *imgs)$/;"	f
+init_img2	map2_cast_init.c	/^void	init_img2(t_img2 *img2)$/;"	f
+init_key2	map2_cast_init.c	/^void	init_key2(t_key *key2)$/;"	f
 init_meta_data	main.c	/^void	init_meta_data(char *name, t_meta_data *meta)$/;"	f
-init_mini	map_cast_init.c	/^void	init_mini(t_mini_map *info_mini, t_meta_data *meta, t_img_2d *imgs)$/;"	f
-init_player	map_cast_init.c	/^void	init_player(t_meta_data *meta, t_mini_map *info_mini)$/;"	f
+init_mini	map2_cast_init.c	/^void	init_mini(t_map2 *info2, t_meta_data *meta, t_img2 *img2)$/;"	f
+init_player	map2_cast_init.c	/^void	init_player(t_meta_data *meta, t_player2 **player2)$/;"	f
 inserting	libft/ft_split.c	/^static char	**inserting(char **ret, size_t count_word, char *s, char c)$/;"	f	file:
 interlace	mlx/mlx_png.c	/^  int		interlace;$/;"	m	struct:png_info_s	file:
 is_one_in	map_valid.c	/^int	is_one_in(t_meta_data *meta, int r, int c)$/;"	f
-key_press	hooking.c	/^int	key_press(int keycode, t_meta_data *meta)$/;"	f
+is_ray_facingdown	cub2d.h	/^	int		is_ray_facingdown;$/;"	m	struct:s_ray2
+is_ray_facingleft	cub2d.h	/^	int		is_ray_facingleft;$/;"	m	struct:s_ray2
+is_ray_facingright	cub2d.h	/^	int		is_ray_facingright;$/;"	m	struct:s_ray2
+is_ray_facingup	cub2d.h	/^	int		is_ray_facingup;$/;"	m	struct:s_ray2
+key2	cub3d.h	/^	t_key		*key2;$/;"	m	struct:s_press
+key_press	map2_press.c	/^int	key_press(int keycode, t_press *press)$/;"	f
 leakcheck	main.c	/^void	leakcheck(void)$/;"	f
+left	cub2d.h	/^	int	left;$/;"	m	struct:s_key
 line_size	cub2d.h	/^	int		line_size;$/;"	m	struct:s_img2
 loc_font_atlassize	mlx/mlx_int.h	/^  GLint		loc_font_atlassize;$/;"	m	struct:glsl_info_s
 loc_font_color	mlx/mlx_int.h	/^  GLint		loc_font_color;$/;"	m	struct:glsl_info_s
@@ -211,18 +237,19 @@ make_line	gnl/get_next_line.c	/^char	*make_line(char *backup, int i)$/;"	f
 make_rgb_bit	utils2.c	/^int	make_rgb_bit(t_meta_data *data)$/;"	f
 make_sp_map	map_setting.c	/^void	make_sp_map(t_meta_data *meta)$/;"	f
 map	cub3d.h	/^	char	**map;$/;"	m	struct:s_meta_data
-map_cast	map_cast.c	/^int	map_cast(t_param *param, t_meta_data *meta)$/;"	f
-map_cast_init	map_cast_init.c	/^void	map_cast_init(t_meta_data *meta, t_img_2d **imgs, \\$/;"	f
+map_cast	map2_cast.c	/^int	map_cast(t_param *param_, t_meta_data *meta_)$/;"	f
+map_cast_init	map2_cast_init.c	/^void	map_cast_init(t_press *press)$/;"	f
 map_check_func	map_valid.c	/^int	map_check_func(t_meta_data *meta, int r, int c)$/;"	f
-map_cols	cub2d.h	/^	int			map_cols;$/;"	m	struct:s_mini_map
+map_cols	cub2d.h	/^	int			map_cols;$/;"	m	struct:s_map2
 map_direction_init	map_direction.c	/^int	map_direction_init(t_meta_data *meta)$/;"	f
 map_free_all	utils.c	/^int	map_free_all(t_meta_data meta, t_param *param)$/;"	f
 map_init	map_setting.c	/^int	map_init(t_meta_data *meta, char **tmp_map, int idx)$/;"	f
-map_rows	cub2d.h	/^	int			map_rows;$/;"	m	struct:s_mini_map
+map_rows	cub2d.h	/^	int			map_rows;$/;"	m	struct:s_map2
 map_valid_check	map_valid.c	/^int	map_valid_check(t_meta_data *meta)$/;"	f
 match_color	map_color.c	/^int	match_color(t_color *color, char **rgb)$/;"	f
 max_width	cub3d.h	/^	int		max_width;$/;"	m	struct:s_meta_data
 meet_eof	gnl/get_next_line.c	/^char	*meet_eof(char **backup, char *buf, int read_size)$/;"	f
+meta	cub3d.h	/^	t_meta_data	*meta;$/;"	m	struct:s_press
 mipng_crc	mlx/mlx_png.c	/^int	mipng_crc(unsigned char *ptr, int len)$/;"	f
 mipng_data	mlx/mlx_png.c	/^int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)$/;"	f
 mipng_defilter	mlx/mlx_png.c	/^unsigned char (*(mipng_defilter[]))(unsigned char *buff, int pos, int a, int b, int c) =$/;"	v
@@ -274,13 +301,14 @@ next	mlx/mlx_int.h	/^  struct mlx_img_list_s	*next;$/;"	m	struct:mlx_img_list_s	
 next	mlx/mlx_int.h	/^  struct mlx_win_list_s	*next;$/;"	m	struct:mlx_win_list_s	typeref:struct:mlx_win_list_s::mlx_win_list_s
 north	cub3d.h	/^	char	*north;$/;"	m	struct:s_meta_data
 num1	cub3d.h	/^	int		num1;$/;"	m	struct:s_meta_data
-param_init	map_cast_init.c	/^void	param_init(t_param *param, t_mini_map *info_mini, t_img_2d *imgs)$/;"	f
+param	cub3d.h	/^	t_param		*param;$/;"	m	struct:s_press
+param_init	map2_cast.c	/^void	param_init(t_press *press)$/;"	f
 pixel_data	mlx/font.c	/^  unsigned char	 pixel_data[1140 * 20 * 4 + 1];$/;"	m	struct:__anon1	file:
 pixel_fshader	mlx/mlx_int.h	/^  GLuint	pixel_fshader;$/;"	m	struct:glsl_info_s
 pixel_program	mlx/mlx_int.h	/^  GLuint	pixel_program;$/;"	m	struct:glsl_info_s
 pixel_vshader	mlx/mlx_int.h	/^  GLuint	pixel_vshader;$/;"	m	struct:glsl_info_s
 pixmgt	mlx/mlx_int.h	/^  int			pixmgt;$/;"	m	struct:mlx_win_list_s
-player2	cub2d.h	/^	t_player	*player2;$/;"	m	struct:s_mini_map
+player2	cub3d.h	/^	t_player2	*player2;$/;"	m	struct:s_press
 player_x	cub3d.h	/^	int		player_x;$/;"	m	struct:s_meta_data
 player_y	cub3d.h	/^	int		player_y;$/;"	m	struct:s_meta_data
 png_info_s	mlx/mlx_png.c	/^typedef struct png_info_s$/;"	s	file:
@@ -288,18 +316,28 @@ png_info_t	mlx/mlx_png.c	/^} png_info_t;$/;"	t	typeref:struct:png_info_s	file:
 pos1_c	cub3d.h	/^	int		pos1_c;$/;"	m	struct:s_meta_data
 pos1_r	cub3d.h	/^	int		pos1_r;$/;"	m	struct:s_meta_data
 print_map	main.c	/^void	print_map(t_meta_data meta)$/;"	f
+ray2	cub3d.h	/^	t_ray2		*ray2;$/;"	m	struct:s_press
+ray_angle	cub2d.h	/^	double	ray_angle;$/;"	m	struct:s_ray2
+ray_init	map2_ray.c	/^void	ray_init(t_ray2 *ray2, double ray_angle)$/;"	f
 red	cub3d.h	/^	int	red;$/;"	m	struct:s_color
-render_map	map_cast.c	/^void	render_map(t_param *param, t_mini_map *info_mini, t_img_2d *imgs, \\$/;"	f
+render_map	map2_cast.c	/^void	render_map(t_press *press)$/;"	f
+reset_image	map2_press.c	/^void	reset_image(t_press *press)$/;"	f
+right	cub2d.h	/^	int	right;$/;"	m	struct:s_key
+rotation_angle	cub2d.h	/^	double	rotation_angle;$/;"	m	struct:s_player2
 s_col_name	mlx/mlx_xpm.c	/^struct  s_col_name$/;"	s	file:
 s_color	cub3d.h	/^typedef struct s_color$/;"	s
+s_dp_ray	cub2d.h	/^typedef struct s_dp_ray$/;"	s
 s_img2	cub2d.h	/^typedef struct s_img2$/;"	s
+s_key	cub2d.h	/^typedef struct s_key$/;"	s
 s_list	libft/libft.h	/^typedef struct s_list$/;"	s
+s_map2	cub2d.h	/^typedef struct s_map2$/;"	s
 s_meta_data	cub3d.h	/^typedef struct s_meta_data$/;"	s
-s_mini_map	cub2d.h	/^typedef struct s_mini_map$/;"	s
 s_param	cub3d.h	/^typedef struct s_param$/;"	s
 s_player2	cub2d.h	/^typedef struct s_player2$/;"	s
+s_press	cub3d.h	/^typedef struct s_press$/;"	s
+s_ray2	cub2d.h	/^typedef struct s_ray2$/;"	s
 s_xpm_col	mlx/mlx_xpm.c	/^typedef struct  s_xpm_col$/;"	s	file:
-scale	cub2d.h	/^	double		scale;$/;"	m	struct:s_mini_map
+scale	cub2d.h	/^	double		scale;$/;"	m	struct:s_map2
 scale	cub2d.h	/^	double	scale;$/;"	m	struct:s_img2
 see_flag	map_direction.c	/^int	see_flag(t_meta_data *meta, char *tmp, int flag)$/;"	f
 skip_space	utils.c	/^void	skip_space(char **str)$/;"	f
@@ -308,30 +346,49 @@ sp_map	cub3d.h	/^	char	**sp_map;$/;"	m	struct:s_meta_data
 start	libft/ft_atoi.c	/^static int	start(const char *str, size_t *i)$/;"	f	file:
 str_free	gnl/get_next_line.c	/^void	str_free(char **str)$/;"	f
 t_color	cub3d.h	/^}	t_color;$/;"	t	typeref:struct:s_color
-t_img_2d	cub2d.h	/^}	t_img_2d;$/;"	t	typeref:struct:s_img2
+t_dp_ray	cub2d.h	/^}	t_dp_ray;$/;"	t	typeref:struct:s_dp_ray
+t_img2	cub2d.h	/^}	t_img2;$/;"	t	typeref:struct:s_img2
+t_key	cub2d.h	/^}	t_key;$/;"	t	typeref:struct:s_key
 t_list	libft/libft.h	/^}					t_list;$/;"	t	typeref:struct:s_list
+t_map2	cub2d.h	/^}	t_map2;$/;"	t	typeref:struct:s_map2
 t_meta_data	cub3d.h	/^}	t_meta_data;$/;"	t	typeref:struct:s_meta_data
-t_mini_map	cub2d.h	/^}	t_mini_map;$/;"	t	typeref:struct:s_mini_map
 t_param	cub3d.h	/^}	t_param;$/;"	t	typeref:struct:s_param
-t_player	cub2d.h	/^}	t_player;$/;"	t	typeref:struct:s_player2
+t_player2	cub2d.h	/^}	t_player2;$/;"	t	typeref:struct:s_player2
+t_press	cub3d.h	/^}	t_press;$/;"	t	typeref:struct:s_press
+t_ray2	cub2d.h	/^}	t_ray2;$/;"	t	typeref:struct:s_ray2
 t_xpm_col	mlx/mlx_xpm.c	/^} t_xpm_col;$/;"	t	typeref:struct:s_xpm_col	file:
 texture	mlx/mlx_int.h	/^  GLuint		texture;$/;"	m	struct:mlx_img_ctx_s
-thickness	cub2d.h	/^	int	thickness;$/;"	m	struct:s_player2
-tile_size	cub2d.h	/^	int			tile_size;$/;"	m	struct:s_mini_map
+thickness	cub2d.h	/^	int		thickness;$/;"	m	struct:s_player2
+tile_size	cub2d.h	/^	int			tile_size;$/;"	m	struct:s_map2
 tile_size	cub2d.h	/^	int		tile_size;$/;"	m	struct:s_img2
+turn_left	cub2d.h	/^	int	turn_left;$/;"	m	struct:s_key
+turn_right	cub2d.h	/^	int	turn_right;$/;"	m	struct:s_key
+turnspeed	cub2d.h	/^	double	turnspeed;$/;"	m	struct:s_player2
+up	cub2d.h	/^	int	up;$/;"	m	struct:s_key
+update_player2	map2_player.c	/^int	update_player2(t_press *press)$/;"	f
 valid_char_check	map_valid.c	/^int	valid_char_check(char c)$/;"	f
 vbuffer	mlx/mlx_int.h	/^  GLuint		vbuffer;$/;"	m	struct:mlx_img_ctx_s
 vertexes	mlx/mlx_int.h	/^  GLfloat		vertexes[8];$/;"	m	struct:mlx_img_list_s
 visited	cub3d.h	/^	int		**visited;$/;"	m	struct:s_meta_data
+walkspeed	cub2d.h	/^	double	walkspeed;$/;"	m	struct:s_player2
+wall_hit_x	cub2d.h	/^	double	wall_hit_x;$/;"	m	struct:s_ray2
+wall_hit_y	cub2d.h	/^	double	wall_hit_y;$/;"	m	struct:s_ray2
+wall_hitx	cub2d.h	/^	double	wall_hitx;$/;"	m	struct:s_dp_ray
+wall_hity	cub2d.h	/^	double	wall_hity;$/;"	m	struct:s_dp_ray
+was_hit_vertical	cub2d.h	/^	int		was_hit_vertical;$/;"	m	struct:s_ray2
 west	cub3d.h	/^	char	*west;$/;"	m	struct:s_meta_data
 width	mlx/font.c	/^  unsigned int 	 width;$/;"	m	struct:__anon1	file:
 width	mlx/mlx_int.h	/^  int			width;$/;"	m	struct:mlx_img_list_s
 width	mlx/mlx_png.c	/^  unsigned int	width;$/;"	m	struct:png_info_s	file:
 win	cub3d.h	/^	void	*win;$/;"	m	struct:s_param
-win_height	cub2d.h	/^	int			win_height;$/;"	m	struct:s_mini_map
+win_height	cub2d.h	/^	int			win_height;$/;"	m	struct:s_map2
 win_list	mlx/mlx_int.h	/^  mlx_win_list_t	*win_list;$/;"	m	struct:mlx_ptr_s
-win_width	cub2d.h	/^	int			win_width;$/;"	m	struct:s_mini_map
+win_width	cub2d.h	/^	int			win_width;$/;"	m	struct:s_map2
 win_width	cub2d.h	/^	int		win_width;$/;"	m	struct:s_img2
 winid	mlx/mlx_int.h	/^  void			*winid;$/;"	m	struct:mlx_win_list_s
-x	cub2d.h	/^	int	x;$/;"	m	struct:s_player2
-y	cub2d.h	/^	int	y;$/;"	m	struct:s_player2
+x	cub2d.h	/^	double	x;$/;"	m	struct:s_player2
+xintercept	cub2d.h	/^	double	xintercept;$/;"	m	struct:s_dp_ray
+xstep	cub2d.h	/^	double	xstep;$/;"	m	struct:s_dp_ray
+y	cub2d.h	/^	double	y;$/;"	m	struct:s_player2
+yintercept	cub2d.h	/^	double	yintercept;$/;"	m	struct:s_dp_ray
+ystep	cub2d.h	/^	double	ystep;$/;"	m	struct:s_dp_ray

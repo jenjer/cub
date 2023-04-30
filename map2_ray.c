@@ -6,7 +6,7 @@
 /*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/30 16:34:01 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/04/30 16:56:44 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	cal_vert_ray(t_press *press, t_dp_ray *vert)
 	vert->found_wallhit = 0;
 	vert->wall_hitx = 0;
 	vert->wall_hity = 0;
-	vert->xintercept = floor(press->player2->x) * (press->info2->tile_size);
+	vert->xintercept = floor(press->player2->x);
 	if (press->ray2->is_ray_facingright)
 		vert->xintercept += press->info2->tile_size; // press->info2->tile_size
 	vert->yintercept = press->player2->y + (vert->xintercept - press->player2->x) / tan(press->ray2->ray_angle);
@@ -129,7 +129,7 @@ void	cal_horz_ray(t_press *press, t_dp_ray *horz)
 	horz->found_wallhit = 0;
 	horz->wall_hitx = 0;
 	horz->wall_hity = 0;
-	horz->yintercept = floor(press->player2->y / press->info2->tile_size) * (press->info2->tile_size);
+	horz->yintercept = floor(press->player2->y);
 	if (press->ray2->is_ray_facingdown)
 		horz->yintercept += press->info2->tile_size; // press->info2->tile_size
 	horz->xintercept = press->player2->x + (horz->yintercept - press->player2->y) / tan(press->ray2->ray_angle);
