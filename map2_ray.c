@@ -17,7 +17,9 @@ int	check_wall_light(t_press *press, double x, double y)
 {
 	int ix;
 	int iy;
-
+	int	tile_size;
+	
+	tile_size = press->info2->tile_size;
 	if (x < 0 || x > press->meta->max_width || y < 0 || y > press->meta->height)
 		return (1);
 	ix = floor(x); /// press->info2->tile_size);
@@ -53,23 +55,22 @@ void    draw_line(t_press *press, double x1, double y1, double x2, double y2)
         printf("ray_x : %f, ray_y : %f\n", ray_x, ray_y);
         if (!check_wall_light(press, ray_x, ray_y))
         {
-//			for (int i = 0; i < press->info2->tile_size; ++i) {
-/*                    press->img2->data[(press->info2->win_width * \
-                        (int)(floor(ray_y) * (press->info2->tile_size) )) + \
-                        (int)(floor(ray_x) * (press->info2->tile_size))] = 0xff0000;
-*/
-//			}
-            press->img2->data[(int)(press->info2->tile_size * \
-			((press->info2->win_width * \
-			(ray_y)) + (ray_x)))] = 0xff0000;
-
-        }
+			for (int i = 0; i < press->info2->tile_size; ++i) {
+                    press->img2->data[(press->info2->win_width * \
+                        (int)((ray_y) * (press->info2->tile_size) )) + \
+                        (int)((ray_x) * (press->info2->tile_size))] = 0xff0000;
+			}
+			printf("val : %d\n", (
+                        (int)((ray_y) * (press->info2->tile_size) )) + \
+                        (int)((ray_x) * (press->info2->tile_size)) );
+            // press->img2->data[(int)((press->info2->tile_size) * \
+			// 	((press->info2->win_width * ((ray_y))) + ((ray_x))))] = 0xff0000;
+		}
         else
             break ;
         printf("dx : %f, dy : %f\n", dx, dy);
-        ray_x += dx;
-   		ray_y += dy;
-		printf("ray : %f %f\n", ray_x, ray_y);
+		ray_y += (dy / (press->info2->tile_size));
+		ray_x += (dx / (press->info2->tile_size));
     }
 }
 

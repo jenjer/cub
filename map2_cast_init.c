@@ -18,7 +18,7 @@ void	init_player(t_meta_data *meta, t_player2 **player2)
 	(*player2) = (t_player2 *)malloc(sizeof(t_player2));
 	(*player2)->x = meta->player_x;
 	(*player2)->y = meta->player_y;
-	(*player2)->thickness = 10;
+	(*player2)->thickness = 5;
 	(*player2)->rotation_angle = PI / 2;
 	(*player2)->walkspeed = 0.2;
 	(*player2)->turnspeed = 4 * (PI / 180);
