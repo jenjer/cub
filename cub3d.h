@@ -35,6 +35,8 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define BUTTON_X 17
+# define GAME_WIDTH 1920
+# define GAME_HEIGHT 1080
 
 typedef struct s_color
 {

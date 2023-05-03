@@ -22,7 +22,6 @@ int	check_wall(t_press *press, double x, double y) // update player 함수에서
 		return (1);
 	ix = floor(x);
 	iy = floor(y);
-	printf("ix : %d, iy : %d\n", ix, iy);
 	if (press->meta->sp_map[iy][ix] == '1' || press->meta->sp_map[iy][ix] == 'X')
 		return (1);
 	return (0);
@@ -73,6 +72,5 @@ int	update_player2(t_press *press)
 		press->player2->x = nx;
 		press->player2->y = ny;
 	}
-	printf("nx : %f, ny : %f\n", press->player2->x, press->player2->y);
 	return (0);
 }

@@ -14,6 +14,10 @@
 # define CUB2D_H
 
 # define PI 3.141592653589793
+# define LEFT_UP 101
+# define LEFT_DOWN 102
+# define RIGHT_UP 103
+# define RIGHT_DOWN 104
 
 typedef struct s_player2
 {
@@ -32,29 +36,28 @@ typedef struct s_img2
 	int		bpp;
 	int		line_size;
 	int		endian;
-	double	scale;
 	int		tile_size;
 	int		win_width;
 }	t_img2;
 
 typedef struct s_map2
 {
-	double		scale;
-	int			tile_size;
-	int			map_rows;
-	int			map_cols;
-	int			win_width;
-	int			win_height;
+	int		tile_size;
+	int		map_rows;
+	int		map_cols;
+	int		win_width;
+	int		win_height;
+	int		m_dir;
 }	t_map2;
 
 typedef struct s_key
 {
-	int	up;
-	int	down;
-	int	left;
-	int	right;
-	int	turn_left;
-	int	turn_right;
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		turn_left;
+	int		turn_right;
 }	t_key;
 
 typedef struct s_dp_ray

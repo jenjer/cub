@@ -20,12 +20,12 @@ void	fill_squares(t_img2 *img2, int x, int y, int color)
 	int	j;
 
 	j = 0;
-	while (j < (int)(img2->scale * img2->tile_size))
+	while (j < (int)(img2->tile_size))
 	{
 		i = 0;
-		while (i < (int)(img2->scale * img2->tile_size))
+		while (i < (int)(img2->tile_size))
 		{
-			img2->data[(int)(img2->scale * (img2->win_width)) * (y + j) + (x + i)] = color;
+			img2->data[(int)((img2->win_width) * (y + j)) + (x + i)] = color;
 			i++;
 		}
 		j++;
@@ -44,14 +44,14 @@ void	render_map(t_press *press)
 		while (col < press->info2->map_cols)
 		{
 			if (press->meta->sp_map[row][col] == '1')
-				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
-								(int)(press->info2->scale * press->info2->tile_size * row), 0x000000);
+				fill_squares(press->img2, (int)(press->info2->tile_size * col), \
+								(int)(press->info2->tile_size * row), 0x000000);
 			else if (press->meta->sp_map[row][col] == 'X')
-				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
-								(int)(press->info2->scale * press->info2->tile_size * row), 0xff00ff);
+				fill_squares(press->img2, (int)(press->info2->tile_size * col), \
+								(int)(press->info2->tile_size * row), 0xff00ff);
 			else if (press->meta->sp_map[row][col] == '0')
-				fill_squares(press->img2, (int)(press->info2->scale * press->info2->tile_size * col), \
-								(int)(press->info2->scale * press->info2->tile_size * row), 0xffffff);
+				fill_squares(press->img2, (int)(press->info2->tile_size * col), \
+								(int)(press->info2->tile_size * row), 0xffffff);
 			col++;
 		}
 		row++;
@@ -75,19 +75,18 @@ int	draw_player(t_press *press)
 		}
 		row++;
 	}
-	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img, \
-							0, 0);
+	mlx_put_image_to_window(press->param->mlx, \
+				press->param->win, press->img2->img, 0, 0);
 	return (0);
 }
 
 void	param_init(t_press *press)
 {
 	press->param->mlx = mlx_init();
-	press->param->win = mlx_new_window(press->param->mlx, press->info2->win_width, \
-									press->info2->win_height, "mini");
-	press->img2->img = mlx_new_image(press->param->mlx, (int)press->info2->scale * \
-								press->info2->win_width, (int)press->info2->scale * \
-									press->info2->win_height);
+	press->param->win = mlx_new_window(press->param->mlx, \
+			GAME_WIDTH, GAME_HEIGHT, "mini");
+	press->img2->img = mlx_new_image(press->param->mlx, \
+			(int) press->info2->win_width, (int) press->info2->win_height);
 }
 
 int	map_cast(t_param *param_, t_meta_data *meta_)
@@ -100,10 +99,11 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 	map_cast_init(press);
 	param_init(press);
 	press->img2->data = (int *)mlx_get_data_addr(press->img2->img, \
-					&(press->img2->bpp), &(press->img2->line_size), &((press->img2->endian)));
+		&(press->img2->bpp), &(press->img2->line_size), \
+			&((press->img2->endian)));
 	render_map(press);
 	draw_player(press);
-	mlx_hook(press->param->win, X_EVENT_KEY_PRESS, 1L<<0, key_press, press);
+	mlx_hook(press->param->win, X_EVENT_KEY_PRESS, 1L << 0, key_press, press);
 	mlx_loop(press->param->mlx);
 	return (0);
 }

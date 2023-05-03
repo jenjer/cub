@@ -118,7 +118,6 @@ int	map_init(t_meta_data *meta, char **tmp_map, int idx)
 		if (ft_strlen(line) > 1 || line[0] != '\n')
 			ft_exit("word after feed ERROR!!!\n");
 	}
-	printf("end_cut_end_feed\n");
 	make_sp_map(meta);
 	return (0);
 }
