@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map2_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/02 18:19:15 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:10:39 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
 int	check_wall_light(t_press *press, double x, double y)
 {
@@ -169,7 +168,7 @@ void	ray_init(t_ray2 *ray2, double ray_angle)
 	ray2->is_ray_facingleft = !(ray2->is_ray_facingright);
 }
 
-void	draw_one_ray(t_press *press, double angle)
+void	draw_one_ray(t_press *press, double angle, int ray_num)
 {
 	t_dp_ray	horz;
 	t_dp_ray	vert;
@@ -192,7 +191,8 @@ void	draw_one_ray(t_press *press, double angle)
 		press->ray2->was_hit_vertical = 0;
 	}
 	draw_line(press, press->player2->x, press->player2->y,
-			press->ray2->wall_hit_x, press->ray2->wall_hit_y);
+		press->ray2->wall_hit_x, press->ray2->wall_hit_y);
+	render_3d_projects_walls(press, ray_num);
 }
 
 void	draw_ray(t_press *press)
@@ -201,20 +201,28 @@ void	draw_ray(t_press *press)
 	double	max_angle;
 	double	ray_range;
 	int		ray_count;
+	int		i;
 
+	i = 0;
 	ray_range = PI / 3.0; // 60도 (플레이어의 시야각)
-	ray_count = 121;
+	ray_count = 120;
 	angle = press->player2->rotation_angle; // 플레이어가 바라보는 각도
 	max_angle = press->player2->rotation_angle + (ray_range / 2.0);
 	// 시야각이 60라면, 플레이어의 최대 각도는 +30도가 된다.
-	while (angle <= max_angle)
+	while (i < ray_count)
 	{
-		draw_one_ray(press, angle);						// 현재 시야각에서 광선 하나
-		draw_one_ray(press, angle - (ray_range / 2.0)); // 현재 시야각 - 30도에서 광선 하나
-		angle += (ray_range / 2.0) / ((ray_count - 1) / 2.0);
-		// 결과적으로 현재 각도에서 0.5도가 더해지게 된다. angle이 90도에서 시작했다면 max_angle은 120이고,
-		// while문을 60번 돌게 될 것이다.
+		draw_one_ray(press, angle - (ray_range / 2.0), i);
+		angle += ray_range / ray_count;
+		i++;
 	}
+	// while (angle <= max_angle)
+	// {
+	// 	draw_one_ray(press, angle);						// 현재 시야각에서 광선 하나
+	// 	draw_one_ray(press, angle - (ray_range / 2.0)); // 현재 시야각 - 30도에서 광선 하나
+	// 	angle += (ray_range / 2.0) / ((ray_count - 1) / 2.0);
+	// 	// 결과적으로 현재 각도에서 0.5도가 더해지게 된다. angle이 90도에서 시작했다면 max_angle은 120이고,
+	// 	// while문을 60번 돌게 될 것이다.
+	// }
 	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img,
 							0, 0);
 }
