@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2_press.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/02 15:28:05 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/03 20:22:33 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	key_press(int keycode, t_press *press)
 	if (keycode == KEY_ESC)
 		exit(0);
 	update_player2(press);
-	reset_image(press);
+	// reset_image(press);
 	render_map(press);
 	draw_player(press);
 	draw_ray(press);
