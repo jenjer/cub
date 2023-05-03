@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/03 17:10:39 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/03 19:45:11 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,8 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	}
 	draw_line(press, press->player2->x, press->player2->y,
 		press->ray2->wall_hit_x, press->ray2->wall_hit_y);
-	render_3d_projects_walls(press, ray_num);
+	ray_num = 0;
+	// render_3d_projects_walls(press, ray_num);
 }
 
 void	draw_ray(t_press *press)
@@ -203,9 +204,9 @@ void	draw_ray(t_press *press)
 	int		ray_count;
 	int		i;
 
-	i = 0;
+	i = 1;
 	ray_range = PI / 3.0; // 60도 (플레이어의 시야각)
-	ray_count = 120;
+	ray_count = 121;
 	angle = press->player2->rotation_angle; // 플레이어가 바라보는 각도
 	max_angle = press->player2->rotation_angle + (ray_range / 2.0);
 	// 시야각이 60라면, 플레이어의 최대 각도는 +30도가 된다.

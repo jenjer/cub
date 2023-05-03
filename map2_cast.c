@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2_cast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/29 21:07:27 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/03 19:52:35 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,25 @@ void	param_init(t_press *press)
 int	map_cast(t_param *param_, t_meta_data *meta_)
 {	
 	t_press		*press;
+	int	x;
+	int	y;
 
 	press = (t_press *)malloc(sizeof(t_press));
 	press->param = param_;
 	press->meta = meta_;
 	map_cast_init(press);
 	param_init(press);
+	printf("win_width : %d\n", press->info2->win_width);
 	press->img2->data = (int *)mlx_get_data_addr(press->img2->img, \
 		&(press->img2->bpp), &(press->img2->line_size), \
 			&((press->img2->endian)));
+
+	for (y = 0; y < GAME_HEIGHT; y++)
+	{
+		for (x = 0; x < GAME_WIDTH; x++)
+			
+			press->img2->data[GAME_WIDTH * y + x] = 0x111111;
+	}
 	render_map(press);
 	draw_player(press);
 	mlx_hook(press->param->win, X_EVENT_KEY_PRESS, 1L << 0, key_press, press);

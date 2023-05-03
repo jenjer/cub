@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2_cast_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/29 20:29:00 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/03 18:01:18 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_img2(t_img2 *img2)
 	img2->bpp = 0;
 	img2->line_size = 0;
 	img2->endian = 0;
-	img2->tile_size = 30;
+	img2->tile_size = 40;
 }
 
 void	init_key2(t_key *key2)
