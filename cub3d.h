@@ -6,12 +6,14 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/03 17:44:01 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/09 17:54:58 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include <stdio.h> // delete
 
 # include "mlx/mlx.h"
 # include <unistd.h>
@@ -35,6 +37,7 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define BUTTON_X 17
+
 # define GAME_WIDTH 1920
 # define GAME_HEIGHT 1080
 
@@ -78,7 +81,7 @@ typedef struct s_press
 {
 	t_param		*param;
 	t_meta_data	*meta;
-	t_map2		*info2;
+	t_map2		*map2;
 	t_img2		*img2;
 	t_key		*key2;
 	t_player2	*player2;
@@ -104,6 +107,8 @@ int		ft_isnum(char *str);
 void	skip_space(char **str);
 int		ft_strrncmp(char *s1, char *s2, int n);
 int		ft_exit(char *str);
+int		ft_max(int a, int b);
+int		ft_compare(int a, int b);
 
 // casting
 int		map_cast(t_param *param, t_meta_data *meta);
@@ -125,8 +130,9 @@ int		check_wall(t_press *press, double x, double y);
 
 //rendering
 void	render_map(t_press *press);
-void	fill_squares(t_img2 *img2, int x, int y, int color);
+void	fill_squares(t_press *press, int x, int y, int color);
 int		draw_player(t_press *press);
+void	setting_map_location(t_press *press, int *x, int *y);
 void	render_3d_projects_walls(t_press *press, int ray_num);
 
 #endif

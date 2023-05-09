@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub2d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/30 19:13:47 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/09 17:37:31 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define CUB2D_H
 
 # define PI 3.141592653589793
-# define LEFT_UP 101
-# define LEFT_DOWN 102
-# define RIGHT_UP 103
-# define RIGHT_DOWN 104
+# define LU 101
+# define LD 102
+# define RU 103
+# define RD 104
 
 typedef struct s_player2
 {
@@ -47,7 +47,9 @@ typedef struct s_map2
 	int		map_cols;
 	int		win_width;
 	int		win_height;
+	int		mts;
 	int		m_dir;
+	double	scale;
 }	t_map2;
 
 typedef struct s_key

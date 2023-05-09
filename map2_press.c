@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/03 20:22:33 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:12:09 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	reset_image(t_press *press)
 {
 	mlx_destroy_image(press->param->mlx, press->img2->img);
 	press->img2->img = mlx_new_image(press->param->mlx, \
-				(int)(press->info2->win_width), (int)(press->info2->win_height));
+				GAME_WIDTH, GAME_HEIGHT);
 	press->img2->data = (int *)mlx_get_data_addr(press->img2->img, \
 						&(press->img2->bpp), &(press->img2->line_size), \
 							&(press->img2->endian));
@@ -50,7 +50,10 @@ int	key_press(int keycode, t_press *press)
 	if (keycode == KEY_ESC)
 		exit(0);
 	update_player2(press);
-	// reset_image(press);
+	reset_image(press);
+	for (int y = 0; y < GAME_HEIGHT; y++)
+		for (int x = 0; x < GAME_WIDTH; x++)
+			press->img2->data[GAME_WIDTH * y + x] = 0x111111;
 	render_map(press);
 	draw_player(press);
 	draw_ray(press);

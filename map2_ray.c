@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/03 19:45:11 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:14:20 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,26 @@ int	check_wall_light(t_press *press, double x, double y)
 	int	iy;
 	int	tile_size;
 
-	tile_size = press->info2->tile_size;
+	tile_size = press->map2->tile_size;
 	if (x < 0 || x > press->meta->max_width || y < 0 || y > press->meta->height)
 		return (1);
 	ix = floor(x);
 	iy = floor(y);
 	return (press->meta->sp_map[iy][ix] != '0');
+}
+
+void	setting_ray_location(t_press *press, double *x, double *y)
+{
+	int	old_x;
+	int	old_y;
+
+	old_x = *x;
+	old_y = *y;
+	if (press->map2->m_dir == LU)
+	{
+		*x = (int)(press->map2->scale * old_x);
+		*y = (int)(press->map2->scale * old_y);
+	}
 }
 
 void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
@@ -45,16 +59,17 @@ void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 	{
 		if (!check_wall_light(press, ray_x, ray_y))
 		{
-			for (int i = 0; i < press->info2->tile_size; ++i) {
-					press->img2->data[(press->info2->win_width * \
-						(int)((ray_y) * (press->info2->tile_size) )) + \
-						(int)((ray_x) * (press->info2->tile_size))] = 0xff0000;
+			// setting_ray_location(press, &ray_x, &ray_y);
+			for (int i = 0; i < press->map2->tile_size; ++i) {
+					press->img2->data[(GAME_WIDTH * \
+						(int)((ray_y) * (press->map2->mts) )) + \
+						(int)((ray_x) * (press->map2->mts))] = 0xff0000;
 			}
 		}
 		else
 			break ;
-		ray_y += (dy / (press->info2->tile_size));
-		ray_x += (dx / (press->info2->tile_size));
+		ray_y += (dy / (press->map2->tile_size));
+		ray_x += (dx / (press->map2->tile_size));
 	}
 }
 
@@ -81,7 +96,7 @@ void	cal_ray(t_press *press, t_dp_ray *hv)
 	next_touch_x = hv->xintercept;
 	next_touch_y = hv->yintercept;
 	check_touch_y = 0;
-	while ((next_touch_x >= 0 && next_touch_x <= press->info2->win_width) && next_touch_y >= 0 && next_touch_y <= press->info2->win_height)
+	while ((next_touch_x >= 0 && next_touch_x <= press->map2->win_width) && next_touch_y >= 0 && next_touch_y <= press->map2->win_height)
 	{
 		if (press->ray2->is_ray_facingup)
 			check_touch_y = 1;
@@ -106,14 +121,14 @@ void	cal_vert_ray(t_press *press, t_dp_ray *vert)
 	vert->found_wallhit = 0;
 	vert->wall_hitx = 0;
 	vert->wall_hity = 0;
-	vert->xintercept = floor(press->player2->x / press->info2->tile_size) * press->info2->tile_size;
+	vert->xintercept = floor(press->player2->x / press->map2->tile_size) * press->map2->tile_size;
 	if (!press->ray2->is_ray_facingright)
-		vert->xintercept += press->info2->tile_size;
+		vert->xintercept += press->map2->tile_size;
 	vert->yintercept = press->player2->y + (vert->xintercept - press->player2->x) * tan(press->ray2->ray_angle);
-	vert->xstep = press->info2->tile_size;
+	vert->xstep = press->map2->tile_size;
 	if (!press->ray2->is_ray_facingleft)
 		vert->xstep *= -1;
-	vert->ystep = press->info2->tile_size * tan(press->ray2->ray_angle);
+	vert->ystep = press->map2->tile_size * tan(press->ray2->ray_angle);
 	if (!press->ray2->is_ray_facingleft && vert->ystep > 0)
 		vert->ystep *= -1;
 	if (!press->ray2->is_ray_facingright && vert->ystep < 0)
@@ -126,14 +141,14 @@ void	cal_horz_ray(t_press *press, t_dp_ray *horz)
 	horz->found_wallhit = 0;
 	horz->wall_hitx = 0;
 	horz->wall_hity = 0;
-	horz->yintercept = floor(press->player2->y / press->info2->tile_size) * press->info2->tile_size;
+	horz->yintercept = floor(press->player2->y / press->map2->tile_size) * press->map2->tile_size;
 	if (!press->ray2->is_ray_facingdown)
-		horz->yintercept += press->info2->tile_size;
+		horz->yintercept += press->map2->tile_size;
 	horz->xintercept = press->player2->x + (horz->yintercept - press->player2->y) / tan(press->ray2->ray_angle);
-	horz->ystep = press->info2->tile_size;
+	horz->ystep = press->map2->tile_size;
 	if (!press->ray2->is_ray_facingup)
 		horz->ystep *= -1;
-	horz->xstep = press->info2->tile_size / tan(press->ray2->ray_angle);
+	horz->xstep = press->map2->tile_size / tan(press->ray2->ray_angle);
 	if (!press->ray2->is_ray_facingleft && horz->xstep > 0)
 		horz->xstep *= -1;
 	if (!press->ray2->is_ray_facingright && horz->xstep < 0)
@@ -192,7 +207,6 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	}
 	draw_line(press, press->player2->x, press->player2->y,
 		press->ray2->wall_hit_x, press->ray2->wall_hit_y);
-	ray_num = 0;
 	// render_3d_projects_walls(press, ray_num);
 }
 
@@ -216,14 +230,6 @@ void	draw_ray(t_press *press)
 		angle += ray_range / ray_count;
 		i++;
 	}
-	// while (angle <= max_angle)
-	// {
-	// 	draw_one_ray(press, angle);						// 현재 시야각에서 광선 하나
-	// 	draw_one_ray(press, angle - (ray_range / 2.0)); // 현재 시야각 - 30도에서 광선 하나
-	// 	angle += (ray_range / 2.0) / ((ray_count - 1) / 2.0);
-	// 	// 결과적으로 현재 각도에서 0.5도가 더해지게 된다. angle이 90도에서 시작했다면 max_angle은 120이고,
-	// 	// while문을 60번 돌게 될 것이다.
-	// }
 	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img,
 							0, 0);
 }
