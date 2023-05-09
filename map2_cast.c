@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/09 19:05:26 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:56:53 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	render_map(t_press *press)
 	int	mts;
 
 	if (ft_compare(press->map2->map_rows, press->map2->map_cols))
-		press->map2->mts = 300 / press->map2->map_rows;
+		press->map2->mts = 400 / press->map2->map_rows;
 	else
-		press->map2->mts = 400 / press->map2->map_cols;
+		press->map2->mts = 600 / press->map2->map_cols;
 	mts = press->map2->mts;
 	row = 0;
 	while (row < press->map2->map_rows)
@@ -122,6 +122,7 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 
 	render_map(press);
 	draw_player(press);
+	draw_ray(press);
 	mlx_hook(press->param->win, X_EVENT_KEY_PRESS, 1L << 0, key_press, press);
 				
 	mlx_loop(press->param->mlx);

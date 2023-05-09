@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/09 19:14:20 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:58:59 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int	check_wall_light(t_press *press, double x, double y)
 {
 	int	ix;
 	int	iy;
-	int	tile_size;
 
-	tile_size = press->map2->tile_size;
 	if (x < 0 || x > press->meta->max_width || y < 0 || y > press->meta->height)
 		return (1);
 	ix = floor(x);
@@ -60,16 +58,15 @@ void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 		if (!check_wall_light(press, ray_x, ray_y))
 		{
 			// setting_ray_location(press, &ray_x, &ray_y);
-			for (int i = 0; i < press->map2->tile_size; ++i) {
-					press->img2->data[(GAME_WIDTH * \
-						(int)((ray_y) * (press->map2->mts) )) + \
-						(int)((ray_x) * (press->map2->mts))] = 0xff0000;
-			}
+			press->img2->data[(GAME_WIDTH * \
+				(int)((ray_y) * (press->map2->mts))) + \
+				(int)((ray_x) * (press->map2->mts))] = 0xff0000;
+	
 		}
 		else
 			break ;
-		ray_y += (dy / (press->map2->tile_size));
-		ray_x += (dx / (press->map2->tile_size));
+		ray_y += (dy / (press->map2->mts));
+		ray_x += (dx / (press->map2->mts));
 	}
 }
 
@@ -96,7 +93,8 @@ void	cal_ray(t_press *press, t_dp_ray *hv)
 	next_touch_x = hv->xintercept;
 	next_touch_y = hv->yintercept;
 	check_touch_y = 0;
-	while ((next_touch_x >= 0 && next_touch_x <= press->map2->win_width) && next_touch_y >= 0 && next_touch_y <= press->map2->win_height)
+	while (next_touch_x >= 0 && next_touch_x <= GAME_WIDTH && next_touch_y >= 0 \
+				&& next_touch_y <= GAME_HEIGHT)
 	{
 		if (press->ray2->is_ray_facingup)
 			check_touch_y = 1;
@@ -121,14 +119,14 @@ void	cal_vert_ray(t_press *press, t_dp_ray *vert)
 	vert->found_wallhit = 0;
 	vert->wall_hitx = 0;
 	vert->wall_hity = 0;
-	vert->xintercept = floor(press->player2->x / press->map2->tile_size) * press->map2->tile_size;
+	vert->xintercept = floor(press->player2->x / press->map2->mts) * press->map2->mts;
 	if (!press->ray2->is_ray_facingright)
-		vert->xintercept += press->map2->tile_size;
+		vert->xintercept += press->map2->mts;
 	vert->yintercept = press->player2->y + (vert->xintercept - press->player2->x) * tan(press->ray2->ray_angle);
-	vert->xstep = press->map2->tile_size;
+	vert->xstep = press->map2->mts;
 	if (!press->ray2->is_ray_facingleft)
 		vert->xstep *= -1;
-	vert->ystep = press->map2->tile_size * tan(press->ray2->ray_angle);
+	vert->ystep = press->map2->mts * tan(press->ray2->ray_angle);
 	if (!press->ray2->is_ray_facingleft && vert->ystep > 0)
 		vert->ystep *= -1;
 	if (!press->ray2->is_ray_facingright && vert->ystep < 0)
@@ -141,14 +139,14 @@ void	cal_horz_ray(t_press *press, t_dp_ray *horz)
 	horz->found_wallhit = 0;
 	horz->wall_hitx = 0;
 	horz->wall_hity = 0;
-	horz->yintercept = floor(press->player2->y / press->map2->tile_size) * press->map2->tile_size;
+	horz->yintercept = floor(press->player2->y / press->map2->mts) * press->map2->mts;
 	if (!press->ray2->is_ray_facingdown)
-		horz->yintercept += press->map2->tile_size;
+		horz->yintercept += press->map2->mts;
 	horz->xintercept = press->player2->x + (horz->yintercept - press->player2->y) / tan(press->ray2->ray_angle);
-	horz->ystep = press->map2->tile_size;
+	horz->ystep = press->map2->mts;
 	if (!press->ray2->is_ray_facingup)
 		horz->ystep *= -1;
-	horz->xstep = press->map2->tile_size / tan(press->ray2->ray_angle);
+	horz->xstep = press->map2->mts / tan(press->ray2->ray_angle);
 	if (!press->ray2->is_ray_facingleft && horz->xstep > 0)
 		horz->xstep *= -1;
 	if (!press->ray2->is_ray_facingright && horz->xstep < 0)
@@ -207,7 +205,8 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	}
 	draw_line(press, press->player2->x, press->player2->y,
 		press->ray2->wall_hit_x, press->ray2->wall_hit_y);
-	// render_3d_projects_walls(press, ray_num);
+	render_3d_projects_walls(press, ray_num);
+	ray_num = 0;
 }
 
 void	draw_ray(t_press *press)

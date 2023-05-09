@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/09 19:14:16 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/09 20:03:32 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	render_3d_projects_walls(t_press *press, int ray_num)
 
 	fov_angle = 60 * (PI / 180);
 	distance_project_plane = (GAME_WIDTH / 2) / tan(fov_angle / 2);
-	projected_wall_height = (press->map2->tile_size / press->ray2->distance) * distance_project_plane;
+	projected_wall_height = (40 / press->ray2->distance) * distance_project_plane;
 	wall_strip_height = (int)projected_wall_height;
 	wall_top_pixel = (GAME_HEIGHT / 2) - (wall_strip_height / 2);
 	if (wall_top_pixel < 0)
