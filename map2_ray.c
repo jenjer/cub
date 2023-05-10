@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/10 19:53:50 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:55:54 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	check_wall_light(t_press *press, double x, double y)
 		return (1);
 	ix = floor(x);
 	iy = floor(y);
-	// printf("map[iy][ix] : %c\n", press->meta->sp_map[iy][ix]);
 	return (press->meta->sp_map[iy][ix] != '0');
 }
 
