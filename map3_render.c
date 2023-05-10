@@ -6,13 +6,13 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/10 19:26:50 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/10 22:39:54 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_3d_projects_walls(t_press *press, int ray_num)
+void	render_3d_projects_walls(t_press *press, int ray_num, int ray_count)
 {
 	double fov_angle = 60 * (PI / 180.0);
     double distance_project_plane = ((GAME_WIDTH / 2) / tan(fov_angle / 2));
@@ -27,9 +27,9 @@ void	render_3d_projects_walls(t_press *press, int ray_num)
     int wall_bottom_pixel = (GAME_HEIGHT / 2) + (wallStripHeight / 2);
     wall_bottom_pixel = wall_bottom_pixel > GAME_HEIGHT ? GAME_HEIGHT : wall_bottom_pixel;
 
-    int color = press->ray2->was_hit_vertical ? 0xFFFFFF : 0xAAAAAA;
+    int color = press->ray2->was_hit_vertical ? 0xA9D0F5 : 0x81F7D8;
     for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
         for (int x = 0; x < (GAME_WIDTH / 120); x++)
-            if (press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / 120))] == 0x111111)
-                press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / 120))] = color;
+            if (press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == 0x111111)
+                press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] = color;
 }

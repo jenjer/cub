@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/10 19:55:54 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/10 22:51:32 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,6 @@ int	check_wall_light(t_press *press, double x, double y)
 	iy = floor(y);
 	return (press->meta->sp_map[iy][ix] != '0');
 }
-
-// void	setting_ray_location(t_press *press, double *x, double *y)
-// {
-// 	int	old_x;
-// 	int	old_y;
-
-// 	old_x = *x;
-// 	old_y = *y;
-// 	if (press->map2->m_dir == LU)
-// 	{
-// 		*x = (int)(press->map2->scale * old_x);
-// 		*y = (int)(press->map2->scale * old_y);
-// 	}
-// }
 
 double	distance_between_points(double x1, double y1, double x2, double y2)
 {
@@ -183,7 +169,7 @@ void	ray_init(t_ray2 *ray2, double ray_angle)
 	ray2->is_ray_facingleft = !(ray2->is_ray_facingright);
 }
 
-void	draw_one_ray(t_press *press, double angle, int ray_num)
+void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count)
 {
 	t_dp_ray	horz;
 	t_dp_ray	vert;
@@ -207,9 +193,7 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	}
 	draw_line(press, press->player2->x, press->player2->y,
 		press->ray2->wall_hit_x, press->ray2->wall_hit_y);
-	printf("ray_num : %d, distance : %f\n", ray_num, press->ray2->distance);
-	render_3d_projects_walls(press, ray_num);
-	ray_num = 0;
+	render_3d_projects_walls(press, ray_num, ray_count);
 }
 
 void	draw_ray(t_press *press)
@@ -222,13 +206,13 @@ void	draw_ray(t_press *press)
 
 	i = 1;
 	ray_range = PI / 3.0; // 60도 (플레이어의 시야각)
-	ray_count = 121;
+	ray_count = 481;
 	angle = press->player2->rotation_angle; // 플레이어가 바라보는 각도
 	max_angle = press->player2->rotation_angle + (ray_range / 2.0);
 	// 시야각이 60라면, 플레이어의 최대 각도는 +30도가 된다.
 	while (i < ray_count)
 	{
-		draw_one_ray(press, angle - (ray_range / 2.0), i);
+		draw_one_ray(press, angle - (ray_range / 2.0), i, ray_count);
 		angle += ray_range / ray_count;
 		i++;
 	}
