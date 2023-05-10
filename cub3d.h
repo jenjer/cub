@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/09 17:54:58 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/10 19:10:19 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define KEY_RIGHT 124
 # define BUTTON_X 17
 
-# define GAME_WIDTH 1920
-# define GAME_HEIGHT 1080
+# define GAME_WIDTH 1600
+# define GAME_HEIGHT 900
 
 typedef struct s_color
 {

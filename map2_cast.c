@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/09 20:42:56 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/10 18:23:57 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,7 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 	
 	for (int y = 0; y < GAME_HEIGHT; y++)
 		for (int x = 0; x < GAME_WIDTH; x++)
-			press->img2->data[GAME_WIDTH * y + x] = 0xEAD1DC; //분홍
-
+			press->img2->data[GAME_WIDTH * y + x] = 0x111111;
 	render_map(press);
 	draw_player(press);
 	draw_ray(press);

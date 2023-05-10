@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/09 20:43:00 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/10 18:23:29 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	key_press(int keycode, t_press *press)
 	reset_image(press);
 	for (int y = 0; y < GAME_HEIGHT; y++)
 		for (int x = 0; x < GAME_WIDTH; x++)
-			press->img2->data[GAME_WIDTH * y + x] = 0xEAD1DC;
+			press->img2->data[GAME_WIDTH * y + x] = 0x111111;
 	render_map(press);
 	draw_player(press);
 	draw_ray(press);

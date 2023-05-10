@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/09 20:37:22 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/10 19:41:35 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,23 @@ int	check_wall_light(t_press *press, double x, double y)
 		return (1);
 	ix = floor(x);
 	iy = floor(y);
+	// printf("map[iy][ix] : %c\n", press->meta->sp_map[iy][ix]);
 	return (press->meta->sp_map[iy][ix] != '0');
 }
 
-void	setting_ray_location(t_press *press, double *x, double *y)
-{
-	int	old_x;
-	int	old_y;
+// void	setting_ray_location(t_press *press, double *x, double *y)
+// {
+// 	int	old_x;
+// 	int	old_y;
 
-	old_x = *x;
-	old_y = *y;
-	if (press->map2->m_dir == LU)
-	{
-		*x = (int)(press->map2->scale * old_x);
-		*y = (int)(press->map2->scale * old_y);
-	}
-}
+// 	old_x = *x;
+// 	old_y = *y;
+// 	if (press->map2->m_dir == LU)
+// 	{
+// 		*x = (int)(press->map2->scale * old_x);
+// 		*y = (int)(press->map2->scale * old_y);
+// 	}
+// }
 
 void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 {
@@ -61,7 +62,6 @@ void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 			press->img2->data[(GAME_WIDTH * \
 				(int)((ray_y) * (press->map2->mts))) + \
 				(int)((ray_x) * (press->map2->mts))] = 0xff0000;
-	
 		}
 		else
 			break ;
@@ -78,8 +78,11 @@ double	distance_between_points(double x1, double y1, double x2, double y2)
 void	cal_distance(t_press *press, t_dp_ray *hv)
 {
 	if (hv->found_wallhit == 1)
+	{
+		printf("wall hit x : %f, wall hit : y : %f\n", hv->wall_hitx, hv->wall_hity);
 		hv->distance = distance_between_points(press->player2->x, \
 		press->player2->y, hv->wall_hitx, hv->wall_hity);
+	}
 	else
 		hv->distance = DBL_MAX;
 }
@@ -119,7 +122,7 @@ void	cal_vert_ray(t_press *press, t_dp_ray *vert)
 	vert->found_wallhit = 0;
 	vert->wall_hitx = 0;
 	vert->wall_hity = 0;
-	vert->xintercept = floor(press->player2->x / press->map2->mts) * press->map2->mts;
+	vert->xintercept = floor(press->player2->x / press->map2->mts) * (press->map2->mts);
 	if (!press->ray2->is_ray_facingright)
 		vert->xintercept += press->map2->mts;
 	vert->yintercept = press->player2->y + (vert->xintercept - press->player2->x) * tan(press->ray2->ray_angle);
@@ -139,7 +142,7 @@ void	cal_horz_ray(t_press *press, t_dp_ray *horz)
 	horz->found_wallhit = 0;
 	horz->wall_hitx = 0;
 	horz->wall_hity = 0;
-	horz->yintercept = floor(press->player2->y / press->map2->mts) * press->map2->mts;
+	horz->yintercept = floor(press->player2->y / press->map2->mts) * (press->map2->mts);
 	if (!press->ray2->is_ray_facingdown)
 		horz->yintercept += press->map2->mts;
 	horz->xintercept = press->player2->x + (horz->yintercept - press->player2->y) / tan(press->ray2->ray_angle);
@@ -205,6 +208,7 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	}
 	draw_line(press, press->player2->x, press->player2->y,
 		press->ray2->wall_hit_x, press->ray2->wall_hit_y);
+	printf("ray_num : %d, distance : %f\n", ray_num, press->ray2->distance);
 	render_3d_projects_walls(press, ray_num);
 	ray_num = 0;
 }
