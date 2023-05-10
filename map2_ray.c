@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/10 19:41:35 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/10 19:53:50 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	check_wall_light(t_press *press, double x, double y)
 // 	}
 // }
 
+double	distance_between_points(double x1, double y1, double x2, double y2)
+{
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
 void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 {
 	double	ray_x;
@@ -68,18 +73,13 @@ void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 		ray_y += (dy / (press->map2->mts));
 		ray_x += (dx / (press->map2->mts));
 	}
-}
-
-double	distance_between_points(double x1, double y1, double x2, double y2)
-{
-	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+	press->ray2->distance = distance_between_points(x1, y1, ray_x, ray_y);
 }
 
 void	cal_distance(t_press *press, t_dp_ray *hv)
 {
 	if (hv->found_wallhit == 1)
 	{
-		printf("wall hit x : %f, wall hit : y : %f\n", hv->wall_hitx, hv->wall_hity);
 		hv->distance = distance_between_points(press->player2->x, \
 		press->player2->y, hv->wall_hitx, hv->wall_hity);
 	}
