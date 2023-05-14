@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/14 21:19:08 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 22:02:14 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count, t_ra
 
 //color
 int		make_rgb_bit(t_meta_data *meta);
+void	draw_base(t_press *press);
 
 //hooking
 int		key_press(int keycode, t_press *press);

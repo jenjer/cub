@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/14 21:03:31 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 22:00:27 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,22 @@ void	param_init(t_press *press)
 			GAME_WIDTH, GAME_HEIGHT);
 }
 
-//0,0부터 이미지를 찍는데, 좌측 상단에 미니맵을 찍고 나머지 화면에는 분홍색으로 전부 칠하고 싶다.
-//미니맵의 width는 win width고 이거는 tile_size(40) * sp_map(25)의 row(1000)다, 우리가 쓸 화면의 width는 1920이다.
-//미니맵의 height는 win height고 이거는 tile_size(40) * sp_map(13)의 col(520)다, 우리가 쓸 화면의 height는 1080이다.
-//win_width는 고정(값 자체는 변함), 여기다가 비율을 정해서 칠하는건 1/4비율로 칠할 수 있다. 쓰는 화면은 win_width을 씀.
+void	draw_base(t_press *press)
+{
+	int	y;
+	int x;
+
+	y = 0;
+	x = 0;
+	for (y = 0; y < GAME_HEIGHT / 2; y++)
+		for (x = 0; x < GAME_WIDTH; x++)
+			press->img2->data[GAME_WIDTH * y + x] = press->meta->c_color->all;
+	y = GAME_HEIGHT / 2;
+	x = 0;
+	for (y = GAME_HEIGHT / 2; y < GAME_HEIGHT; y++)
+		for (x = 0; x < GAME_WIDTH; x++)
+			press->img2->data[GAME_WIDTH * y + x] = press->meta->f_color->all;
+}
 
 int	map_cast(t_param *param_, t_meta_data *meta_)
 {	
@@ -115,10 +127,8 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 	press->img2->data = (int *)mlx_get_data_addr(press->img2->img, \
 		&(press->img2->bpp), &(press->img2->line_size), \
 			&((press->img2->endian)));
-	
-	for (int y = 0; y < GAME_HEIGHT; y++)
-		for (int x = 0; x < GAME_WIDTH; x++)
-			press->img2->data[GAME_WIDTH * y + x] = 0x111111;
+	draw_base(press);
+	printf("c color : %x f color : %x\n", press->meta->c_color->all, press->meta->f_color->all);
 	render_map(press);
 	draw_player(press);
 	draw_ray(press);

@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/14 21:27:47 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 22:00:53 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int fix_color(t_press *press)
     pre_y = press->ray2->last_pre_y;
     x = press->ray2->last_x;
     y = press->ray2->last_y;
-
 
     if (y >= x && (x + y >= 1))
     {
@@ -72,7 +71,8 @@ void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count, t_
 
 	for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
 		for (int x = 0; x < (GAME_WIDTH / ray_count); x++)
-			if (press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == 0x111111)
+			if (press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == press->meta->c_color->all || \
+                    press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == press->meta->f_color->all)
 				press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] = color;
 }
 
