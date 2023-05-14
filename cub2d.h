@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/14 17:05:22 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 20:58:32 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ typedef struct s_dp_ray
 	double	wall_hity;
 	double	distance;
 }	t_dp_ray;
+
+typedef struct s_rayarr
+{
+	double	*distances;
+	double	*ray_angles;
+	int		*colors;
+}	t_ray_arr;
 
 typedef struct s_ray2
 {

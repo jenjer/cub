@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/14 17:28:03 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 21:27:18 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void	ray_init(t_ray2 *ray2, double ray_angle)
     ray2->is_ray_facingright = !ray2->is_ray_facingleft;
 }
 
-void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count)
+void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count, t_ray_arr *ray_arr)
 {
 	t_dp_ray	horz;
 	t_dp_ray	vert;
@@ -184,6 +184,7 @@ void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count)
 	ray_init(press->ray2, angle);
 	cal_horz_ray(press, &horz);
 	cal_vert_ray(press, &vert);
+	(void) ray_count;
 	if (vert.distance < horz.distance)
 	{
 		press->ray2->wall_hit_x = vert.wall_hitx;
@@ -200,27 +201,49 @@ void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count)
 	}
 	draw_line(press, press->player2->x, press->player2->y,
 		press->ray2->wall_hit_x, press->ray2->wall_hit_y);
-	render_3d_projects_walls(press, ray_num, ray_count);
+	ray_arr->distances[ray_num] = press->ray2->distance;
+	ray_arr->ray_angles[ray_num] = press->ray2->ray_angle;
+	ray_arr->colors[ray_num] = fix_color(press);
+	// render_3d_projects_walls(press, ray_num, ray_count);
+}
+
+void	ray_arr_init(t_ray_arr *ray_arr, int ray_count)
+{
+	ray_arr->ray_angles = (double *)malloc(sizeof(double) * ray_count);
+	memset(ray_arr->ray_angles, 0, sizeof(double) * ray_count);
+	ray_arr->distances = (double *)malloc(sizeof(double) * ray_count);
+	memset(ray_arr->distances, 0, sizeof(double) * ray_count);
+	ray_arr->colors = (int *)malloc(sizeof(int) * ray_count);
+	memset(ray_arr->colors, 0, ray_count);
 }
 
 void	draw_ray(t_press *press)
 {
-	double	angle;
-	double	max_angle;
-	double	ray_range;
-	int		ray_count;
-	int		i;
+	double		angle;
+	double		max_angle;
+	double		ray_range;
+	int			ray_count;
+	int			i;
+	t_ray_arr	*ray_arr;
 
 	i = 1;
 	ray_range = PI / 3.0; // 60도 (플레이어의 시야각)
 	ray_count = 400;
 	angle = press->player2->rotation_angle; // 플레이어가 바라보는 각도
 	max_angle = press->player2->rotation_angle + (ray_range / 2.0);
+	ray_arr = (t_ray_arr*) malloc(sizeof(t_ray_arr));
+	ray_arr_init(ray_arr, ray_count);
 	// 시야각이 60라면, 플레이어의 최대 각도는 +30도가 된다.
 	while (i < ray_count)
 	{
-		draw_one_ray(press, angle - (ray_range / 2.0), i, ray_count);
+		draw_one_ray(press, angle - (ray_range / 2.0), i, ray_count, ray_arr);
 		angle += ray_range / ray_count;
+		i++;
+	}
+	i = 1;
+	while (i < ray_count)
+	{
+		render_3d_projects_walls_arr(press, i, ray_count, ray_arr);
 		i++;
 	}
 	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img,

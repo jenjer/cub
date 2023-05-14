@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/14 18:05:11 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 21:03:31 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 	draw_player(press);
 	draw_ray(press);
 	mlx_hook(press->param->win, X_EVENT_KEY_PRESS, 1L << 0, key_press, press);
-				
 	mlx_loop(press->param->mlx);
 	return (0);
 }

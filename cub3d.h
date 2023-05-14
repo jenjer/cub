@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/10 22:38:11 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 21:19:08 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	param_init(t_press *press);
 void	init_player(t_meta_data *meta, t_player2 **player2);
 int		check_wall(t_press *press, double x, double y);
 void	draw_ray(t_press *press);
-void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count);
+void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count, t_ray_arr *ray_arr);
 
 //color
 int		make_rgb_bit(t_meta_data *meta);
@@ -133,7 +133,9 @@ void	render_map(t_press *press);
 void	fill_squares(t_press *press, int x, int y, int color);
 int		draw_player(t_press *press);
 void	setting_map_location(t_press *press, int *x, int *y);
-void	render_3d_projects_walls(t_press *press, int ray_num, int ray_count);
+// void	render_3d_projects_walls(t_press *press, int ray_num, int ray_count);
+void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count, t_ray_arr *ray_arr);
+int		fix_color(t_press *press);
 
 #endif
 
