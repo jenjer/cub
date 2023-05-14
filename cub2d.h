@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/09 17:37:31 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 17:05:22 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ typedef struct s_dp_ray
 
 typedef struct s_ray2
 {
+	double	last_x;
+	double	last_y;
+	double	last_pre_y;
+	double	last_pre_x;
 	double	ray_angle;
 	double	wall_hit_x;
 	double	wall_hit_y;

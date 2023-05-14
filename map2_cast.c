@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/10 18:23:57 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/14 18:05:11 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	render_map(t_press *press)
 		{
 			if (press->meta->sp_map[row][col] == '1')
 				fill_squares(press, (int)(mts * col), \
-								(int)(mts * row), 0x000000);
+								(int)(mts * row), 0x848484);
 			else if (press->meta->sp_map[row][col] == 'X')
 				fill_squares(press, (int)(mts * col), \
-								(int)(mts * row), 0xff00ff);
+								(int)(mts * row), 0x111111);
 			else if (press->meta->sp_map[row][col] == '0')
 				fill_squares(press, (int)(mts * col), \
 								(int)(mts * row), 0xffffff);
