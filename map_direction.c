@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_direction.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/22 19:58:26 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:46:25 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	check_direction(t_meta_data *meta)
 {
-	if (!meta->north || !meta->south || !meta->east || !meta->west)
+	if (!meta->tex[0].tex_path || !meta->tex[1].tex_path \
+			|| !meta->tex[2].tex_path || !meta->tex[3].tex_path)
 		return (1);
 	if (meta->f_color->red == -1 || meta->f_color->green == -1
 		|| meta->f_color->blue == -1)
@@ -39,13 +40,13 @@ int	see_flag(t_meta_data *meta, char *tmp, int flag)
 	if (fd == -1)
 		return (1);
 	if (flag == 1)
-		meta->north = ft_strdup(tmp);
+		meta->tex[0].tex_path = ft_strdup(tmp);
 	else if (flag == 2)
-		meta->south = ft_strdup(tmp);
+		meta->tex[1].tex_path = ft_strdup(tmp);
 	else if (flag == 3)
-		meta->west = ft_strdup(tmp);
+		meta->tex[2].tex_path = ft_strdup(tmp);
 	else if (flag == 4)
-		meta->east = ft_strdup(tmp);
+		meta->tex[3].tex_path = ft_strdup(tmp);
 	return (0);
 }
 

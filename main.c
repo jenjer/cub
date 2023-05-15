@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/14 21:56:55 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:58:49 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	print_map(t_meta_data meta)
 	printf("height : %d\n", meta.height);
 	printf("max_width : %d\n", meta.max_width);
 	printf("add_height : %d\n", meta.add_height);
-	printf("north : %s\n", meta.north);
-	printf("south : %s\n", meta.south);
-	printf("west : %s\n", meta.west);
-	printf("east : %s\n", meta.east);
+	printf("tex[0](north) : %s\n", meta.tex[0].tex_path);
+	printf("tex[1](south) : %s\n", meta.tex[1].tex_path);
+	printf("tex[2](west) : %s\n", meta.tex[2].tex_path);
+	printf("tex[3](east) : %s\n", meta.tex[3].tex_path);
 	printf("F RED : %d\n", meta.f_color->red);
 	printf("F GREEN : %d\n", meta.f_color->green);
 	printf("F BLUE : %d\n", meta.f_color->blue);
@@ -55,7 +55,21 @@ void	leakcheck(void)
 
 void	init_meta_data(char *name, t_meta_data *meta)
 {
+	int		i;
+	int		tex_size;
+
+	i = 0;
+	tex_size = 4;
 	meta->fd = open(name, O_RDONLY);
+	meta->tex = (t_texture *)malloc(sizeof(t_texture) * tex_size);
+	while (i < tex_size)
+	{
+		meta->tex[i].tex_path = NULL;
+		meta->tex[i].texture = NULL;
+		meta->tex->width = 0.0;
+		meta->tex->height = 0.0;
+		i++;
+	}
 	meta->height = 0;
 	meta->add_height = 0;
 	meta->map = 0;
@@ -74,7 +88,7 @@ void	init_meta_data(char *name, t_meta_data *meta)
 int	main(int argc, char **argv)
 {
 	t_meta_data	meta;
-	t_param		*param;
+	t_param			*param;
 
 	param = (t_param *)malloc(sizeof(t_param));
 	if (!param)

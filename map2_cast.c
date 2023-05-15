@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/14 22:00:27 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:43:08 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,45 @@ void	draw_base(t_press *press)
 			press->img2->data[GAME_WIDTH * y + x] = press->meta->f_color->all;
 }
 
+static int	*load_image_malloc(t_press *press, char *path, t_img1 *img1, int i)
+{
+	int		col;
+	int		row;
+	int		*result;
+	
+	img1->ptr = mlx_xpm_file_to_image(press->param->mlx, path, &(img1->img_width), &(img1->img_height));
+	if (!(img1->ptr))
+		ft_exit("wrong texture\n");
+	press->meta->tex[i].width = img1->img_width;
+	press->meta->tex[i].height = img1->img_height;
+	img1->data = (int *)mlx_get_data_addr(img1->ptr, \
+			&img1->bpp, &img1->line_size, &img1->endian);
+	result = (int*)malloc(sizeof(int) * (img1->img_width * img1->img_height));
+	row = -1;
+	while (++row < img1->img_height)
+	{
+		col = -1;
+		while (++col < img1->img_width)
+		{
+			result[img1->img_width * row + col] = img1->data[img1->img_width * row + col];
+		}
+	}
+	mlx_destroy_image(press->param->mlx, img1->ptr);
+	return (result);
+}
+
+void	load_texture(t_press  *press)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		press->meta->tex[i].texture = load_image_malloc(press, \
+			press->meta->tex[i].tex_path, press->img1, i);
+	}
+}
+
 int	map_cast(t_param *param_, t_meta_data *meta_)
 {	
 	t_press		*press;
@@ -129,6 +168,7 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 			&((press->img2->endian)));
 	draw_base(press);
 	printf("c color : %x f color : %x\n", press->meta->c_color->all, press->meta->f_color->all);
+	load_texture(press);
 	render_map(press);
 	draw_player(press);
 	draw_ray(press);

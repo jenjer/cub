@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/15 14:45:41 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:38:50 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,46 @@ typedef struct s_color
 	int	all;
 }	t_color;
 
+// typedef struct s_3d
+// {
+// 	double	fov_angle;
+// 	double	distance_project_plane;
+// 	double	corrected_distance;
+// 	double	projected_wall_height;
+// 	int			wall_strip_height;
+// 	int			wall_top_pixel;
+// 	int			wall_bottom_pixel;
+// }	t_3d;
+
+
+typedef struct	s_texture
+{
+    char		*tex_path;
+    int             *texture;
+    double		width;
+    double		height;
+}	t_texture;
 typedef struct s_meta_data
 {
-	t_color	*f_color;
-	t_color	*c_color;
-	int		fd;
-	int		height;
-	int		max_width;
-	int		add_height;
-	int		player_x;
-	int		player_y;
-	char	**map;
-	char	**sp_map;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	int		pos1_r;
-	int		pos1_c;
-	int		num1;
-	int		**visited;
+	t_color		*f_color;
+	t_color		*c_color;
+	int				fd;
+	int				height;
+	int				max_width;
+	int				add_height;
+	int				player_x;
+	int				player_y;
+	t_texture	*tex;
+	char			**map;
+	char			**sp_map;
+	// char			*north;
+	// char			*south;
+	// char			*west;
+	// char			*east;
+	int				pos1_r;
+	int				pos1_c;
+	int				num1;
+	int				**visited;
 }	t_meta_data;
 
 typedef struct s_param
@@ -79,6 +99,8 @@ typedef struct s_param
 
 typedef struct s_press
 {
+	t_ray_arr	*ray_arr;
+	t_img1		*img1;
 	t_param		*param;
 	t_meta_data	*meta;
 	t_map2		*map2;

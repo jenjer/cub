@@ -6,23 +6,21 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/15 14:42:28 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:43:41 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+
 
 int fix_color(t_press *press)
 {
     int color;
     double x;
     double y;
-    double pre_x;
-    double pre_y;
-    
+
     color = 0;
-    pre_x = press->ray2->last_pre_x;
-    pre_y = press->ray2->last_pre_y;
     x = press->ray2->last_x;
     y = press->ray2->last_y;
 
@@ -49,6 +47,46 @@ int fix_color(t_press *press)
 
     return color;
 }
+
+int find_dir(t_press *press, int i)
+{
+    int color;
+    color = press->ray_arr->colors[i];
+    if (color == 0xff00ff)
+        return 0;
+    if (color == 0xA9D0F5)
+        return 1;
+    if (color == 0x81F7D8)
+        return 2;
+    if (color == 0x00ffff)
+        return 3;
+    return (-1);
+}
+
+// int pixel_color(t_press *press)
+// {
+//     //	press->meta->tex[i].texture
+//     int dir;
+//     int img_wid;
+//     int img_hei;
+//     int i;
+//     int count_wall; // 벽의 갯수
+//     int *width_wall_pixel_count;//벽 width ->벽별로 가로 레이 갯수 -> 배열 한칸에 벽의 옆면 레이 갯수가 들어간다. -> 배열 모든 칸 합하면 레이 갯수와 같다.
+//     int *height_wall_pixel_count;//벽 height -> 레이 하나당 세로 픽셀 갯수.
+//     count_wall = find_count_wall(press); //벽의 갯수를 세어주는 함수
+//     width_wall_pixel_count = find_width_wall_pixel_count(press,  count_wall); // 각각의 벽별로 픽셀의 갯수를 세어주는 함수
+//     height_wall_pixel_count = find_height_wall_pixel_count(press); // 각 벽별로 높이를 세어주는 함수
+//     i = 0;
+//     while (1)
+//     {
+//         dir = find_dir(press, i);
+//         img_wid = press->meta->tex[dir].width;
+//         img_hei = press->meta->tex[dir].height;
+//         // 아래는 원본 이미지와 벽 이미지의 비율 계산
+        
+//         i++;
+//     }
+
 
 void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count, t_ray_arr *ray_arr)
 {

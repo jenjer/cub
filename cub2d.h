@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/14 20:58:32 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:06:23 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,27 @@ typedef struct s_player2
 	double	turnspeed;
 }	t_player2;
 
+typedef struct s_img1
+{
+	void	*ptr;
+	int		*data;
+	int		img_width;
+	int		img_height;
+	int		bpp;
+	int		line_size;
+	int		endian;
+}	t_img1;
 typedef struct s_img2
 {
+	int		win_width;
 	void	*img;
 	int		*data;
 	int		bpp;
 	int		line_size;
 	int		endian;
 	int		tile_size;
-	int		win_width;
+	int		img_width;
+	int		img_height;
 }	t_img2;
 
 typedef struct s_map2
@@ -78,7 +90,10 @@ typedef struct s_rayarr
 {
 	double	*distances;
 	double	*ray_angles;
-	int		*colors;
+	int			*colors;
+	double	*ray_x;
+	double	*ray_y;
+	double	*wall_heights;
 }	t_ray_arr;
 
 typedef struct s_ray2

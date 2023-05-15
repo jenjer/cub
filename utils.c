@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/24 15:44:52 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 16:28:32 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int	map_free_all(t_meta_data meta, t_param *param)
 		free(meta.f_color);
 	if (meta.c_color)
 		free(meta.c_color);
-	if (meta.north)
-		free(meta.north);
-	if (meta.south)
-		free(meta.south);
-	if (meta.west)
-		free(meta.west);
-	if (meta.east)
-		free(meta.east);
+	// if (meta.north)
+	// 	free(meta.north);
+	// if (meta.south)
+	// 	free(meta.south);
+	// if (meta.west)
+	// 	free(meta.west);
+	// if (meta.east)
+	// 	free(meta.east);
 	i = 0;
 	while (meta.map[i])
 		free(meta.map[i++]);
@@ -70,6 +70,14 @@ int	map_free_all(t_meta_data meta, t_param *param)
 		free(meta.visited[i++]);
 	free(meta.visited);
 	free(param);
+	i = 0;
+	while (i < 4)
+	{
+		free(meta.tex[i].tex_path);
+		free(meta.tex[i].texture);
+		i++;
+	}
+	free(meta.tex);
 	return (0);
 }
 

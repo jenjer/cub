@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/14 21:52:08 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 16:03:09 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	add_bits(t_color *color)
 	color->all += color->blue;
 }
 
-int	make_rgb_bit(t_meta_data *data)
+int	make_rgb_bit(t_meta_data *meta)
 {
-	add_bits(data->f_color);
-	add_bits(data->c_color);
+	add_bits(meta->f_color);
+	add_bits(meta->c_color);
 	return (1);
 }
