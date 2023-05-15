@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub2d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/15 18:06:23 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 20:52:47 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define LD 102
 # define RU 103
 # define RD 104
+# define RAY_COUNT 400
 
 typedef struct s_player2
 {
@@ -39,6 +40,7 @@ typedef struct s_img1
 	int		line_size;
 	int		endian;
 }	t_img1;
+
 typedef struct s_img2
 {
 	int		win_width;
@@ -100,8 +102,6 @@ typedef struct s_ray2
 {
 	double	last_x;
 	double	last_y;
-	double	last_pre_y;
-	double	last_pre_x;
 	double	ray_angle;
 	double	wall_hit_x;
 	double	wall_hit_y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/15 18:38:51 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 21:25:56 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 		}
 		else
 		{
-			press->ray2->last_x = ray_x - (int)ray_x;
-			press->ray2->last_y = ray_y - (int)ray_y;
-			press->ray2->last_pre_y = ray_y -  ((dy / (press->map2->mts)) / 300) - (int)ray_y;
-			press->ray2->last_pre_x = ray_x -  ((dy / (press->map2->mts)) / 300) - (int)ray_x;
+			press->ray2->last_x = ray_x;
+			press->ray2->last_y = ray_y;
 			// printf("ray_x : %f ray_y : %f sosu_x : %f sosu_y : %f\n", ray_x, ray_y, ray_x -(int)ray_x, ray_y-(int)ray_y);
 			break ;
 		}
@@ -223,7 +221,35 @@ void	ray_arr_init(t_ray_arr *ray_arr, int ray_count)
 	memset(ray_arr->colors, 0, ray_count);
 }
 
-void	draw_ray(t_press *press)
+void	info3_init(t_press *press, int ray_num)
+{
+	t_3d	*info3;
+	double	corrected_distance;
+	double	projected_wall_height;
+	double	wall_strip_height;
+
+	info3 = (t_3d *)malloc(sizeof(t_3d));
+	memset(info3, 0, sizeof(t_3d));
+	info3->wall_top_pixel = (int *) malloc(sizeof(int) * RAY_COUNT);
+	info3->wall_bottom_pixel = (int *) malloc(sizeof(int) * RAY_COUNT);
+	info3->fov_angle = 60 * (PI / 180.0);
+	info3->distance_project_plane = ((GAME_WIDTH / 2) / tan(info3->fov_angle / 2));
+	while (ray_num < RAY_COUNT)
+	{
+		corrected_distance = press->ray_arr->distances[ray_num] * \
+				cos(press->ray_arr->ray_angles[ray_num] - press->player2->rotation_angle);
+		projected_wall_height = ((press->map2->mts / corrected_distance) * (info3->distance_project_plane)) / 16;
+		wall_strip_height = projected_wall_height;
+		info3->wall_top_pixel[ray_num] = (GAME_HEIGHT / 2) - (wall_strip_height / 2);
+		info3->wall_top_pixel[ray_num] = info3->wall_top_pixel[ray_num] < 0 ? 0 : info3->wall_top_pixel[ray_num];
+		info3->wall_bottom_pixel[ray_num] = (GAME_HEIGHT / 2) + (wall_strip_height / 2);
+		info3->wall_bottom_pixel[ray_num] = info3->wall_bottom_pixel[ray_num] > GAME_HEIGHT ? GAME_HEIGHT : info3->wall_bottom_pixel[ray_num];
+		ray_num++;
+	}
+	press->info3 = info3;
+}
+
+void draw_ray(t_press *press)
 {
 	double		angle;
 	double		ray_range;
@@ -245,6 +271,7 @@ void	draw_ray(t_press *press)
 		angle += ray_range / ray_count;
 		i++;
 	}
+	info3_init(press, 1);
 	i = 1;
 	while (i < ray_count)
 	{

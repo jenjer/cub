@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map3_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/15 18:43:41 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 21:27:23 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int fix_color(t_press *press)
     double y;
 
     color = 0;
-    x = press->ray2->last_x;
-    y = press->ray2->last_y;
+    x = press->ray2->last_x - (int)press->ray2->last_x;
+    y = press->ray2->last_y - (int)press->ray2->last_y;
 
     if (y >= x && (x + y >= 1))
     {
@@ -63,76 +63,103 @@ int find_dir(t_press *press, int i)
     return (-1);
 }
 
-// int pixel_color(t_press *press)
-// {
-//     //	press->meta->tex[i].texture
-//     int dir;
-//     int img_wid;
-//     int img_hei;
-//     int i;
-//     int count_wall; // 벽의 갯수
-//     int *width_wall_pixel_count;//벽 width ->벽별로 가로 레이 갯수 -> 배열 한칸에 벽의 옆면 레이 갯수가 들어간다. -> 배열 모든 칸 합하면 레이 갯수와 같다.
-//     int *height_wall_pixel_count;//벽 height -> 레이 하나당 세로 픽셀 갯수.
-//     count_wall = find_count_wall(press); //벽의 갯수를 세어주는 함수
-//     width_wall_pixel_count = find_width_wall_pixel_count(press,  count_wall); // 각각의 벽별로 픽셀의 갯수를 세어주는 함수
-//     height_wall_pixel_count = find_height_wall_pixel_count(press); // 각 벽별로 높이를 세어주는 함수
-//     i = 0;
-//     while (1)
-//     {
-//         dir = find_dir(press, i);
-//         img_wid = press->meta->tex[dir].width;
-//         img_hei = press->meta->tex[dir].height;
-//         // 아래는 원본 이미지와 벽 이미지의 비율 계산
-        
-//         i++;
-//     }
+int count_wall_func(t_press *press, int temp_x, int temp_y)
+{
+    double *x;
+    double *y;
+    int ret;
+    int i;
 
+    i = 0;
+    ret = 0;
+    x = press->ray_arr->ray_x;
+    y = press->ray_arr->ray_y;
+    while (x[i])
+    {
+        if (temp_x != (int)x[i] || temp_y != (int)y[i])
+            ret++;
+        temp_x = (int)x[i];
+        temp_y = (int)y[i];
+        i++;
+    }
+    return (ret);
+}
+
+// int * find_width_wall_pixel_count(t_press *press, int count_wall)
+// {
+//     int *width_wall_pixel_count;
+//     int i;
+//     int count;
+
+//     i = -1;
+//     count = 0;
+//     width_wall_pixel_count = (char *)malloc(sizeof(char) * count_wall);
+//     while (++i < count_wall)
+//         width_wall_pixel_count[i] = 0;
+//     while (i < RAY_COUNT && count < count_wall)
+//     {
+//         if ()
+//         {
+//             width_wall_pixel_count[count]++;
+//         }
+//         if ()
+//         {
+//             count++;
+//         }
+
+//     }
+//     return width_wall_pixel_count;
+// }
+
+//  int pixel_color(t_press *press)
+//  {
+//      //	press->meta->tex[i].texture
+//      int dir;
+//      int img_wid;
+//      int img_hei;
+//      int i;
+//      int count_wall; // 벽의 갯수
+//      int *width_wall_pixel_count;//벽 width ->벽별로 가로 레이 갯수 -> 배열 한칸에 벽의 옆면 레이 갯수가 들어간다. -> 배열 모든 칸 합하면 레이 갯수와 같다.
+//      int *height_wall_pixel_count;//벽 height -> 레이 하나당 세로 픽셀 갯수.
+//      int  image_pixel;
+
+//      count_wall = count_wall_func(press); //벽의 갯수를 세어주는 함수
+//      //width_wall_pixel_count = find_width_wall_pixel_count(press,  count_wall); // 각각의 벽별로 픽셀의 갯수를 세어주는 함수
+//      //뽑은 x, y  값은 0~1 사이로 나오기 때문에 이미 비율을 뽑은 값이다.
+//      //그로 인해 이미지 width , height 값에 x 혹은 y 를 곱한 위치의 픽셀을 뽑으면 자동으로 비율이 나온다.
+//      height_wall_pixel_count = find_height_wall_pixel_count(press); // 각 벽별로 높이를 세어주는 함수
+//      i = 0;
+//      while (1)
+//      {
+//         dir = find_dir(press, i);
+//         img_wid = press->meta->tex[dir].width * press->ray_arr->ray_x[i];
+//         img_hei = press->meta->tex[dir].height * press->ray_arr->ray_y[i];
+//         //아래는 원본 이미지의 width 계산하는 부분
+//         if (dir == 0 || dir == 1)
+//             image_pixel = press->meta->tex[dir].texture[(int)img_wid];
+//         else
+//             image_pixel = press->meta->tex[dir].texture[(int)img_hei];
+//         // 아래는 원본 이미지의 height 계산
+//         // 일단은 스킵
+//         while()
+//         {
+
+//         }
+
+//         i++;
+//      }
+//  }
 
 void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count, t_ray_arr *ray_arr)
 {
-	double fov_angle = 60 * (PI / 180.0);
-	double distance_project_plane = ((GAME_WIDTH / 2) / tan(fov_angle / 2));
-	double corrected_distance = ray_arr->distances[ray_num] * cos(ray_arr->ray_angles[ray_num] - press->player2->rotation_angle);
-	double projected_wall_height = ((press->map2->mts / corrected_distance) * distance_project_plane) / 16;
-	int wallStripHeight = (int)projected_wall_height;
-
-	int wall_top_pixel = (GAME_HEIGHT / 2) - (wallStripHeight / 2);
-	wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
-
-	int wall_bottom_pixel = (GAME_HEIGHT / 2) + (wallStripHeight / 2);
-	wall_bottom_pixel = wall_bottom_pixel > GAME_HEIGHT ? GAME_HEIGHT : wall_bottom_pixel;
-
 	int color = ray_arr->colors[ray_num];
     
     if ((ray_num != 1 && ray_num != ray_count - 1) && ((color != ray_arr->colors[ray_num - 1]) && color != ray_arr->colors[ray_num + 1]))
         color = ray_arr->colors[ray_num - 1];
 
-	for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
+	for (int y = press->info3->wall_top_pixel[ray_num]; y < press->info3->wall_bottom_pixel[ray_num]; y++)
 		for (int x = 0; x < (GAME_WIDTH / ray_count); x++)
 			if (press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == press->meta->c_color->all || \
                     press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == press->meta->f_color->all)
 				press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] = color;
 }
-
-// void	render_3d_projects_walls(t_press *press, int ray_num, int ray_count)
-// {
-// 	double fov_angle = 60 * (PI / 180.0);
-//     double distance_project_plane = ((GAME_WIDTH / 2) / tan(fov_angle / 2));
-//     double corrected_distance = press->ray2->distance * cos(press->ray2->ray_angle - press->player2->rotation_angle);
-//     double projected_wall_height = ((40 / corrected_distance) * distance_project_plane) / 32;
-//     // int color;
-//     int wallStripHeight = (int)projected_wall_height;
-
-//     int wall_top_pixel = (GAME_HEIGHT / 2) - (wallStripHeight / 2);
-//     wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
-
-//     int wall_bottom_pixel = (GAME_HEIGHT / 2) + (wallStripHeight / 2);
-//     wall_bottom_pixel = wall_bottom_pixel > GAME_HEIGHT ? GAME_HEIGHT : wall_bottom_pixel;
-
-//     int color = fix_color(press);
-//     // int color = press->ray2->was_hit_vertical ? 0xA9D0F5 : 0x81F7D8;
-//     for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
-//         for (int x = 0; x < (GAME_WIDTH / ray_count); x++)
-//             if (press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == 0x111111)
-//                 press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] = color;
-// }

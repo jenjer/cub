@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/15 18:38:50 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/15 21:11:51 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,20 @@ typedef struct s_param
 	void	*win;
 }	t_param;
 
+typedef struct s_3d
+{
+	double	fov_angle;
+	double	distance_project_plane;
+	double	*corrected_distance;
+	double	*projected_wall_height;
+	int		*wall_strip_height;
+	int		*wall_top_pixel;
+	int		*wall_bottom_pixel;
+}	t_3d;
+
 typedef struct s_press
 {
+	t_3d		*info3;
 	t_ray_arr	*ray_arr;
 	t_img1		*img1;
 	t_param		*param;
