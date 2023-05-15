@@ -6,7 +6,7 @@
 /*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/15 21:11:51 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/15 21:35:45 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ typedef struct s_3d
 {
 	double	fov_angle;
 	double	distance_project_plane;
-	double	*corrected_distance;
-	double	*projected_wall_height;
-	int		*wall_strip_height;
+	// double	*corrected_distance;
+	// double	*projected_wall_height;
+	// int		*wall_strip_height;
 	int		*wall_top_pixel;
 	int		*wall_bottom_pixel;
 }	t_3d;
@@ -169,7 +169,7 @@ void	fill_squares(t_press *press, int x, int y, int color);
 int		draw_player(t_press *press);
 void	setting_map_location(t_press *press, int *x, int *y);
 // void	render_3d_projects_walls(t_press *press, int ray_num, int ray_count);
-void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count, t_ray_arr *ray_arr);
+void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count);
 int		fix_color(t_press *press);
 
 #endif

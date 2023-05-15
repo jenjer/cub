@@ -6,7 +6,7 @@
 /*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/15 21:25:56 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/15 21:35:34 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,20 @@ void	info3_init(t_press *press, int ray_num)
 	press->info3 = info3;
 }
 
+void	normalize_color(t_press *press)
+{
+	int	ray_num;
+
+	ray_num = 0;
+	while (++ray_num < RAY_COUNT)
+	{
+		if ((ray_num != 1 && ray_num != RAY_COUNT - 1) && ((press->ray_arr->colors[ray_num] != press->ray_arr->colors[ray_num - 1]) \
+				&& press->ray_arr->colors[ray_num] != press->ray_arr->colors[ray_num + 1]))
+        	press->ray_arr->colors[ray_num] = press->ray_arr->colors[ray_num - 1];
+	}
+}
+
+
 void draw_ray(t_press *press)
 {
 	double		angle;
@@ -273,9 +287,10 @@ void draw_ray(t_press *press)
 	}
 	info3_init(press, 1);
 	i = 1;
+	normalize_color(press);
 	while (i < ray_count)
 	{
-		render_3d_projects_walls_arr(press, i, ray_count, press->ray_arr);
+		render_3d_projects_walls_arr(press, i, ray_count);
 		i++;
 	}
 	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img,
