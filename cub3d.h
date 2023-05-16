@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/16 19:36:24 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/16 21:58:14 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,44 +49,29 @@ typedef struct s_color
 	int	all;
 }	t_color;
 
-// typedef struct s_3d
-// {
-// 	double	fov_angle;
-// 	double	distance_project_plane;
-// 	double	corrected_distance;
-// 	double	projected_wall_height;
-// 	int			wall_strip_height;
-// 	int			wall_top_pixel;
-// 	int			wall_bottom_pixel;
-// }	t_3d;
-
-
-typedef struct	s_texture
+typedef struct s_texture
 {
     char		*tex_path;
-    int             *texture;
+    int			*texture;
     double		width;
     double		height;
 }	t_texture;
 typedef struct s_meta_data
 {
-	t_color		*f_color;
-	t_color		*c_color;
+	t_color			*f_color;
+	t_color			*c_color;
 	int				fd;
 	int				height;
 	int				max_width;
 	int				add_height;
 	int				player_x;
 	int				player_y;
-	t_texture	*tex;
+	t_texture		*tex;
 	char			**map;
 	char			**sp_map;
-	// char			*north;
-	// char			*south;
-	// char			*west;
-	// char			*east;
 	int				pos1_r;
 	int				pos1_c;
+	int				dir;
 	int				num1;
 	int				**visited;
 }	t_meta_data;
@@ -101,9 +86,6 @@ typedef struct s_3d
 {
 	double	fov_angle;
 	double	distance_project_plane;
-	// double	*corrected_distance;
-	// double	*projected_wall_height;
-	// int		*wall_strip_height;
 	int		*wall_top_pixel;
 	int		*wall_bottom_pixel;
 }	t_3d;
@@ -152,6 +134,7 @@ void	init_player(t_meta_data *meta, t_player2 **player2);
 int		check_wall(t_press *press, double x, double y);
 void	draw_ray(t_press *press);
 void	draw_one_ray(t_press *press, double angle, int ray_num);
+void 	draw_after_ray(t_press *press);
 
 //color
 int		make_rgb_bit(t_meta_data *meta);
@@ -161,7 +144,6 @@ void	draw_base(t_press *press);
 int		key_press(int keycode, t_press *press);
 int		update_player2(t_press *press);
 int		check_wall(t_press *press, double x, double y);
-// int		ft_loop(t_press *press);
 
 //rendering
 void	render_map(t_press *press);
@@ -170,6 +152,7 @@ int		draw_player(t_press *press);
 void	setting_map_location(t_press *press, int *x, int *y);
 void	render_3d_projects_walls_arr(t_press *press);
 int		fix_color(t_press *press);
+double	distance_between_points(double x1, double y1, double x2, double y2);
 
 #endif
 

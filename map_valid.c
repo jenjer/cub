@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/09 17:03:00 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/16 21:58:34 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	do_dfs1(t_meta_data *meta, int r, int c)
 int	dfs1_start(t_meta_data *meta)
 {
 	int		i;
+	int		j;
 
 	meta->visited = (int **)malloc(sizeof(int *) * (meta->height + 2));
 	i = 0;
@@ -74,18 +75,16 @@ int	dfs1_start(t_meta_data *meta)
 		i++;
 	}
 	do_dfs1(meta, meta->pos1_r, meta->pos1_c);
-	//
 	printf("visited array\n");
 	i = 0;
 	while (i < meta->height + 2)
 	{
-		int j = 0;
+		j = 0;
 		while (j < meta->max_width + 2)
 			printf("%d", meta->visited[i][j++]);
 		printf("\n");
 		i++;
 	}
-	//
 	printf("num1 after dfs : %d\n", meta->num1);
 	return (0);
 }
@@ -126,6 +125,20 @@ int	is_one_in(t_meta_data *meta, int r, int c)
 	return (0);
 }
 
+int	check_cardinal(char dir)
+{
+	if (dir == 'N')
+		return (1);
+	else if (dir == 'S')
+		return (2);
+	else if (dir == 'W')
+		return (3);
+	else if (dir == 'E')
+		return (4);
+	else
+		return (-1);
+}
+
 int	map_valid_check(t_meta_data *meta)
 {
 	int	r;
@@ -158,6 +171,7 @@ int	map_valid_check(t_meta_data *meta)
 				meta->player_x = c;
 				meta->player_y = r;
 				flag++;
+				meta->dir = check_cardinal(meta->sp_map[r][c]);
 				meta->sp_map[r][c] = '0'; // 0으로 변경사항이 있다.
 			}
 			if (meta->sp_map[r][c] == '1')

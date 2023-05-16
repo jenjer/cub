@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/15 18:52:41 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:58:20 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,14 @@ void	init_meta_data(char *name, t_meta_data *meta)
 	meta->pos1_r = 0;
 	meta->pos1_c = 0;
 	meta->num1 = 0;
+	meta->dir = 0;
 	meta->visited = NULL;
 }
 
 int	main(int argc, char **argv)
 {
 	t_meta_data	meta;
-	t_param			*param;
+	t_param		*param;
 
 	param = (t_param *)malloc(sizeof(t_param));
 	if (!param)

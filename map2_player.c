@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 22:04:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/10 22:23:10 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/16 22:14:43 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_wall(t_press *press, double x, double y) // update player 함수에서
 	int	ix;
 	int	iy;
 
-	if (x < 0 || x > press->map2->win_width || y < 0 || y > press->map2->win_height)
+	if (x < 0 || x > press->map2->map_cols || y < 0 || y > press->map2->map_rows)
 		return (1);
 	ix = floor(x);
 	iy = floor(y);

@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/14 21:56:41 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/16 21:58:28 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	key_press(int keycode, t_press *press)
 	draw_base(press);
 	render_map(press);
 	draw_player(press);
-	draw_ray(press);
+	draw_after_ray(press);
 	erase_key(press);
 	return (0);
 }

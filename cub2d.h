@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 19:22:23 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/16 21:57:39 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define LD 102
 # define RU 103
 # define RD 104
-# define RAY_COUNT 400
+# define RAY_COUNT 800
 
 typedef struct s_player2
 {
@@ -92,7 +92,9 @@ typedef struct s_rayarr
 {
 	double	*distances;
 	double	*ray_angles;
-	int			*colors;
+	int		*colors;
+	double	*ray_pre_x;
+	double	*ray_pre_y;
 	double	*ray_x;
 	double	*ray_y;
 	double	*wall_heights;
@@ -102,6 +104,8 @@ typedef struct s_ray2
 {
 	double	last_x;
 	double	last_y;
+	double	last_pre_x;
+	double	last_pre_y;
 	double	ray_angle;
 	double	wall_hit_x;
 	double	wall_hit_y;

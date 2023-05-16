@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 19:31:44 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/16 22:20:05 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,40 +83,17 @@ int count_wall_func(t_press *press, int temp_x, int temp_y)
     return (ret);
 }
 
-// int *find_width_wall_pixel_count(t_press *press, int count_wall)
-// {
-//     int *width_wall_pixel_count;
-//     int i;
-//     int count;
-
-//     i = -1;
-//     count = 0;
-//     width_wall_pixel_count = (char *)malloc(sizeof(char) * count_wall);
-//     while (++i < count_wall)
-//         width_wall_pixel_count[i] = 0;
-//     while (i < RAY_COUNT && count < count_wall)
-//     {
-//         if ()
-//         {
-//             width_wall_pixel_count[count]++;
-//         }
-//         if ()
-//         {
-//             count++;
-//         }
-//     }
-//     return width_wall_pixel_count;
-// }
-
 int find_position_hei(t_press *press, int top, int bottom, int y, int dir)
 {
-    double range = bottom - top;
+    double range;
     int position;
 
-//tex 인덱스 나중에 가변으로 바꿔줘야된다.
-    // (y/range) * 100
+    if (bottom < 0)
+        bottom = 0;
+    if (top > GAME_HEIGHT)
+        top = GAME_HEIGHT;
+    range = bottom - top;
     position = (int)((press->meta->tex[dir].height) * ((y/range)));
-//    printf("position = %d\n", position);
     return (position);
 }
 
@@ -128,54 +105,48 @@ void pixel_color(t_press *press)
     int img_hwid;
     int i;
     int flag;
-
-    // count_wall = count_wall_func(press, 0, 0); // 벽의 갯수를 세어주는 함수
-    // width_wall_pixel_count = find_width_wall_pixel_count(press,  count_wall); // 각각의 벽별로 픽셀의 갯수를 세어주는 함수
-    // 뽑은 x, y  값은 0~1 사이로 나오기 때문에 이미 비율을 뽑은 값이다.
-    // 그로 인해 이미지 width , height 값에 x 혹은 y 를 곱한 위치의 픽셀을 뽑으면 자동으로 비율이 나온다.
-    // height_wall_pixel_count = find_height_wall_pixel_count(press); // 각 벽별로 높이를 세어주는 함수
+    
     i = 1;
     while (i < RAY_COUNT)
     {
         dir = find_dir(press, i);
         img_wid = press->meta->tex[dir].width * (press->ray_arr->ray_x[i] - (int)press->ray_arr->ray_x[i]);
         img_hwid = press->meta->tex[dir].width * (press->ray_arr->ray_y[i] - (int)press->ray_arr->ray_y[i]);
-        // 아래는 원본 이미지의 width 계산하는 부분
         if (dir == 0 || dir == 1)
             flag = 1;
         else
             flag = 0;
         int position_hei;
         int hei_index = -1;
+        if (press->info3->wall_top_pixel[i] < -18000)
+        {
+            press->info3->wall_top_pixel[i] = -18000;
+        }
+        if (press->info3->wall_bottom_pixel[i] > 18000)
+        {
+            press->info3->wall_bottom_pixel[i] = 18000;
+        }        
         for (int y = press->info3->wall_top_pixel[i]; y < press->info3->wall_bottom_pixel[i]; y++)
         {
-            hei_index++;
+            ++hei_index;
             position_hei = find_position_hei(press, press->info3->wall_top_pixel[i], press->info3->wall_bottom_pixel[i], hei_index, dir);
             for (int x = 0; x < (GAME_WIDTH / RAY_COUNT); x++)
             {
                 if ((GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) < 0 || (GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) > GAME_WIDTH * GAME_HEIGHT)
-                {
-                    x++;
                     continue;
-                }
                 if (flag == 1)
                 {
                     if (press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] == press->meta->c_color->all ||
                         press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
                         press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] =
                             press->meta->tex[dir].texture[(((int)img_wid + (int)(press->meta->tex[dir].width) * position_hei))];
-                    // printf("(int)img_wid * i = %d\n", (int)img_wid * i);
                 }
-                /*
-                (int)god->parse.tex[direction].height * row + col
-                */
                 else
                 {
                     if (press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->c_color->all ||
                         press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
                         press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] =
                             press->meta->tex[dir].texture[(((int)img_hwid + (int)(press->meta->tex[dir].width) * position_hei))];
-                    // printf("(int)img_wid * i = %d\n", (int)img_hei * i);
                 }
             }
         }
