@@ -1,7 +1,7 @@
-NO ./texture/1.xpm
-SO ./texture/2.xpm
-WE ./texture/3.xpm
-EA ./texture/4.xpm
+NO ./texture/brown_wall.xpm
+SO ./texture/stone_wall.xpm
+WE ./texture/castle_wall.xpm
+EA ./texture/future_wall.xpm
 
 F 233,150,122
 C 0,191,255

@@ -6,7 +6,7 @@
 /*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/15 21:35:34 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:39:05 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 	max_value = fmax(fabs(dx), fabs(dy));
 	dx /= max_value;
 	dy /= max_value;
+	int	i = -1;
 	while (1)
 	{
+		i++;
 		if (!check_wall_light(press, ray_x, ray_y))
 		{
 			press->img2->data[(GAME_WIDTH * \
@@ -65,9 +67,10 @@ void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 		}
 		else
 		{
+			printf("i : %d", i);
 			press->ray2->last_x = ray_x;
 			press->ray2->last_y = ray_y;
-			// printf("ray_x : %f ray_y : %f sosu_x : %f sosu_y : %f\n", ray_x, ray_y, ray_x -(int)ray_x, ray_y-(int)ray_y);
+			//printf("ray_x : %f ray_y : %f sosu_x : %f sosu_y : %f\n", ray_x, ray_y, ray_x -(int)ray_x, ray_y-(int)ray_y);
 			break ;
 		}
 		ray_y += (dy / (press->map2->mts)) / 100;
@@ -241,9 +244,9 @@ void	info3_init(t_press *press, int ray_num)
 		projected_wall_height = ((press->map2->mts / corrected_distance) * (info3->distance_project_plane)) / 16;
 		wall_strip_height = projected_wall_height;
 		info3->wall_top_pixel[ray_num] = (GAME_HEIGHT / 2) - (wall_strip_height / 2);
-		info3->wall_top_pixel[ray_num] = info3->wall_top_pixel[ray_num] < 0 ? 0 : info3->wall_top_pixel[ray_num];
+		//info3->wall_top_pixel[ray_num] = info3->wall_top_pixel[ray_num] < 0 ? 0 : info3->wall_top_pixel[ray_num];
 		info3->wall_bottom_pixel[ray_num] = (GAME_HEIGHT / 2) + (wall_strip_height / 2);
-		info3->wall_bottom_pixel[ray_num] = info3->wall_bottom_pixel[ray_num] > GAME_HEIGHT ? GAME_HEIGHT : info3->wall_bottom_pixel[ray_num];
+		//info3->wall_bottom_pixel[ray_num] = info3->wall_bottom_pixel[ray_num] > GAME_HEIGHT ? GAME_HEIGHT : info3->wall_bottom_pixel[ray_num];
 		ray_num++;
 	}
 	press->info3 = info3;
@@ -288,11 +291,7 @@ void draw_ray(t_press *press)
 	info3_init(press, 1);
 	i = 1;
 	normalize_color(press);
-	while (i < ray_count)
-	{
-		render_3d_projects_walls_arr(press, i, ray_count);
-		i++;
-	}
+	render_3d_projects_walls_arr(press, i, ray_count);
 	mlx_put_image_to_window(press->param->mlx, press->param->win, press->img2->img,
 							0, 0);
 }

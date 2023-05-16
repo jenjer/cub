@@ -6,7 +6,7 @@
 /*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 15:20:15 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:47:11 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,6 @@ void pixel_color(t_press *press)
     int img_wid;
     int img_hwid;
     int i;
-    // int count_wall;               // 벽의 갯수
-    // int *width_wall_pixel_count;  // 벽 width ->벽별로 가로 레이 갯수 -> 배열 한칸에 벽의 옆면 레이 갯수가 들어간다. -> 배열 모든 칸 합하면 레이 갯수와 같다.
-    // int *height_wall_pixel_count; // 벽 height -> 레이 하나당 세로 픽셀 갯수.
-    // int image_pixel;
     int flag;
 
     // count_wall = count_wall_func(press, 0, 0); // 벽의 갯수를 세어주는 함수
@@ -147,10 +143,8 @@ void pixel_color(t_press *press)
         // 아래는 원본 이미지의 width 계산하는 부분
         if (dir == 0 || dir == 1)
             flag = 1;
-            // image_pixel = press->meta->tex[dir].texture[(int)img_wid];
         else
             flag = 0;
-            // image_pixel = press->meta->tex[dir].texture[(int)img_hei];
         int position_hei;
         int hei_index = -1;
         for (int y = press->info3->wall_top_pixel[i]; y < press->info3->wall_bottom_pixel[i]; y++)
@@ -159,12 +153,17 @@ void pixel_color(t_press *press)
             position_hei = find_position_hei(press, press->info3->wall_top_pixel[i], press->info3->wall_bottom_pixel[i], hei_index, dir);
             for (int x = 0; x < (GAME_WIDTH / RAY_COUNT); x++)
             {
+                if ((GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) < 0 || (GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) > GAME_WIDTH * GAME_HEIGHT)
+                {
+                    x++;
+                    continue;
+                }
                 if (flag == 1)
                 {
                     if (press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] == press->meta->c_color->all ||
-                            press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] == press->meta->f_color->all)
-                        press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] =
-                            press->meta->tex[dir].texture[((int)img_wid + (int)(press->meta->tex[dir].width) * position_hei)];
+                        press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
+                        press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] =
+                            press->meta->tex[dir].texture[(((int)img_wid + (int)(press->meta->tex[dir].width) * position_hei))];
                     // printf("(int)img_wid * i = %d\n", (int)img_wid * i);
                 }
                 /*
@@ -172,10 +171,10 @@ void pixel_color(t_press *press)
                 */
                 else
                 {
-                    if (press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] == press->meta->c_color->all ||
-                            press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] == press->meta->f_color->all)
-                        press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] =
-                            press->meta->tex[dir].texture[((int)img_hwid + (int)(press->meta->tex[dir].width) * position_hei)];
+                    if (press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->c_color->all ||
+                        press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
+                        press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] =
+                            press->meta->tex[dir].texture[(((int)img_hwid + (int)(press->meta->tex[dir].width) * position_hei))];
                     // printf("(int)img_wid * i = %d\n", (int)img_hei * i);
                 }
             }

@@ -59,6 +59,7 @@ OPEN_MAX	gnl/get_next_line.h	/^#  define OPEN_MAX /;"	d
 PI	cub2d.h	/^# define PI /;"	d
 PNG_HDR_SIZE	mlx/mlx_png.c	/^#define PNG_HDR_SIZE	/;"	d	file:
 PNG_MAGIC_SIZE	mlx/mlx_png.c	/^#define	PNG_MAGIC_SIZE	/;"	d	file:
+RAY_COUNT	cub2d.h	/^# define RAY_COUNT /;"	d
 RD	cub2d.h	/^# define RD /;"	d
 RETURN	mlx/mlx_xpm.c	/^#define	RETURN	/;"	d	file:
 RU	cub2d.h	/^# define RU /;"	d
@@ -97,6 +98,7 @@ colors	cub2d.h	/^	int			*colors;$/;"	m	struct:s_rayarr
 content	libft/libft.h	/^	void			*content;$/;"	m	struct:s_list
 count_max	libft/ft_strlcpy.c	/^static int	count_max(const char *arr)$/;"	f	file:
 count_num_len	libft/ft_itoa.c	/^static int	count_num_len(int n)$/;"	f	file:
+count_wall_func	map3_render.c	/^int count_wall_func(t_press *press, int temp_x, int temp_y)$/;"	f
 counting_word	libft/ft_split.c	/^static size_t	counting_word(char const *s, char c)$/;"	f	file:
 cpy	libft/ft_memmove.c	/^static void	cpy(unsigned char *udst, unsigned char *usrc, size_t len)$/;"	f	file:
 cpy_string	libft/ft_split.c	/^static char	*cpy_string(char *s, char c)$/;"	f	file:
@@ -112,6 +114,7 @@ display_log	mlx/mlx_shaders.c	/^void display_log(GLuint object, void (*param_fun
 distance	cub2d.h	/^	double	distance;$/;"	m	struct:s_dp_ray
 distance	cub2d.h	/^	double	distance;$/;"	m	struct:s_ray2
 distance_between_points	map2_ray.c	/^double	distance_between_points(double x1, double y1, double x2, double y2)$/;"	f
+distance_project_plane	cub3d.h	/^	double	distance_project_plane;$/;"	m	struct:s_3d
 distances	cub2d.h	/^	double	*distances;$/;"	m	struct:s_rayarr
 do_dfs1	map_valid.c	/^void	do_dfs1(t_meta_data *meta, int r, int c)$/;"	f
 down	cub2d.h	/^	int		down;$/;"	m	struct:s_key
@@ -119,7 +122,7 @@ draw_base	map2_cast.c	/^void	draw_base(t_press *press)$/;"	f
 draw_line	map2_ray.c	/^void	draw_line(t_press *press, double x1, double y1, double x2, double y2)$/;"	f
 draw_one_ray	map2_ray.c	/^void	draw_one_ray(t_press *press, double angle, int ray_num, int ray_count, t_ray_arr *ray_arr)$/;"	f
 draw_player	map2_cast.c	/^int	draw_player(t_press *press)$/;"	f
-draw_ray	map2_ray.c	/^void	draw_ray(t_press *press)$/;"	f
+draw_ray	map2_ray.c	/^void draw_ray(t_press *press)$/;"	f
 endian	cub2d.h	/^	int		endian;$/;"	m	struct:s_img1
 endian	cub2d.h	/^	int		endian;$/;"	m	struct:s_img2
 erase_key	map2_press.c	/^void	erase_key(t_press *press)$/;"	f
@@ -129,6 +132,7 @@ fd	cub3d.h	/^	int				fd;$/;"	m	struct:s_meta_data
 fill_sp_map	map_setting.c	/^void	fill_sp_map(char *sp_map, int idx)$/;"	f
 fill_squares	map2_cast.c	/^void	fill_squares(t_press *press, int x, int y, int color)$/;"	f
 find_dir	map3_render.c	/^int find_dir(t_press *press, int i)$/;"	f
+find_position_hei	map3_render.c	/^int find_position_hei(t_press *press, int top, int bottom, int y, int dir)$/;"	f
 fix_color	map3_render.c	/^int fix_color(t_press *press)$/;"	f
 font	mlx/mlx_int.h	/^  mlx_img_list_t	*font;$/;"	m	struct:mlx_ptr_s
 font_atlas	mlx/font.c	/^} font_atlas = {$/;"	v	typeref:struct:__anon1	file:
@@ -136,6 +140,7 @@ font_fshader	mlx/mlx_int.h	/^  GLuint	font_fshader;$/;"	m	struct:glsl_info_s
 font_program	mlx/mlx_int.h	/^  GLuint	font_program;$/;"	m	struct:glsl_info_s
 font_vshader	mlx/mlx_int.h	/^  GLuint	font_vshader;$/;"	m	struct:glsl_info_s
 found_wallhit	cub2d.h	/^	int		found_wallhit;$/;"	m	struct:s_dp_ray
+fov_angle	cub3d.h	/^	double	fov_angle;$/;"	m	struct:s_3d
 free_spl	utils2.c	/^void	free_spl(char **temp)$/;"	f
 ft_atoi	libft/ft_atoi.c	/^int	ft_atoi(const char *str)$/;"	f
 ft_bzero	libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
@@ -213,6 +218,8 @@ img_list	mlx/mlx_int.h	/^  mlx_img_ctx_t		*img_list;$/;"	m	struct:mlx_win_list_s
 img_list	mlx/mlx_int.h	/^  mlx_img_list_t	*img_list;$/;"	m	struct:mlx_ptr_s
 img_width	cub2d.h	/^	int		img_width;$/;"	m	struct:s_img1
 img_width	cub2d.h	/^	int		img_width;$/;"	m	struct:s_img2
+info3	cub3d.h	/^	t_3d		*info3;$/;"	m	struct:s_press
+info3_init	map2_ray.c	/^void	info3_init(t_press *press, int ray_num)$/;"	f
 init_color	map_color.c	/^void	init_color(t_color *color)$/;"	f
 init_img2	map2_cast_init.c	/^void	init_img2(t_img2 *img2)$/;"	f
 init_key2	map2_cast_init.c	/^void	init_key2(t_key *key2)$/;"	f
@@ -228,8 +235,6 @@ is_ray_facingright	cub2d.h	/^	int		is_ray_facingright;$/;"	m	struct:s_ray2
 is_ray_facingup	cub2d.h	/^	int		is_ray_facingup;$/;"	m	struct:s_ray2
 key2	cub3d.h	/^	t_key		*key2;$/;"	m	struct:s_press
 key_press	map2_press.c	/^int	key_press(int keycode, t_press *press)$/;"	f
-last_pre_x	cub2d.h	/^	double	last_pre_x;$/;"	m	struct:s_ray2
-last_pre_y	cub2d.h	/^	double	last_pre_y;$/;"	m	struct:s_ray2
 last_x	cub2d.h	/^	double	last_x;$/;"	m	struct:s_ray2
 last_y	cub2d.h	/^	double	last_y;$/;"	m	struct:s_ray2
 leakcheck	main.c	/^void	leakcheck(void)$/;"	f
@@ -330,9 +335,11 @@ next	mlx/mlx_int.h	/^  struct mlx_img_ctx_s	*next;$/;"	m	struct:mlx_img_ctx_s	ty
 next	mlx/mlx_int.h	/^  struct mlx_img_list_s	*next;$/;"	m	struct:mlx_img_list_s	typeref:struct:mlx_img_list_s::mlx_img_list_s
 next	mlx/mlx_int.h	/^  struct mlx_win_list_s	*next;$/;"	m	struct:mlx_win_list_s	typeref:struct:mlx_win_list_s::mlx_win_list_s
 normalize_angle	map2_ray.c	/^double	normalize_angle(double angle)$/;"	f
+normalize_color	map2_ray.c	/^void	normalize_color(t_press *press)$/;"	f
 num1	cub3d.h	/^	int				num1;$/;"	m	struct:s_meta_data
 param	cub3d.h	/^	t_param		*param;$/;"	m	struct:s_press
 param_init	map2_cast.c	/^void	param_init(t_press *press)$/;"	f
+pixel_color	map3_render.c	/^void pixel_color(t_press *press)$/;"	f
 pixel_data	mlx/font.c	/^  unsigned char	 pixel_data[1140 * 20 * 4 + 1];$/;"	m	struct:__anon1	file:
 pixel_fshader	mlx/mlx_int.h	/^  GLuint	pixel_fshader;$/;"	m	struct:glsl_info_s
 pixel_program	mlx/mlx_int.h	/^  GLuint	pixel_program;$/;"	m	struct:glsl_info_s
@@ -356,11 +363,12 @@ ray_init	map2_ray.c	/^void	ray_init(t_ray2 *ray2, double ray_angle)$/;"	f
 ray_x	cub2d.h	/^	double	*ray_x;$/;"	m	struct:s_rayarr
 ray_y	cub2d.h	/^	double	*ray_y;$/;"	m	struct:s_rayarr
 red	cub3d.h	/^	int	red;$/;"	m	struct:s_color
-render_3d_projects_walls_arr	map3_render.c	/^void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count, t_ray_arr *ray_arr)$/;"	f
+render_3d_projects_walls_arr	map3_render.c	/^void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count)$/;"	f
 render_map	map2_cast.c	/^void	render_map(t_press *press)$/;"	f
 reset_image	map2_press.c	/^void	reset_image(t_press *press)$/;"	f
 right	cub2d.h	/^	int		right;$/;"	m	struct:s_key
 rotation_angle	cub2d.h	/^	double	rotation_angle;$/;"	m	struct:s_player2
+s_3d	cub3d.h	/^typedef struct s_3d$/;"	s
 s_col_name	mlx/mlx_xpm.c	/^struct  s_col_name$/;"	s	file:
 s_color	cub3d.h	/^typedef struct s_color$/;"	s
 s_dp_ray	cub2d.h	/^typedef struct s_dp_ray$/;"	s
@@ -383,6 +391,7 @@ skip_space	utils.c	/^void	skip_space(char **str)$/;"	f
 sp_map	cub3d.h	/^	char			**sp_map;$/;"	m	struct:s_meta_data
 start	libft/ft_atoi.c	/^static int	start(const char *str, size_t *i)$/;"	f	file:
 str_free	gnl/get_next_line.c	/^void	str_free(char **str)$/;"	f
+t_3d	cub3d.h	/^}	t_3d;$/;"	t	typeref:struct:s_3d
 t_color	cub3d.h	/^}	t_color;$/;"	t	typeref:struct:s_color
 t_dp_ray	cub2d.h	/^}	t_dp_ray;$/;"	t	typeref:struct:s_dp_ray
 t_img1	cub2d.h	/^}	t_img1;$/;"	t	typeref:struct:s_img1
@@ -415,11 +424,13 @@ vbuffer	mlx/mlx_int.h	/^  GLuint		vbuffer;$/;"	m	struct:mlx_img_ctx_s
 vertexes	mlx/mlx_int.h	/^  GLfloat		vertexes[8];$/;"	m	struct:mlx_img_list_s
 visited	cub3d.h	/^	int				**visited;$/;"	m	struct:s_meta_data
 walkspeed	cub2d.h	/^	double	walkspeed;$/;"	m	struct:s_player2
+wall_bottom_pixel	cub3d.h	/^	int		*wall_bottom_pixel;$/;"	m	struct:s_3d
 wall_heights	cub2d.h	/^	double	*wall_heights;$/;"	m	struct:s_rayarr
 wall_hit_x	cub2d.h	/^	double	wall_hit_x;$/;"	m	struct:s_ray2
 wall_hit_y	cub2d.h	/^	double	wall_hit_y;$/;"	m	struct:s_ray2
 wall_hitx	cub2d.h	/^	double	wall_hitx;$/;"	m	struct:s_dp_ray
 wall_hity	cub2d.h	/^	double	wall_hity;$/;"	m	struct:s_dp_ray
+wall_top_pixel	cub3d.h	/^	int		*wall_top_pixel;$/;"	m	struct:s_3d
 was_hit_vertical	cub2d.h	/^	int		was_hit_vertical;$/;"	m	struct:s_ray2
 width	cub3d.h	/^    double		width;$/;"	m	struct:s_texture
 width	mlx/font.c	/^  unsigned int 	 width;$/;"	m	struct:__anon1	file:
