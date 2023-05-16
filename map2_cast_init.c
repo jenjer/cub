@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2_cast_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 15:14:03 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:35:36 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_player(t_meta_data *meta, t_player2 **player2)
 	(*player2)->y = meta->player_y;
 	(*player2)->thickness = 5;
 	(*player2)->rotation_angle = PI / 2;
-	(*player2)->walkspeed = 0.2;
+	(*player2)->walkspeed = 0.4;
 	(*player2)->turnspeed = 4 * (PI / 180);
 }
 

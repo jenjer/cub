@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map3_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 17:47:11 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:31:44 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,18 +183,7 @@ void pixel_color(t_press *press)
     }
 }
 
-void	render_3d_projects_walls_arr(t_press *press, int ray_num, int ray_count)
+void	render_3d_projects_walls_arr(t_press *press)
 {
-	// int color = press->ray_arr->colors[ray_num];
-    
-    (void)ray_count;
-   (void)ray_num; 
-    // color = pixel_color(press);
-
-	// for (int y = press->info3->wall_top_pixel[ray_num]; y < press->info3->wall_bottom_pixel[ray_num]; y++)
-	// 	for (int x = 0; x < (GAME_WIDTH / ray_count); x++)
-	// 		if (press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == press->meta->c_color->all || \
-    //                 press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] == press->meta->f_color->all)
-	// 			press->img2->data[GAME_WIDTH * y + (x + ray_num * (GAME_WIDTH / ray_count))] = color;
-    pixel_color(press);
+   pixel_color(press);
 }
