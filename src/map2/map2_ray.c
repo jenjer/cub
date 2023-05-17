@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/17 18:23:49 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 22:27:05 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	draw_line(t_press *press, double x1, double y1, double x2, double y2)
 			press->ray2->last_y = ray_y;
 			break ;
 		}
-		ray_y += (dy / (press->map2->mts)) / 160;
-		ray_x += (dx / (press->map2->mts)) / 160;
+		ray_y += (dy / (press->map2->mts)) / 80;
+		ray_x += (dx / (press->map2->mts)) / 80;
 	}
 	press->ray2->distance = distance_between_points(x1, y1, ray_x, ray_y);
 }

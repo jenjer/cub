@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub2d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 21:57:39 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 22:26:58 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define LD 102
 # define RU 103
 # define RD 104
-# define RAY_COUNT 800
+# define RAY_COUNT 400
 
 typedef struct s_player2
 {
