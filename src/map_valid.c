@@ -6,11 +6,11 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/16 21:58:34 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 18:24:07 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../headers/cub3d.h"
 
 int	map_check_func(t_meta_data *meta, int r, int c)
 {

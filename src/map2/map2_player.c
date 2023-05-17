@@ -6,11 +6,11 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 22:04:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/17 17:48:39 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 18:23:45 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../headers/cub3d.h"
 
 int	check_wall(t_press *press, double x, double y)
 {

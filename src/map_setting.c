@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_setting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/04/27 22:01:42 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 18:24:05 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../headers/cub3d.h"
 
 void	deep_copy_space(char *sp_map, char *map, int width)
 {

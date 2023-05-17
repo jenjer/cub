@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark < gyopark@student.42seoul.kr>      +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 18:06:26 by gyopark           #+#    #+#             */
-/*   Updated: 2023/04/30 16:33:39 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 18:24:01 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../headers/cub3d.h"
 
 int	match_color(t_color *color, char **rgb)
 {

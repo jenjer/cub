@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 17:16:39 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 18:24:52 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 # include <stdio.h> // delete
 
-# include "mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
-# include "gnl/get_next_line.h"
-# include "libft/libft.h"
+# include "../gnl/get_next_line.h"
+# include "../libft/libft.h"
 # include "cub2d.h"
-# include <float.h> // for double max(DBL_MAX)
+# include <float.h>
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3

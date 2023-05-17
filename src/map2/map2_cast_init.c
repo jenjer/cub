@@ -6,11 +6,11 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/17 16:39:48 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 18:23:36 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../headers/cub3d.h"
 
 double	draw_cardinal(int dir)
 {
