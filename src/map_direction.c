@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_direction.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/17 18:24:03 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 20:34:44 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	see_flag(t_meta_data *meta, char *tmp, int flag)
 
 	if (flag == 5 || flag == 6)
 	{
-		if (add_color(meta, tmp, flag))
+		if (add_color(meta, tmp, flag, -1))
 			return (1);
 		return (0);
 	}
@@ -70,7 +70,7 @@ void	make_flag(char *line, int *flag, char **tmp)
 		(*tmp)++;
 }
 
-int	add_direction(t_meta_data *meta, char *line)
+int	add_direction(t_meta_data *meta, char *line, int *flag_)
 {
 	int		flag;
 	char	*tmp;
@@ -92,15 +92,12 @@ int	add_direction(t_meta_data *meta, char *line)
 		return (1);
 	free(for_free);
 	for_free = NULL;
+	(*flag_)++;
 	return (0);
 }
 
-int	map_direction_init(t_meta_data *meta)
+int	map_direction_init(t_meta_data *meta, int flag, char *line)
 {
-	int		flag;
-	char	*line;
-
-	flag = 0;
 	if (meta->fd <= 0)
 		return (1);
 	while (1)
@@ -115,13 +112,8 @@ int	map_direction_init(t_meta_data *meta)
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		if (!add_direction(meta, line))
-			flag++;
-		else
-		{
-			free(line);
-			return (1);
-		}
+		if (!add_direction(meta, line, &flag) || freeing_line_and_fin(line))
+			;
 		free(line);
 		if (flag == 6)
 			break ;

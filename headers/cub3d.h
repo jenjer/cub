@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 18:24:52 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:49:04 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h> // delete
+# include <stdio.h>
 
 # include "../mlx/mlx.h"
 # include <unistd.h>
@@ -107,24 +107,25 @@ typedef struct s_press
 //------------------------ functions ---------------------------// 
 
 // init function
-int		map_init(t_meta_data *meta, char **tmp_map, int idx);
-int		map_direction_init(t_meta_data *meta);
+int		map_init(t_meta_data *meta, char **tmp_map, int idx, int s_flag);
+int		map_direction_init(t_meta_data *meta, int flag, char *line);
 
 // parsing function
-int		add_color(t_meta_data *meta, char *tmp, int flag);
-int		map_valid_check(t_meta_data *meta);
+int		add_color(t_meta_data *meta, char *tmp, int flag, int i);
+int		map_valid_check(t_meta_data *meta, int r, int flag, int first1);
 
 // freeing function
-int		map_free_all(t_meta_data meta, t_param *param);
+int		map_free_all(t_meta_data meta, t_param *param, int i);
 void	free_spl(char **temp);
 
 // utils
 int		ft_isnum(char *str);
 void	skip_space(char **str);
 int		ft_strrncmp(char *s1, char *s2, int n);
-int		ft_exit(char *str);
+int		ft_exit(const char *str);
 int		ft_max(int a, int b);
 int		ft_compare(int a, int b);
+void	deep_copy_space(char *sp_map, char *map, int width);
 
 // casting
 int		map_cast(t_param *param, t_meta_data *meta);
@@ -152,6 +153,31 @@ void	setting_map_location(t_press *press, int *x, int *y);
 void	render_3d_projects_walls_arr(t_press *press);
 int		fix_color(t_press *press);
 double	distance_between_points(double x1, double y1, double x2, double y2);
+
+//for delete
+void	print_map(t_meta_data meta);
+void	leakcheck(void);
+
+//valid_check
+void	do_dfs1(t_meta_data *meta, int r, int c);
+int		valid_char_check(char c);
+int		map_check_func(t_meta_data *meta, int r, int c);
+
+//direction
+int		freeing_line_and_fin(char *line);
+
+//sp_map
+void	fill_sp_map(char *sp_map, int idx);
+int		is_one_in(t_meta_data *meta, int r, int c);
+int		check_cardinal(char dir);
+void	call_dfs(t_meta_data *meta);
+int		dfs1_start(t_meta_data *meta);
+int	check_four_side(t_meta_data *meta, int r, int c);
+void	check_alpha(t_meta_data *meta, int *flag, int r, int c);
+void	check_wall_sp_map(t_meta_data *meta, int r, int c, int *first1);
+int	map_valid_check(t_meta_data *meta, int r, int flag, int first1);
+
+
 
 #endif
 

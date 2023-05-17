@@ -3,63 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_valid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 18:24:07 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:49:47 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
-
-int	map_check_func(t_meta_data *meta, int r, int c)
-{
-	static int	dr[8] = {-1, -1, -1, 0, 1, 1, 1, 0};
-	static int	dc[8] = {-1, 0, 1, 1, 1, 0, -1, -1};
-	int			nr;
-	int			nc;
-	int			i;
-
-	i = -1;
-	while (++i < 8)
-	{
-		nr = r + dr[i];
-		nc = c + dc[i];
-		if (nr < 0 || nc < 0 || nr >= meta->height + 2
-			|| nc >= meta->max_width + 2)
-			continue ;
-		else if (meta->sp_map[nr][nc] != '1' && meta->sp_map[nr][nc] != 'X')
-			return (1);
-	}
-	return (0);
-}
-
-int	valid_char_check(char c)
-{
-	return (c == '0' || c == '1' || c == 'N' || c == 'E' || c == 'S'
-		|| c == 'W' || c == 'X');
-}
-
-void	do_dfs1(t_meta_data *meta, int r, int c)
-{
-	const int	dr[4] = {0, 0, -1, 1};
-	const int	dc[4] = {-1, 1, 0, 0};
-	int			nr;
-	int			nc;
-	int			i;
-
-	meta->visited[r][c] = 1;
-	if (meta->sp_map[r][c] == '1')
-		meta->num1--;
-	i = -1;
-	while (++i < 4)
-	{
-		nr = r + dr[i];
-		nc = c + dc[i];
-		if (meta->visited[nr][nc] == 0 && meta->sp_map[nr][nc] == '1')
-			do_dfs1(meta, nr, nc);
-	}
-}
 
 int	dfs1_start(t_meta_data *meta)
 {
@@ -108,90 +59,53 @@ int	check_four_side(t_meta_data *meta, int r, int c)
 	return (0);
 }
 
-int	is_one_in(t_meta_data *meta, int r, int c)
+void	check_alpha(t_meta_data *meta, int *flag, int r, int c)
 {
-	while (meta->sp_map[++r])
+	if (meta->sp_map[r][c] == 'N' || meta->sp_map[r][c] == 'S'
+				|| meta->sp_map[r][c] == 'E' || meta->sp_map[r][c] == 'W')
 	{
-		c = -1;
-		while (meta->sp_map[r][++c])
-		{
-			if (meta->sp_map[r][c] == '1' && meta->visited[r][c] == 0)
-			{
-				if (check_four_side(meta, r, c))
-					return (1);
-			}
-		}
+		meta->player_x = c;
+		meta->player_y = r;
+		(*flag)++;
+		meta->dir = check_cardinal(meta->sp_map[r][c]);
+		meta->sp_map[r][c] = '0';
 	}
-	return (0);
 }
 
-int	check_cardinal(char dir)
+void	check_wall_sp_map(t_meta_data *meta, int r, int c, int *first1)
 {
-	if (dir == 'N')
-		return (1);
-	else if (dir == 'S')
-		return (2);
-	else if (dir == 'W')
-		return (3);
-	else if (dir == 'E')
-		return (4);
-	else
-		return (-1);
+	if (meta->sp_map[r][c] == '1')
+	{
+		if (*first1 == 0)
+		{
+			meta->pos1_r = r;
+			meta->pos1_c = c;
+			(*first1)++;
+		}
+		meta->num1++;
+	}	
 }
 
-int	map_valid_check(t_meta_data *meta)
+int	map_valid_check(t_meta_data *meta, int r, int flag, int first1)
 {
-	int	r;
 	int	c;
-	int	flag;
-	int	first1;
 
-	flag = 0;
-	first1 = 0;
-	r = -1;
 	while (meta->sp_map[++r])
 	{
 		c = -1;
 		while (meta->sp_map[r][++c])
 		{
 			if (!valid_char_check(meta->sp_map[r][c]))
-			{
 				ft_exit("Invalid map! 1\n");
-			}
 			if (meta->sp_map[r][c] == 'X')
 			{
 				if (map_check_func(meta, r, c))
-				{
 					ft_exit("Invalid map! 2\n");
-				}
 			}
-			if (meta->sp_map[r][c] == 'N' || meta->sp_map[r][c] == 'S'
-				|| meta->sp_map[r][c] == 'E' || meta->sp_map[r][c] == 'W')
-			{
-				meta->player_x = c;
-				meta->player_y = r;
-				flag++;
-				meta->dir = check_cardinal(meta->sp_map[r][c]);
-				meta->sp_map[r][c] = '0'; // 0으로 변경사항이 있다.
-			}
-			if (meta->sp_map[r][c] == '1')
-			{
-				if (first1 == 0)
-				{
-					meta->pos1_r = r;
-					meta->pos1_c = c;
-					first1++;
-				}
-				meta->num1++;
-			}	
+			check_alpha(meta, &flag, r, c);
+			check_wall_sp_map(meta, r, c, &first1);
 		}	
 	}
-	printf("num1 : %d\n", meta->num1);
-	dfs1_start(meta);
-	if (meta->num1 != 0)
-	{
-		if (is_one_in(meta, -1, -1))
-			ft_exit("dfs error\n");
-	}
+	call_dfs(meta);
 	return (flag != 1);
 }

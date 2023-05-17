@@ -3,44 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_setting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 18:24:05 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:27:39 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
-
-void	deep_copy_space(char *sp_map, char *map, int width)
-{
-	int		i;
-	int		idx;
-
-	idx = 0;
-	i = 0;
-	while (++i < width + 1)
-	{
-		if (map[idx] == '\n' || map[idx] == '\0')
-			break ;
-		if (map[idx] != ' ')
-			sp_map[i] = map[idx];
-		idx++;
-	}
-}
-
-void	fill_sp_map(char *sp_map, int idx)
-{
-	int	i;
-
-	i = 0;
-	while (i < idx - 1)
-	{
-		sp_map[i] = 'X';
-		i++;
-	}
-	sp_map[idx - 1] = '\0';
-}
 
 void	make_sp_map(t_meta_data *meta)
 {
@@ -65,39 +35,66 @@ void	make_sp_map(t_meta_data *meta)
 		free(temp_sp_map);
 }
 
-#include <stdio.h>
+int	map_init_sub(t_meta_data *meta, char *line, int *s_flag)
+{
+	if (!line)
+		return (0);
+	if (*s_flag == 0 && line[0] == '\n')
+		(*s_flag) = 1;
+	if (*s_flag == 1 && line[0] == '\n')
+	{
+		free(line);
+		return (1);
+	}
+	if (*s_flag == 1 && line[0] != '\n')
+		(*s_flag)++;
+	if (line[0] == '\n')
+	{
+		free(line);
+		return (0);
+	}
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
+	if (line[ft_strlen(line) - 1] != '1')
+		ft_exit("not 1 ended!!\n");
+	if (meta->max_width < (int) ft_strlen(line))
+		meta->max_width = ft_strlen(line);
+	return (3);
+}
 
-int	map_init(t_meta_data *meta, char **tmp_map, int idx)
+void	map_init_util(t_meta_data *meta)
 {
 	char	*line;
-	int		s_flag;
 
-	s_flag = 0;
 	while (1)
 	{
 		line = get_next_line(meta->fd);
 		if (!line)
 			break ;
-		if (s_flag == 0 && line[0] == '\n')
-			s_flag = 1;
-		if (s_flag == 1 && line[0] == '\n')
-		{
-			free(line);
-			continue ;
-		}
-		if (s_flag == 1 && line[0] != '\n')
-			s_flag++;
-		if (line[0] == '\n')
-		{
-			free(line);
+		if (ft_strlen(line) > 1 || line[0] != '\n')
+			ft_exit("word after feed ERROR!!!\n");
+	}
+}
+
+void	height_plus_free(t_meta_data *meta, char *line)
+{
+	meta->height++;
+	free(line);
+}
+
+int	map_init(t_meta_data *meta, char **tmp_map, int idx, int s_flag)
+{
+	char	*line;
+	int		temp;
+
+	while (1)
+	{
+		line = get_next_line(meta->fd);
+		temp = map_init_sub(meta, line, &s_flag);
+		if (temp == 0)
 			break ;
-		}
-		if (line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
-		if (line[ft_strlen(line) - 1] != '1')
-			ft_exit("not 1 ended!!\n");
-		if (meta->max_width < (int) ft_strlen(line))
-			meta->max_width = ft_strlen(line);
+		else if (temp == 1)
+			continue ;
 		tmp_map = meta->map;
 		meta->map = (char **)malloc(sizeof(char *) * (meta->height + 2));
 		meta->map[meta->height + 1] = 0;
@@ -107,17 +104,9 @@ int	map_init(t_meta_data *meta, char **tmp_map, int idx)
 		meta->map[idx] = ft_strdup(line);
 		if (tmp_map)
 			free(tmp_map);
-		meta->height++;
-		free(line);
+		height_plus_free(meta, line);
 	}
-	while (1)
-	{
-		line = get_next_line(meta->fd);
-		if (!line)
-			break ;
-		if (ft_strlen(line) > 1 || line[0] != '\n')
-			ft_exit("word after feed ERROR!!!\n");
-	}
+	map_init_util(meta);
 	make_sp_map(meta);
 	return (0);
 }

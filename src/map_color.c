@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 18:06:26 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/17 18:24:01 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 19:04:16 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ void	init_color(t_color *color)
 	color->blue = -1;
 }
 
-int	add_color(t_meta_data *meta, char *tmp, int flag)
+int	add_color(t_meta_data *meta, char *tmp, int flag, int i)
 {
 	t_color	*color;
 	char	**rgb;
-	int		i;
 
-	i = 0;
 	color = (t_color *)malloc(sizeof(t_color));
 	init_color(color);
 	if (flag == 5)
@@ -47,15 +45,12 @@ int	add_color(t_meta_data *meta, char *tmp, int flag)
 	else
 		meta->c_color = color;
 	rgb = ft_split(tmp, ',');
-	while (rgb[i])
+	while (rgb[++i])
 	{
 		if (ft_isnum(rgb[i]))
 			return (1);
-		i++;
 	}
-	if (i != 3)
-		return (1);
-	if (match_color(color, rgb))
+	if (i != 3 || match_color(color, rgb))
 	{
 		free_spl(rgb);
 		rgb = NULL;

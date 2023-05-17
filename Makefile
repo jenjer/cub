@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+         #
+#    By: youngski <youngski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/05/17 18:26:18 by gyopark          ###   ########.fr        #
+#    Updated: 2023/05/17 21:47:57 by youngski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,13 @@ SRCS_MAN    = src/main.c				\
 			  src/map3/map3_render.c	\
 			  gnl/get_next_line.c       \
 			  src/utils.c				\
-			  src/utils2.c
+			  src/utils2.c				\
+			  src/utils3.c				\
+			  src/map_valid2.c			\
+			  src/map_direction2.c		\
+			  src/map_setting2.c		\
+			  src/map_valid3.c			\
+			  src/for_delete.c
 
 OBJS_MAN    = ${SRCS_MAN:.c=.o}
 
