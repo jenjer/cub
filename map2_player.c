@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 22:04:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 22:14:43 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 16:16:07 by youngski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@ int	check_wall(t_press *press, double x, double y) // update player 함수에서
 {
 	int	ix;
 	int	iy;
+	int tx;
+	int ty;
 
 	if (x < 0 || x > press->map2->map_cols || y < 0 || y > press->map2->map_rows)
 		return (1);
-	ix = floor(x);
-	iy = floor(y);
-	if (press->meta->sp_map[iy][ix] == '1' || press->meta->sp_map[iy][ix] == 'X')
+	ix = floor(x + 0.4);
+	iy = floor(y + 0.4);
+	tx = floor(x - 0.4);
+	ty = floor(y - 0.4);
+	if (press->meta->sp_map[iy][ix] == '1' || press->meta->sp_map[iy][ix] == 'X' || \
+			press->meta->sp_map[ty][tx] == '1' || press->meta->sp_map[ty][tx] == 'X')
 		return (1);
 	return (0);
 }
@@ -29,6 +34,8 @@ int	check_wall(t_press *press, double x, double y) // update player 함수에서
 // map2->player2->rotation_angle = PI / 2; 거의 90도 1.57
 // map2->player2->walkspeed = 1;
 // map2->player2->turnspeed = 4 * (PI / 180); 거의 4도
+
+
 
 int	update_player2(t_press *press)
 {
