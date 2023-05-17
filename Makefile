@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: youngski <youngski@student.42.fr>          +#+  +:+       +#+         #
+#    By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/05/17 21:47:57 by youngski         ###   ########.fr        #
+#    Updated: 2023/05/17 22:31:16 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS_MAN    = src/main.c				\
 			  src/map2/map2_press.c		\
 			  src/map2/map2_cast.c		\
 			  src/map2/map2_cast_init.c	\
+			  src/map2/map2_cast_texture.c	\
 			  src/map2/map2_player.c	\
 			  src/map2/map2_ray.c		\
 			  src/map3/map3_render.c	\

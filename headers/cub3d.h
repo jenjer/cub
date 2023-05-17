@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 21:49:04 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:31:02 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ typedef struct s_color
 
 typedef struct s_texture
 {
-    char		*tex_path;
-    int			*texture;
-    double		width;
-    double		height;
+	char		*tex_path;
+	int			*texture;
+	double		width;
+	double		height;
 }	t_texture;
+
 typedef struct s_meta_data
 {
 	t_color			*f_color;
@@ -135,7 +136,8 @@ void	init_player(t_meta_data *meta, t_player2 **player2);
 int		check_wall(t_press *press, double x, double y);
 void	draw_ray(t_press *press);
 void	draw_one_ray(t_press *press, double angle, int ray_num);
-void 	draw_after_ray(t_press *press);
+void	draw_after_ray(t_press *press);
+void	load_texture(t_press *press);
 
 //color
 int		make_rgb_bit(t_meta_data *meta);
