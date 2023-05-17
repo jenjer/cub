@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 22:17:43 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 18:15:42 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,9 +247,14 @@ void	normalize_color(t_press *press)
 	ray_num = 0;
 	while (++ray_num < RAY_COUNT)
 	{
-		if ((ray_num != 1 && ray_num != RAY_COUNT - 1) && ((press->ray_arr->colors[ray_num] != press->ray_arr->colors[ray_num - 1]) \
+		if ((ray_num != 1 && ray_num != RAY_COUNT - 1) && 
+				((press->ray_arr->colors[ray_num] != press->ray_arr->colors[ray_num - 1]) \
 				&& press->ray_arr->colors[ray_num] != press->ray_arr->colors[ray_num + 1]))
         	press->ray_arr->colors[ray_num] = press->ray_arr->colors[ray_num - 1];
+		if ((ray_num != 1 && ray_num != RAY_COUNT - 1) && 
+				((press->ray_arr->colors[ray_num] != press->ray_arr->colors[ray_num - 2]) \
+				&& press->ray_arr->colors[ray_num] != press->ray_arr->colors[ray_num + 2]))
+			press->ray_arr->colors[ray_num] = press->ray_arr->colors[ray_num - 1];
 	}
 }
 

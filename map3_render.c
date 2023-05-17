@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 22:20:05 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 16:39:50 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,7 @@ void pixel_color(t_press *press)
         else
             flag = 0;
         int position_hei;
-        int hei_index = -1;
-        if (press->info3->wall_top_pixel[i] < -18000)
-        {
-            press->info3->wall_top_pixel[i] = -18000;
-        }
-        if (press->info3->wall_bottom_pixel[i] > 18000)
-        {
-            press->info3->wall_bottom_pixel[i] = 18000;
-        }        
+        int hei_index = -1;       
         for (int y = press->info3->wall_top_pixel[i]; y < press->info3->wall_bottom_pixel[i]; y++)
         {
             ++hei_index;
@@ -133,7 +125,10 @@ void pixel_color(t_press *press)
             for (int x = 0; x < (GAME_WIDTH / RAY_COUNT); x++)
             {
                 if ((GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) < 0 || (GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) > GAME_WIDTH * GAME_HEIGHT)
+                {
+                    x++;
                     continue;
+                }
                 if (flag == 1)
                 {
                     if (press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] == press->meta->c_color->all ||

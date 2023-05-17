@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/16 21:28:10 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 16:39:48 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_player(t_meta_data *meta, t_player2 **player2)
 	(*player2) = (t_player2 *)malloc(sizeof(t_player2));
 	(*player2)->x = meta->player_x;
 	(*player2)->y = meta->player_y;
-	(*player2)->thickness = 10;
+	(*player2)->thickness = 2;
 	(*player2)->rotation_angle = draw_cardinal(meta->dir);
 	(*player2)->walkspeed = 0.2;
 	(*player2)->turnspeed = 4 * (PI / 180);

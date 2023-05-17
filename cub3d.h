@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/16 21:58:14 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/17 17:16:39 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void	draw_base(t_press *press);
 //hooking
 int		key_press(int keycode, t_press *press);
 int		update_player2(t_press *press);
-int		check_wall(t_press *press, double x, double y);
 
 //rendering
 void	render_map(t_press *press);
