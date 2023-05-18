@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map3_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/17 22:18:59 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:28:42 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,24 @@ int	find_position_hei(t_press *press, int i, int y, int dir)
 	double	range;
 	int		position;
 	int		top;
-	int		bottom;
+	int		bot;
 
 	top = press->info3->wall_top_pixel[i];
-	bottom = press->info3->wall_bottom_pixel[i];
-	if (bottom < 0)
-		bottom = 0;
+	bot = press->info3->wall_bot_pixel[i];
+	if (bot < 0)
+		bot = 0;
 	if (top > GAME_HEIGHT)
 		top = GAME_HEIGHT;
-	range = bottom - top;
+	range = bot - top;
 	position = (int)((press->meta->tex[dir].height) * ((y / range)));
 	return (position);
 }
 
-void	pixel_color(t_press *press)
+void	pixel_render(t_press *press)
 {
 	int	dir;
-	int	img_wid;
-	int	img_hwid;
+	int	img_wid = 0;
+	int	img_hwid = 0;
 	int	i;
 	int	flag;
 
@@ -100,15 +100,23 @@ void	pixel_color(t_press *press)
 	while (i < RAY_COUNT)
 	{
 		dir = find_dir(press, i);
-		img_wid = press->meta->tex[dir].width * (press->ray_arr->ray_x[i] - (int)press->ray_arr->ray_x[i]);
-		img_hwid = press->meta->tex[dir].width * (press->ray_arr->ray_y[i] - (int)press->ray_arr->ray_y[i]);
 		if (dir == 0 || dir == 1)
+		{
 			flag = 1;
+			img_wid = press->meta->tex[dir].width * (press->ray_arr->ray_x[i] - (int)press->ray_arr->ray_x[i]);
+		}
 		else
+		{
 			flag = 0;
+			img_hwid = press->meta->tex[dir].width * (press->ray_arr->ray_y[i] - (int)press->ray_arr->ray_y[i]);
+		}
+		if (press->info3->wall_top_pixel[i] < -9000)
+			press->info3->wall_top_pixel[i] = -9000;
+		if (press->info3->wall_bot_pixel[i] > 9000)
+			press->info3->wall_bot_pixel[i] = 9000;			
 		int position_hei;
 		int hei_index = -1;       
-		for (int y = press->info3->wall_top_pixel[i]; y < press->info3->wall_bottom_pixel[i]; y++)
+		for (int y = press->info3->wall_top_pixel[i]; y < press->info3->wall_bot_pixel[i]; y++)
 		{
 			++hei_index;
 			position_hei = find_position_hei(press, i, hei_index, dir);
@@ -116,7 +124,7 @@ void	pixel_color(t_press *press)
 			{
 				if ((GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) < 0 || (GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) > GAME_WIDTH * GAME_HEIGHT)
 				{
-					x++;
+					// x++;
 					continue;
 				}
 				if (flag == 1)
@@ -137,9 +145,4 @@ void	pixel_color(t_press *press)
 		}
 		i++;
 	}
-}
-
-void	render_3d_projects_walls_arr(t_press *press)
-{
-	pixel_color(press);
 }

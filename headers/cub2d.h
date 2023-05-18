@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/17 22:30:11 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 16:09:14 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ typedef struct s_rayarr
 	double	*distances;
 	double	*ray_angles;
 	int		*colors;
-	double	*ray_pre_x;
-	double	*ray_pre_y;
 	double	*ray_x;
 	double	*ray_y;
 	double	*wall_heights;
@@ -106,8 +104,6 @@ typedef struct s_ray2
 {
 	double	last_x;
 	double	last_y;
-	double	last_pre_x;
-	double	last_pre_y;
 	double	ray_angle;
 	double	wall_hit_x;
 	double	wall_hit_y;
@@ -117,6 +113,9 @@ typedef struct s_ray2
 	int		is_ray_facingup;
 	int		is_ray_facingright;
 	int		is_ray_facingleft;
+	double	max_value;
+	double	dx;
+	double	dy;
 }	t_ray2;
 
 #endif

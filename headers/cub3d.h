@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 22:31:02 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 16:28:38 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ typedef struct s_param
 typedef struct s_3d
 {
 	double	fov_angle;
-	double	distance_project_plane;
+	double	distance_plane;
 	int		*wall_top_pixel;
-	int		*wall_bottom_pixel;
+	int		*wall_bot_pixel;
 }	t_3d;
 
 typedef struct s_press
@@ -128,16 +128,25 @@ int		ft_max(int a, int b);
 int		ft_compare(int a, int b);
 void	deep_copy_space(char *sp_map, char *map, int width);
 
-// casting
+// casting && ray
 int		map_cast(t_param *param, t_meta_data *meta);
 void	map_cast_init(t_press *press);
 void	param_init(t_press *press);
 void	init_player(t_meta_data *meta, t_player2 **player2);
 int		check_wall(t_press *press, double x, double y);
+int		check_wall_light(t_press *press, double x, double y);
+void	cal_distance(t_press *press, t_dp_ray *hv);
+void	load_texture(t_press *press);
+void	ray_init(t_ray2 *ray2, double ray_angle);
+void	ray_arr_init(t_ray_arr *ray_arr);
+void	info3_init(t_press *press, int ray_num);
+void	cal_vert_ray(t_press *press, t_dp_ray *vert);
+void	cal_horz_ray(t_press *press, t_dp_ray *horz);
+void	cal_ray(t_press *press, t_dp_ray *hv);
+void	normalize_color(t_press *press);
+double	normalize_angle(double angle);
 void	draw_ray(t_press *press);
 void	draw_one_ray(t_press *press, double angle, int ray_num);
-void	draw_after_ray(t_press *press);
-void	load_texture(t_press *press);
 
 //color
 int		make_rgb_bit(t_meta_data *meta);
@@ -152,7 +161,7 @@ void	render_map(t_press *press);
 void	fill_squares(t_press *press, int x, int y, int color);
 int		draw_player(t_press *press);
 void	setting_map_location(t_press *press, int *x, int *y);
-void	render_3d_projects_walls_arr(t_press *press);
+void	pixel_render(t_press *press);
 int		fix_color(t_press *press);
 double	distance_between_points(double x1, double y1, double x2, double y2);
 
@@ -174,22 +183,9 @@ int		is_one_in(t_meta_data *meta, int r, int c);
 int		check_cardinal(char dir);
 void	call_dfs(t_meta_data *meta);
 int		dfs1_start(t_meta_data *meta);
-int	check_four_side(t_meta_data *meta, int r, int c);
+int		check_four_side(t_meta_data *meta, int r, int c);
 void	check_alpha(t_meta_data *meta, int *flag, int r, int c);
 void	check_wall_sp_map(t_meta_data *meta, int r, int c, int *first1);
-int	map_valid_check(t_meta_data *meta, int r, int flag, int first1);
-
-
+int		map_valid_check(t_meta_data *meta, int r, int flag, int first1);
 
 #endif
-
-// typedef struct s_img
-// {
-// 	void	*img;		//	pointer to the image data
-// 	void	*data;		//	pointer to the first pixel of image
-// 	int		size_l;		//	size of a line in bytes
-// 	int		bpp;		//	number of bits per pixel
-// 	int		endian;		//	endian of image data
-// 	int		img_width;	//	width of the image in pixel
-// 	int		img_height;	//	height of the image in pixel
-// }	t_img;

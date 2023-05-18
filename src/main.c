@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 19:13:13 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:25:28 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	main(int argc, char **argv)
 	if (!param)
 		ft_exit("parameter allocation error!\n");
 	memset(param, 0, sizeof(t_param));
-	// atexit(leakcheck);
 	init_meta_data(argv[1], &meta);
 	if (argc != 2 || ft_strrncmp(argv[1], ".cub", 4))
 		return (ft_exit("Invalid Argument\n"));
@@ -72,3 +71,4 @@ int	main(int argc, char **argv)
 	write(1, "valid\n", ft_strlen("valid\n"));
 	return (map_free_all(meta, param, 0));
 }
+	// atexit(leakcheck);
