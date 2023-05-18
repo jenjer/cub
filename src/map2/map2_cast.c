@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/17 22:29:33 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 21:58:22 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 	press->meta = meta_;
 	map_cast_init(press);
 	param_init(press);
-	printf("win_width : %d\n", press->map2->win_width);
 	press->img2->data = (int *)mlx_get_data_addr(press->img2->img, \
 		&(press->img2->bpp), &(press->img2->line_size), \
 			&((press->img2->endian)));

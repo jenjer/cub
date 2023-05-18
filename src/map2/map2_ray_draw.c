@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 16:28:40 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 21:46:12 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	draw_ray(t_press *press)
 	ray_range = PI / 3.0;
 	angle = press->player2->rotation_angle;
 	ray_arr_ = (t_ray_arr *)malloc(sizeof(t_ray_arr));
-	memset(ray_arr_, 0, sizeof(t_ray_arr));
+	ft_memset(ray_arr_, 0, sizeof(t_ray_arr));
 	ray_arr_init(ray_arr_);
 	press->ray_arr = ray_arr_;
 	while (i < RAY_COUNT)

@@ -6,7 +6,7 @@
 #    By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/05/18 15:27:12 by gyopark          ###   ########.fr        #
+#    Updated: 2023/05/18 21:53:32 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS_MAN    = src/main.c					\
 			  src/map2/map2_ray_draw.c		\
 			  src/map2/map2_ray_init.c		\
 			  src/map3/map3_render.c		\
+			  src/map3/map3_loop.c			\
 			  gnl/get_next_line.c       	\
 			  src/utils.c					\
 			  src/utils2.c					\

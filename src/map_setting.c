@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_setting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 21:27:39 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/18 21:45:23 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,26 @@ void	make_sp_map(t_meta_data *meta)
 		free(temp_sp_map);
 }
 
+void	map_init_util(t_meta_data *meta)
+{
+	char	*line;
+
+	while (1)
+	{
+		line = get_next_line(meta->fd);
+		if (!line)
+			break ;
+		if (ft_strlen(line) > 1 || line[0] != '\n')
+			ft_exit("word after feed ERROR!!!\n");
+	}
+}
+
+void	height_plus_free(t_meta_data *meta, char *line)
+{
+	meta->height++;
+	free(line);
+}
+
 int	map_init_sub(t_meta_data *meta, char *line, int *s_flag)
 {
 	if (!line)
@@ -60,26 +80,6 @@ int	map_init_sub(t_meta_data *meta, char *line, int *s_flag)
 	if (meta->max_width < (int) ft_strlen(line))
 		meta->max_width = ft_strlen(line);
 	return (3);
-}
-
-void	map_init_util(t_meta_data *meta)
-{
-	char	*line;
-
-	while (1)
-	{
-		line = get_next_line(meta->fd);
-		if (!line)
-			break ;
-		if (ft_strlen(line) > 1 || line[0] != '\n')
-			ft_exit("word after feed ERROR!!!\n");
-	}
-}
-
-void	height_plus_free(t_meta_data *meta, char *line)
-{
-	meta->height++;
-	free(line);
 }
 
 int	map_init(t_meta_data *meta, char **tmp_map, int idx, int s_flag)

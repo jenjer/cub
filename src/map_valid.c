@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_valid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 21:49:47 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/18 21:56:30 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,17 @@
 int	dfs1_start(t_meta_data *meta)
 {
 	int		i;
-	int		j;
 
 	meta->visited = (int **)malloc(sizeof(int *) * (meta->height + 2));
 	i = 0;
 	while (i < meta->height + 2)
 	{
 		meta->visited[i] = (int *)malloc(sizeof(int) * (meta->max_width + 2));
-		memset(meta->visited[i], 0, sizeof(int) * (meta->max_width + 2));
+		ft_memset(meta->visited[i], 0, sizeof(int) * (meta->max_width + 2));
 		i++;
 	}
 	do_dfs1(meta, meta->pos1_r, meta->pos1_c);
-	printf("visited array\n");
 	i = 0;
-	while (i < meta->height + 2)
-	{
-		j = 0;
-		while (j < meta->max_width + 2)
-			printf("%d", meta->visited[i][j++]);
-		printf("\n");
-		i++;
-	}
-	printf("num1 after dfs : %d\n", meta->num1);
 	return (0);
 }
 

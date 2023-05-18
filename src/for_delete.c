@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:33:17 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/18 16:26:36 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 21:50:43 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	print_all(t_meta_data meta)
 	printf("player Y : %d\n", meta.player_y);
 }
 
+void	leakcheck(void)
+{
+	system("leaks cub3d");
+}
+
 void	print_map(t_meta_data meta)
 {
 	int	i;
@@ -51,9 +56,4 @@ void	print_map(t_meta_data meta)
 		i++;
 	}
 	print_all(meta);
-}
-
-void	leakcheck(void)
-{
-	system("leaks cub3d");
 }

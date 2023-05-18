@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 16:52:25 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 21:47:14 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ double	normalize_angle(double angle)
 void	normalize_color(t_press *press)
 {
 	int	ray_num;
+	int	offset;
 
-	ray_num = 0;
-	while (++ray_num < RAY_COUNT)
+	ray_num = 1;
+	offset = 1;
+	while (offset <= 5)
 	{
-		if ((ray_num != 1 && ray_num != RAY_COUNT - 1) && \
-				((press->ray_arr->colors[ray_num] != \
-					press->ray_arr->colors[ray_num - 1]) \
-				&& press->ray_arr->colors[ray_num] != \
-					press->ray_arr->colors[ray_num + 1]))
-			press->ray_arr->colors[ray_num] = \
-				press->ray_arr->colors[ray_num - 1];
-		if ((ray_num != 1 && ray_num != RAY_COUNT - 1) && \
-				((press->ray_arr->colors[ray_num] != \
-					press->ray_arr->colors[ray_num - 2]) \
-				&& press->ray_arr->colors[ray_num] != \
-					press->ray_arr->colors[ray_num + 2]))
-			press->ray_arr->colors[ray_num] = \
-				press->ray_arr->colors[ray_num - 1];
+		while (ray_num < RAY_COUNT - offset)
+		{
+			if (press->ray_arr->colors[ray_num] != \
+				press->ray_arr->colors[ray_num - offset] && \
+				press->ray_arr->colors[ray_num] != \
+				press->ray_arr->colors[ray_num + offset])
+				press->ray_arr->colors[ray_num] = \
+					press->ray_arr->colors[ray_num - offset];
+			ray_num++;
+		}
+		offset++;
+		ray_num = offset + 1;
 	}
 }
 
@@ -55,7 +55,7 @@ void	info3_init(t_press *press, int ray_num)
 	double	cal_height;
 
 	info3 = (t_3d *)malloc(sizeof(t_3d));
-	memset(info3, 0, sizeof(t_3d));
+	ft_memset(info3, 0, sizeof(t_3d));
 	info3->wall_top_pixel = (int *) malloc(sizeof(int) * RAY_COUNT);
 	info3->wall_bot_pixel = (int *) malloc(sizeof(int) * RAY_COUNT);
 	info3->fov_angle = 60 * (PI / 180.0);
@@ -96,13 +96,13 @@ void	ray_init(t_ray2 *ray2, double ray_angle)
 void	ray_arr_init(t_ray_arr *ray_arr)
 {
 	ray_arr->ray_angles = (double *)malloc(sizeof(double) * RAY_COUNT);
-	memset(ray_arr->ray_angles, 0, sizeof(double) * RAY_COUNT);
+	ft_memset(ray_arr->ray_angles, 0, sizeof(double) * RAY_COUNT);
 	ray_arr->distances = (double *)malloc(sizeof(double) * RAY_COUNT);
-	memset(ray_arr->distances, 0, sizeof(double) * RAY_COUNT);
+	ft_memset(ray_arr->distances, 0, sizeof(double) * RAY_COUNT);
 	ray_arr->ray_x = (double *)malloc(sizeof(double) * RAY_COUNT);
-	memset(ray_arr->ray_x, 0, sizeof(double) * RAY_COUNT);
+	ft_memset(ray_arr->ray_x, 0, sizeof(double) * RAY_COUNT);
 	ray_arr->ray_y = (double *)malloc(sizeof(double) * RAY_COUNT);
-	memset(ray_arr->ray_y, 0, sizeof(double) * RAY_COUNT);
+	ft_memset(ray_arr->ray_y, 0, sizeof(double) * RAY_COUNT);
 	ray_arr->colors = (int *)malloc(sizeof(int) * RAY_COUNT);
-	memset(ray_arr->colors, 0, RAY_COUNT);
+	ft_memset(ray_arr->colors, 0, RAY_COUNT);
 }

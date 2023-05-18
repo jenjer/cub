@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 14:56:29 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 21:59:19 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	reset_image(t_press *press)
 
 int	key_press(int keycode, t_press *press)
 {
+	if (check > 2)
+		exit(1);
+	atexit(leakcheck);
 	if (keycode == KEY_LEFT)
 		press->key2->turn_left = 1;
 	if (keycode == KEY_RIGHT)
@@ -56,5 +59,7 @@ int	key_press(int keycode, t_press *press)
 	draw_player(press);
 	draw_ray(press);
 	erase_key(press);
+	check++;
+	printf("check : %d\n", check);
 	return (0);
 }

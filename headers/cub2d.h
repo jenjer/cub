@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 16:09:14 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 21:42:09 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_img1
 
 typedef struct s_img2
 {
-	int		win_width;
 	void	*img;
 	int		*data;
 	int		bpp;
@@ -61,8 +60,6 @@ typedef struct s_map2
 	int		tile_size;
 	int		map_rows;
 	int		map_cols;
-	int		win_width;
-	int		win_height;
 	int		mts;
 	int		m_dir;
 	double	scale;
