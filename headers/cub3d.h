@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/18 16:28:38 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 16:56:42 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ typedef struct s_3d
 	double	distance_plane;
 	int		*wall_top_pixel;
 	int		*wall_bot_pixel;
+	int		dir;
+	int		img_wid;
+	int		img_hwid;
 }	t_3d;
 
 typedef struct s_press

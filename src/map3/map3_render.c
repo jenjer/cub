@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 16:28:42 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 16:58:57 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,19 @@ int	fix_color(t_press *press)
 	return (color);
 }
 
-int	find_dir(t_press *press, int i)
+void	find_dir(t_press *press, int i)
 {
 	int	color;
 
 	color = press->ray_arr->colors[i];
 	if (color == 0xff00ff)
-		return (0);
+		press->info3->dir = 0;
 	if (color == 0xA9D0F5)
-		return (1);
+		press->info3->dir = 1;
 	if (color == 0x81F7D8)
-		return (2);
+		press->info3->dir = 2;
 	if (color == 0x00ffff)
-		return (3);
-	return (-1);
+		press->info3->dir = 3;
 }
 
 int	count_wall_func(t_press *press, int temp_x, int temp_y)
@@ -88,38 +87,54 @@ int	find_position_hei(t_press *press, int i, int y, int dir)
 	return (position);
 }
 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map3_render.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
+/*   Updated: 2023/05/18 16:36:31 by gyopark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+void	find_wid(t_press *press, int *flag, int num)
+{
+	if (press->info3->dir == 0 || press->info3->dir == 1)
+	{
+		*flag = 1;
+		press->info3->img_wid = press->meta->tex[press->info3->dir].width * \
+				(press->ray_arr->ray_x[num] - (int)press->ray_arr->ray_x[num]);
+	}
+	else
+	{
+		*flag = 0;
+		press->info3->img_hwid = press->meta->tex[press->info3->dir].width * \
+				(press->ray_arr->ray_y[num] - (int)press->ray_arr->ray_y[num]);
+	}
+}
+
 void	pixel_render(t_press *press)
 {
-	int	dir;
-	int	img_wid = 0;
-	int	img_hwid = 0;
 	int	i;
 	int	flag;
 
 	i = 1;
 	while (i < RAY_COUNT)
 	{
-		dir = find_dir(press, i);
-		if (dir == 0 || dir == 1)
-		{
-			flag = 1;
-			img_wid = press->meta->tex[dir].width * (press->ray_arr->ray_x[i] - (int)press->ray_arr->ray_x[i]);
-		}
-		else
-		{
-			flag = 0;
-			img_hwid = press->meta->tex[dir].width * (press->ray_arr->ray_y[i] - (int)press->ray_arr->ray_y[i]);
-		}
+		find_dir(press, i);
+		find_wid(press, &flag, i);
 		if (press->info3->wall_top_pixel[i] < -9000)
 			press->info3->wall_top_pixel[i] = -9000;
 		if (press->info3->wall_bot_pixel[i] > 9000)
-			press->info3->wall_bot_pixel[i] = 9000;			
+			press->info3->wall_bot_pixel[i] = 9000;
 		int position_hei;
 		int hei_index = -1;       
 		for (int y = press->info3->wall_top_pixel[i]; y < press->info3->wall_bot_pixel[i]; y++)
 		{
 			++hei_index;
-			position_hei = find_position_hei(press, i, hei_index, dir);
+			position_hei = find_position_hei(press, i, hei_index, press->info3->dir);
 			for (int x = 0; x < (GAME_WIDTH / RAY_COUNT); x++)
 			{
 				if ((GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) < 0 || (GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) > GAME_WIDTH * GAME_HEIGHT)
@@ -132,14 +147,14 @@ void	pixel_render(t_press *press)
 					if (press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] == press->meta->c_color->all ||
 							press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
 						press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] =
-							press->meta->tex[dir].texture[(((int)img_wid + (int)(press->meta->tex[dir].width) * position_hei))];
+							press->meta->tex[press->info3->dir].texture[(((int)press->info3->img_wid + (int)(press->meta->tex[press->info3->dir].width) * position_hei))];
 				}
 				else
 				{
 					if (press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->c_color->all ||
 							press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
 						press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] =
-							press->meta->tex[dir].texture[(((int)img_hwid + (int)(press->meta->tex[dir].width) * position_hei))];
+							press->meta->tex[press->info3->dir].texture[(((int)press->info3->img_hwid + (int)(press->meta->tex[press->info3->dir].width) * position_hei))];
 				}
 			}
 		}
