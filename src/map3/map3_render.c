@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 16:58:57 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 17:07:25 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,6 @@ int	find_position_hei(t_press *press, int i, int y, int dir)
 	return (position);
 }
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map3_render.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 16:36:31 by gyopark          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 void	find_wid(t_press *press, int *flag, int num)
 {
 	if (press->info3->dir == 0 || press->info3->dir == 1)
@@ -115,49 +103,83 @@ void	find_wid(t_press *press, int *flag, int num)
 	}
 }
 
+void	normalize_top_bot(t_press *press, int num)
+{
+	if (press->info3->wall_top_pixel[num] < -9000)
+		press->info3->wall_top_pixel[num] = -9000;
+	if (press->info3->wall_bot_pixel[num] > 9000)
+		press->info3->wall_bot_pixel[num] = 9000;
+}
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map3_render.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
+/*   Updated: 2023/05/18 16:36:31 by gyopark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+// void	draw_top_bot(t_press *press)
+// {
+	
+// }
+
 void	pixel_render(t_press *press)
 {
-	int	i;
+	int	idx;
 	int	flag;
+	int	y;
+	int	x;
+	int	position_hei;
+	int	hei_index;
 
-	i = 1;
-	while (i < RAY_COUNT)
+	idx = 1;
+	y = 0;
+	position_hei = 0;
+	hei_index = 0;
+	while (idx < RAY_COUNT)
 	{
-		find_dir(press, i);
-		find_wid(press, &flag, i);
-		if (press->info3->wall_top_pixel[i] < -9000)
-			press->info3->wall_top_pixel[i] = -9000;
-		if (press->info3->wall_bot_pixel[i] > 9000)
-			press->info3->wall_bot_pixel[i] = 9000;
-		int position_hei;
-		int hei_index = -1;       
-		for (int y = press->info3->wall_top_pixel[i]; y < press->info3->wall_bot_pixel[i]; y++)
+		find_dir(press, idx);
+		find_wid(press, &flag, idx);
+		normalize_top_bot(press, idx);
+
+		// draw_top_bot(press);
+		
+		hei_index = -1;
+		y = press->info3->wall_top_pixel[idx]
+		while (y < press)
+		for (int y = press->info3->wall_top_pixel[idx]; y < press->info3->wall_bot_pixel[idx]; y++)
 		{
 			++hei_index;
-			position_hei = find_position_hei(press, i, hei_index, press->info3->dir);
+			position_hei = find_position_hei(press, idx, hei_index, press->info3->dir);
 			for (int x = 0; x < (GAME_WIDTH / RAY_COUNT); x++)
 			{
-				if ((GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) < 0 || (GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))) > GAME_WIDTH * GAME_HEIGHT)
+				if ((GAME_WIDTH * y + (x + idx * (GAME_WIDTH / RAY_COUNT))) < 0 || (GAME_WIDTH * y + (x + idx * (GAME_WIDTH / RAY_COUNT))) > GAME_WIDTH * GAME_HEIGHT)
 				{
 					// x++;
 					continue;
 				}
 				if (flag == 1)
 				{
-					if (press->img2->data[GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT))] == press->meta->c_color->all ||
-							press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
-						press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] =
+					if (press->img2->data[GAME_WIDTH * y + (x + idx * (GAME_WIDTH / RAY_COUNT))] == press->meta->c_color->all ||
+							press->img2->data[(GAME_WIDTH * y + (x + idx * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
+						press->img2->data[(GAME_WIDTH * y + (x + idx * (GAME_WIDTH / RAY_COUNT)))] =
 							press->meta->tex[press->info3->dir].texture[(((int)press->info3->img_wid + (int)(press->meta->tex[press->info3->dir].width) * position_hei))];
 				}
 				else
 				{
-					if (press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->c_color->all ||
-							press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
-						press->img2->data[(GAME_WIDTH * y + (x + i * (GAME_WIDTH / RAY_COUNT)))] =
+					if (press->img2->data[(GAME_WIDTH * y + (x + idx * (GAME_WIDTH / RAY_COUNT)))] == press->meta->c_color->all ||
+							press->img2->data[(GAME_WIDTH * y + (x + idx * (GAME_WIDTH / RAY_COUNT)))] == press->meta->f_color->all)
+						press->img2->data[(GAME_WIDTH * y + (x + idx * (GAME_WIDTH / RAY_COUNT)))] =
 							press->meta->tex[press->info3->dir].texture[(((int)press->info3->img_hwid + (int)(press->meta->tex[press->info3->dir].width) * position_hei))];
 				}
 			}
 		}
-		i++;
+		
+		idx++;
 	}
 }
