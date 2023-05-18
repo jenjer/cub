@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 17:07:25 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/18 17:11:33 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,12 @@ void	normalize_top_bot(t_press *press, int num)
 /*                                                                            */
 /* ************************************************************************** */
 
-// void	draw_top_bot(t_press *press)
+// void	draw_top_bot(t_press *press, int down, int hei_index)
 // {
-	
+// 	while (x < (GAME_WIDTH / RAY_COUNT))
+// 	{
+		
+// 	}	
 // }
 
 void	pixel_render(t_press *press)
@@ -139,6 +142,7 @@ void	pixel_render(t_press *press)
 
 	idx = 1;
 	y = 0;
+	x = 0;
 	position_hei = 0;
 	hei_index = 0;
 	while (idx < RAY_COUNT)
@@ -147,11 +151,16 @@ void	pixel_render(t_press *press)
 		find_wid(press, &flag, idx);
 		normalize_top_bot(press, idx);
 
-		// draw_top_bot(press);
 		
 		hei_index = -1;
-		y = press->info3->wall_top_pixel[idx]
-		while (y < press)
+		// y = press->info3->wall_top_pixel[idx];
+		// while (y < press_info3->wall_bot_pixel[idx])
+		// {
+		// 	draw_top_bot(press, y, -1);
+		// 	y++;
+		// }
+
+		
 		for (int y = press->info3->wall_top_pixel[idx]; y < press->info3->wall_bot_pixel[idx]; y++)
 		{
 			++hei_index;
