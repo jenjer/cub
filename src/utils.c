@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngski <youngski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/17 18:43:13 by youngski         ###   ########.fr       */
+/*   Updated: 2023/05/19 15:15:35 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_isnum(char *str)
 	return (0);
 }
 
-int	map_free_all(t_meta_data meta, t_param *param, int i)
+int	map_free_all(t_meta_data meta, int i)
 {
 	if (meta.f_color)
 		free(meta.f_color);
@@ -58,7 +58,6 @@ int	map_free_all(t_meta_data meta, t_param *param, int i)
 	while (i < meta.height + 2)
 		free(meta.visited[i++]);
 	free(meta.visited);
-	free(param);
 	i = -1;
 	while (++i < 4)
 	{

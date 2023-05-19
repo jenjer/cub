@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 21:39:04 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 15:30:58 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	add_direction(t_meta_data *meta, char *line, int *flag_)
 		skip_space(&tmp);
 	}
 	else
-		return (1);
+		ft_exit("Incorrect information!\n");
 	if (see_flag(meta, tmp, flag))
-		return (1);
+		ft_exit("Incorrect information!\n");
 	free(for_free);
 	for_free = NULL;
 	(*flag_)++;
@@ -98,13 +98,11 @@ int	add_direction(t_meta_data *meta, char *line, int *flag_)
 
 int	map_direction_init(t_meta_data *meta, int flag, char *line)
 {
-	if (meta->fd <= 0)
-		return (1);
 	while (1)
 	{
 		line = get_next_line(meta->fd);
 		if (!line)
-			return (1);
+			ft_exit("getting line error!");
 		if (ft_strlen(line) == 1 && line[0] == '\n')
 		{
 			free(line);
@@ -112,8 +110,7 @@ int	map_direction_init(t_meta_data *meta, int flag, char *line)
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		if (!add_direction(meta, line, &flag) || freeing_line_and_fin(line))
-			;
+		add_direction(meta, line, &flag);
 		free(line);
 		if (flag == 6)
 			break ;

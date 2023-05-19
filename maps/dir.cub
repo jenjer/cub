@@ -2,6 +2,7 @@ NO ./texture/brown_wall.xpm
 SO ./texture/stone_wall.xpm
 WE ./texture/castle_wall.xpm
 EA ./texture/future_wall.xpm
+EA ./texture/future_wall.xpm
 
 F 233,150,122
 C 0,191,255
