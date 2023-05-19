@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/19 15:28:24 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 16:17:20 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int argc, char **argv)
 	t_meta_data	meta;
 	t_param		param;
 
+	atexit(leakcheck);
 	if (argc != 2 || ft_strrncmp(argv[1], ".cub", 4))
 		return (ft_exit("Invalid Argument\n"));
 	ft_memset(&meta, 0, sizeof(t_meta_data));

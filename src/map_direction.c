@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/19 15:30:58 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 16:17:23 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,34 @@ int	check_direction(t_meta_data *meta)
 	return (0);
 }
 
+void	check_dup_path(t_meta_data *meta, char *tmp, int flag)
+{
+	if (flag == 1)
+	{
+		if ((meta->tex[0].tex_path))
+			ft_exit("Duplicated information!\n");
+		meta->tex[0].tex_path = ft_strdup(tmp);
+	}
+	else if (flag == 2)
+	{
+		if ((meta->tex[1].tex_path))
+			ft_exit("Duplicated information!\n");
+		meta->tex[1].tex_path = ft_strdup(tmp);
+	}	
+	else if (flag == 3)
+	{
+		if ((meta->tex[2].tex_path))
+			ft_exit("Duplicated information!\n");
+		meta->tex[2].tex_path = ft_strdup(tmp);
+	}	
+	else if (flag == 4)
+	{
+		if ((meta->tex[3].tex_path))
+			ft_exit("Duplicated information!\n");
+		meta->tex[3].tex_path = ft_strdup(tmp);
+	}		
+}
+
 int	see_flag(t_meta_data *meta, char *tmp, int flag)
 {
 	int	fd;
@@ -38,15 +66,9 @@ int	see_flag(t_meta_data *meta, char *tmp, int flag)
 	}
 	fd = open(tmp, O_RDONLY);
 	if (fd == -1)
-		return (1);
-	if (flag == 1)
-		meta->tex[0].tex_path = ft_strdup(tmp);
-	else if (flag == 2)
-		meta->tex[1].tex_path = ft_strdup(tmp);
-	else if (flag == 3)
-		meta->tex[2].tex_path = ft_strdup(tmp);
-	else if (flag == 4)
-		meta->tex[3].tex_path = ft_strdup(tmp);
+		ft_exit("Texture file open error!\n");
+	if (flag == 1 || flag == 2 || flag == 3 || flag == 4)
+		check_dup_path(meta, tmp, flag);
 	return (0);
 }
 
