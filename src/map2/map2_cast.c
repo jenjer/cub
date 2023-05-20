@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/19 18:16:49 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 20:20:46 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	render_map(t_press *press)
 	}
 }
 
+// 0.5
 int	draw_player(t_press *press)
 {
 	int	row;
@@ -84,8 +85,8 @@ int	draw_player(t_press *press)
 		while (col <= (press->player2->thickness) / 2)
 		{
 			press->img2->data[(int)(GAME_WIDTH * \
-				((int)(press->player2->y * mts + row))) \
-					+ ((int)(press->player2->x * mts + col))] = 0x0000FF;
+				((int)((press->player2->y) * mts + row))) \
+					+ ((int)((press->player2->x) * mts + col))] = 0x0000FF;
 			col++;
 		}
 		row++;

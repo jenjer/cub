@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/19 17:54:42 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 20:27:03 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ double	draw_cardinal(int dir)
 
 void	init_player(t_meta_data *meta, t_player2 **player2)
 {
-	(*player2)->x = meta->player_x;
-	(*player2)->y = meta->player_y;
+	(*player2)->x = (meta->player_x + 0.5);
+	(*player2)->y = (meta->player_y + 0.5);
 	(*player2)->thickness = 2;
 	(*player2)->rotation_angle = draw_cardinal(meta->dir);
 	(*player2)->walkspeed = 0.2;

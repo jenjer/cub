@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 16:00:01 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 20:29:44 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 void	ray_loop(t_press *press, double *ray_x, double *ray_y)
 {
-	int	size;
-
 	while (1)
 	{
-		size = 80;
 		if (!check_wall_light(press, *ray_x, *ray_y))
 		{
 			press->img2->data[(GAME_WIDTH * \
@@ -31,10 +28,8 @@ void	ray_loop(t_press *press, double *ray_x, double *ray_y)
 			press->ray2->last_y = *ray_y;
 			break ;
 		}
-		// if (*ray_x - (int)(*ray_x) < 0.1 || *ray_x - (int)(*ray_x) > 0.9 || *ray_y - (int)(*ray_y) < 0.1 || *ray_y - (int)(*ray_y) > 0.9)
-		// 	size = 1000;
-		*ray_y += (press->ray2->dy / (press->map2->mts)) / size;
-		*ray_x += (press->ray2->dx / (press->map2->mts)) / size;
+		*ray_y += (press->ray2->dy / press->map2->mts) / 80;
+		*ray_x += (press->ray2->dx / press->map2->mts) / 80;
 	}
 }
 
@@ -94,16 +89,24 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	cal_vert_ray(press, &vert);
 	if (vert.distance < horz.distance)
 	{
+		printf("vert dis : %f\n", vert.distance);
 		press->ray2->wall_hit_x = vert.wall_hitx;
 		press->ray2->wall_hit_y = vert.wall_hity;
+		printf("num : %d\n v-wallhitx : %f wallhity : %f\n", ray_num, vert.wall_hitx, vert.wall_hity);
+		printf("h-wallhitx : %f wallhity : %f\n", horz.wall_hitx, horz.wall_hity);
 		press->ray2->was_hit_vertical = 1;
 	}
 	else
 	{
+		printf("horz dis : %f\n", horz.distance);
 		press->ray2->wall_hit_x = horz.wall_hitx;
 		press->ray2->wall_hit_y = horz.wall_hity;
+		printf("num : %d\n h-wallhitx : %f wallhity : %f\n", ray_num, horz.wall_hitx, horz.wall_hity);
+		printf("v-wallhitx : %f wallhity : %f\n", vert.wall_hitx, vert.wall_hity);
 		press->ray2->was_hit_vertical = 0;
 	}
+	printf("final wallhit x : %f final wallhit y : %f\n", press->ray2->wall_hit_x, press->ray2->wall_hit_y);
+
 	draw_line(press, press->player2->x, press->player2->y);
 	press->ray_arr->distances[ray_num] = press->ray2->distance;
 	press->ray_arr->ray_angles[ray_num] = press->ray2->ray_angle;
@@ -115,6 +118,9 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	press->ray_arr->colors[ray_num] = \
 		fix_color(press, dx, dy);
 	press->ray_arr->colors[0] = press->ray_arr->colors[1];
+	
+	printf("ray_x : %f ray_y : %f\n", press->ray_arr->ray_x[ray_num], press->ray_arr->ray_y[ray_num]);
+	printf("color : %d\n\n", press->ray_arr->colors[ray_num]);
 	// for (int i = 0; i < RAY_COUNT; i++)
 	// {
 	// 	printf("i : %d color : %d\n", i, press->ray_arr->colors[i]);
@@ -142,7 +148,7 @@ void	draw_ray(t_press *press)
 		i++;
 	}
 	info3_init(press, 1);
-	//normalize_color(press);
+	normalize_color(press);
 	pixel_render(press);
 	mlx_put_image_to_window(press->param->mlx, \
 			press->param->win, press->img2->img, 0, 0);
