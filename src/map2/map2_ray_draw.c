@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 20:29:44 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 20:47:24 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	ray_init(press->ray2, angle);
 	cal_horz_ray(press, &horz);
 	cal_vert_ray(press, &vert);
+	printf("vert dis : %f horz dis : %f\n", vert.distance, horz.distance);
 	if (vert.distance < horz.distance)
 	{
 		printf("vert dis : %f\n", vert.distance);

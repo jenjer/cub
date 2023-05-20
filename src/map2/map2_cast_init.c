@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 20:27:03 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 20:51:34 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init_player(t_meta_data *meta, t_player2 **player2)
 	(*player2)->thickness = 2;
 	(*player2)->rotation_angle = draw_cardinal(meta->dir);
 	(*player2)->walkspeed = 0.2;
-	(*player2)->turnspeed = 5 * (PI / 180);
+	(*player2)->turnspeed = 4 * (PI / 180);
 	(*player2)->turn_direction = 0;
 	(*player2)->walk_direction = 0;
 }
