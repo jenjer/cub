@@ -6,7 +6,7 @@
 #    By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/05/18 21:53:32 by gyopark          ###   ########.fr        #
+#    Updated: 2023/05/19 17:21:48 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRCS_MAN    = src/main.c					\
 			  src/map_direction2.c			\
 			  src/map_setting2.c			\
 			  src/map_valid3.c				\
-			  src/for_delete.c
+			  src/for_delete.c				\
+			  src/debug.c
 
 OBJS_MAN    = ${SRCS_MAN:.c=.o}
 

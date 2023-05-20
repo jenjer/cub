@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 21:47:14 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 15:42:15 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	normalize_color(t_press *press)
 
 	ray_num = 1;
 	offset = 1;
-	while (offset <= 5)
+	while (offset <= 1)
 	{
 		while (ray_num < RAY_COUNT - offset)
 		{
@@ -39,7 +39,7 @@ void	normalize_color(t_press *press)
 				press->ray_arr->colors[ray_num] != \
 				press->ray_arr->colors[ray_num + offset])
 				press->ray_arr->colors[ray_num] = \
-					press->ray_arr->colors[ray_num - offset];
+					press->ray_arr->colors[ray_num - 1];
 			ray_num++;
 		}
 		offset++;
@@ -49,31 +49,31 @@ void	normalize_color(t_press *press)
 
 void	info3_init(t_press *press, int ray_num)
 {
-	t_3d	*info3;
-	double	corr_dis;
-	double	wall_height;
-	double	cal_height;
+	static t_3d	info3;
+	double		corr_dis;
+	double		wall_height;
+	double		cal_height;
 
-	info3 = (t_3d *)malloc(sizeof(t_3d));
-	ft_memset(info3, 0, sizeof(t_3d));
-	info3->wall_top_pixel = (int *) malloc(sizeof(int) * RAY_COUNT);
-	info3->wall_bot_pixel = (int *) malloc(sizeof(int) * RAY_COUNT);
-	info3->fov_angle = 60 * (PI / 180.0);
-	info3->distance_plane = \
-			((GAME_WIDTH / 2) / tan(info3->fov_angle / 2));
+	//info3 = (t_3d *)malloc(sizeof(t_3d));
+	ft_memset(&info3, 0, sizeof(t_3d));
+	info3.fov_angle = 60 * (PI / 180.0);
+	info3.distance_plane = \
+			((GAME_WIDTH / 2) / tan(info3.fov_angle / 2));
 	while (ray_num < RAY_COUNT)
 	{
 		corr_dis = press->ray_arr->distances[ray_num] * \
 				cos(press->ray_arr->ray_angles[ray_num] - \
 						press->player2->rotation_angle);
 		wall_height = ((press->map2->mts / corr_dis) * \
-				(info3->distance_plane)) / 16;
+				(info3.distance_plane)) / 16;
 		cal_height = wall_height;
-		info3->wall_top_pixel[ray_num] = (GAME_HEIGHT / 2) - (cal_height / 2);
-		info3->wall_bot_pixel[ray_num] = (GAME_HEIGHT / 2) + (cal_height / 2);
+		info3.wall_top_pixel[ray_num] = (GAME_HEIGHT / 2) - (cal_height / 2);
+		info3.wall_bot_pixel[ray_num] = (GAME_HEIGHT / 2) + (cal_height / 2);
+		info3.wall_top_pixel[0] = info3.wall_top_pixel[1];
+		info3.wall_bot_pixel[0] = info3.wall_bot_pixel[1];
 		ray_num++;
 	}
-	press->info3 = info3;
+	press->info3 = &info3;
 }
 
 void	ray_init(t_ray2 *ray2, double ray_angle)
@@ -93,16 +93,16 @@ void	ray_init(t_ray2 *ray2, double ray_angle)
 	ray2->dy = 0;
 }
 
-void	ray_arr_init(t_ray_arr *ray_arr)
-{
-	ray_arr->ray_angles = (double *)malloc(sizeof(double) * RAY_COUNT);
-	ft_memset(ray_arr->ray_angles, 0, sizeof(double) * RAY_COUNT);
-	ray_arr->distances = (double *)malloc(sizeof(double) * RAY_COUNT);
-	ft_memset(ray_arr->distances, 0, sizeof(double) * RAY_COUNT);
-	ray_arr->ray_x = (double *)malloc(sizeof(double) * RAY_COUNT);
-	ft_memset(ray_arr->ray_x, 0, sizeof(double) * RAY_COUNT);
-	ray_arr->ray_y = (double *)malloc(sizeof(double) * RAY_COUNT);
-	ft_memset(ray_arr->ray_y, 0, sizeof(double) * RAY_COUNT);
-	ray_arr->colors = (int *)malloc(sizeof(int) * RAY_COUNT);
-	ft_memset(ray_arr->colors, 0, RAY_COUNT);
-}
+// void	ray_arr_init(t_ray_arr *ray_arr)
+// {
+// 	ray_arr->ray_angles = (double *)malloc(sizeof(double) * RAY_COUNT);
+// 	ft_memset(ray_arr->ray_angles, 0, sizeof(double) * RAY_COUNT);
+// 	ray_arr->distances = (double *)malloc(sizeof(double) * RAY_COUNT);
+// 	ft_memset(ray_arr->distances, 0, sizeof(double) * RAY_COUNT);
+// 	ray_arr->ray_x = (double *)malloc(sizeof(double) * RAY_COUNT);
+// 	ft_memset(ray_arr->ray_x, 0, sizeof(double) * RAY_COUNT);
+// 	ray_arr->ray_y = (double *)malloc(sizeof(double) * RAY_COUNT);
+// 	ft_memset(ray_arr->ray_y, 0, sizeof(double) * RAY_COUNT);
+// 	ray_arr->colors = (int *)malloc(sizeof(int) * RAY_COUNT);
+// 	ft_memset(ray_arr->colors, 0, RAY_COUNT);
+// }

@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 21:46:07 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 17:54:42 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ double	draw_cardinal(int dir)
 
 void	init_player(t_meta_data *meta, t_player2 **player2)
 {
-	(*player2) = (t_player2 *)malloc(sizeof(t_player2));
 	(*player2)->x = meta->player_x;
 	(*player2)->y = meta->player_y;
 	(*player2)->thickness = 2;
@@ -59,6 +58,7 @@ void	init_map2(t_map2 *map2, t_meta_data *meta)
 
 void	map_cast_init(t_press *press)
 {
+	atexit(leakcheck);
 	press->img1 = (t_img1 *)malloc(sizeof(t_img1));
 	ft_memset(press->img1, 0, sizeof(t_img1));
 	press->img2 = (t_img2 *)malloc(sizeof(t_img2));

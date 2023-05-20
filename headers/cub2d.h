@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 21:42:09 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 22:36:12 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # define RU 103
 # define RD 104
 # define RAY_COUNT 400
+
+#include <stdio.h>
+extern void* __debug_tmp__;
+# define malloc(x) \
+(__debug_tmp__ = malloc(x)); \
+printf("%s:%d %p [%lubyte]\n", __FILE__, __LINE__, __debug_tmp__, x)
 
 typedef struct s_player2
 {
@@ -89,12 +95,12 @@ typedef struct s_dp_ray
 
 typedef struct s_rayarr
 {
-	double	*distances;
-	double	*ray_angles;
-	int		*colors;
-	double	*ray_x;
-	double	*ray_y;
-	double	*wall_heights;
+	double	distances[RAY_COUNT];
+	double	ray_angles[RAY_COUNT];
+	int		colors[RAY_COUNT];
+	double	ray_x[RAY_COUNT];
+	double	ray_y[RAY_COUNT];
+	double	wall_heights[RAY_COUNT];
 }	t_ray_arr;
 
 typedef struct s_ray2

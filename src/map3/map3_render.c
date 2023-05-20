@@ -6,29 +6,37 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 19:47:50 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 15:55:27 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-int	fix_color(t_press *press)
+int	fix_color(t_press *press, double dx, double dy)
 {
 	int		color;
 	double	x;
 	double	y;
 
+	(void) dx;
+	(void) dy;
 	color = 0;
 	x = press->ray2->last_x - (int)press->ray2->last_x;
 	y = press->ray2->last_y - (int)press->ray2->last_y;
-	if (y >= x && (x + y >= 1))
-		color = 0xff00ff;
-	else if (!(y >= x) && !(x + y >= 1))
-		color = 0xA9D0F5;
-	else if (y >= x && !(x + y >= 1))
-		color = 0x81F7D8;
-	else if (!(y >= x) && x + y >= 1)
-		color = 0x00ffff;
+	if (y >= x)
+	{	
+		if (x + y >= 1)
+			color = 0xff00ff;//16711935
+		else
+			color = 0x81F7D8;//8517592
+	}
+	else
+	{
+		if (x + y >= 1)
+			color = 0x00ffff;//65535 갈색
+		else
+			color = 0xA9D0F5;//11129077 모래색
+	}
 	return (color);
 }
 
@@ -37,13 +45,15 @@ void	find_dir(t_press *press, int i)
 	int	color;
 
 	color = press->ray_arr->colors[i];
+	if (color == 0)
+		color = press->ray_arr->colors[i - 1];
 	if (color == 0xff00ff)
 		press->info3->dir = 0;
-	if (color == 0xA9D0F5)
+	else if (color == 0xA9D0F5)
 		press->info3->dir = 1;
-	if (color == 0x81F7D8)
+	else if (color == 0x81F7D8)
 		press->info3->dir = 2;
-	if (color == 0x00ffff)
+	else if (color == 0x00ffff)
 		press->info3->dir = 3;
 }
 
@@ -90,7 +100,7 @@ void	pixel_render(t_press *press)
 	int	idx;
 	int	flag;
 
-	idx = 1;
+	idx = 0;
 	while (idx < RAY_COUNT)
 	{
 		find_dir(press, idx);

@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/19 15:36:32 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 21:40:12 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@
 
 # define GAME_WIDTH 1600
 # define GAME_HEIGHT 900
-
-int check;
 typedef struct s_color
 {
 	int	red;
@@ -88,8 +86,8 @@ typedef struct s_3d
 {
 	double	fov_angle;
 	double	distance_plane;
-	int		*wall_top_pixel;
-	int		*wall_bot_pixel;
+	int		wall_top_pixel[RAY_COUNT];
+	int		wall_bot_pixel[RAY_COUNT];
 	int		dir;
 	int		img_wid;
 	int		img_hwid;
@@ -121,6 +119,7 @@ int		map_direction_init(t_meta_data *meta, int flag, char *line);
 // parsing function
 int		add_color(t_meta_data *meta, char *tmp, int flag, int i);
 int		map_valid_check(t_meta_data *meta, int r, int flag, int first1);
+void	check_dup_path(t_meta_data *meta, char *tmp, int flag);
 
 // freeing function
 int		map_free_all(t_meta_data meta, int i);
@@ -169,7 +168,7 @@ void	fill_squares(t_press *press, int x, int y, int color);
 int		draw_player(t_press *press);
 void	setting_map_location(t_press *press, int *x, int *y);
 void	pixel_render(t_press *press);
-int		fix_color(t_press *press);
+int		fix_color(t_press *press, double ray_x, double ray_y);
 double	distance_between_points(double x1, double y1, double x2, double y2);
 void	render_pixel_row(t_press *press, int idx, int flag);
 int		find_position_hei(t_press *press, int i, int y, int dir);

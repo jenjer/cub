@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/18 21:56:30 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 16:49:59 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	check_alpha(t_meta_data *meta, int *flag, int r, int c)
 		meta->player_x = c;
 		meta->player_y = r;
 		(*flag)++;
+		if (*flag > 1)
+			ft_exit("Too many charater!\n");
 		meta->dir = check_cardinal(meta->sp_map[r][c]);
 		meta->sp_map[r][c] = '0';
 	}
@@ -85,11 +87,11 @@ int	map_valid_check(t_meta_data *meta, int r, int flag, int first1)
 		while (meta->sp_map[r][++c])
 		{
 			if (!valid_char_check(meta->sp_map[r][c]))
-				ft_exit("Invalid map! 1\n");
+				ft_exit("Invalid characters!\n");
 			if (meta->sp_map[r][c] == 'X')
 			{
 				if (map_check_func(meta, r, c))
-					ft_exit("Invalid map! 2\n");
+					ft_exit("There's Hole in the map!\n");
 			}
 			check_alpha(meta, &flag, r, c);
 			check_wall_sp_map(meta, r, c, &first1);

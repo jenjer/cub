@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/18 21:45:23 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 16:50:30 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	map_init_util(t_meta_data *meta)
 		if (!line)
 			break ;
 		if (ft_strlen(line) > 1 || line[0] != '\n')
-			ft_exit("word after feed ERROR!!!\n");
+			ft_exit("word after feed error!\n");
 	}
 }
 
@@ -76,7 +76,7 @@ int	map_init_sub(t_meta_data *meta, char *line, int *s_flag)
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
 	if (line[ft_strlen(line) - 1] != '1')
-		ft_exit("not 1 ended!!\n");
+		ft_exit("Not 1 ended error!\n");
 	if (meta->max_width < (int) ft_strlen(line))
 		meta->max_width = ft_strlen(line);
 	return (3);
@@ -107,6 +107,8 @@ int	map_init(t_meta_data *meta, char **tmp_map, int idx, int s_flag)
 		height_plus_free(meta, line);
 	}
 	map_init_util(meta);
+	if (!meta->map)
+		ft_exit("No map information!\n");
 	make_sp_map(meta);
 	return (0);
 }

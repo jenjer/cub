@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:42:35 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/18 21:58:22 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 18:16:49 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	map_cast(t_param *param_, t_meta_data *meta_)
 	t_press		*press;
 
 	press = (t_press *)malloc(sizeof(t_press));
+	ft_memset(press, 0, sizeof(t_press));
 	press->param = param_;
 	press->meta = meta_;
 	map_cast_init(press);

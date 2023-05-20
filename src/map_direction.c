@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/19 16:17:23 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/19 16:19:55 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,6 @@ int	check_direction(t_meta_data *meta)
 		|| meta->c_color->blue == -1)
 		return (1);
 	return (0);
-}
-
-void	check_dup_path(t_meta_data *meta, char *tmp, int flag)
-{
-	if (flag == 1)
-	{
-		if ((meta->tex[0].tex_path))
-			ft_exit("Duplicated information!\n");
-		meta->tex[0].tex_path = ft_strdup(tmp);
-	}
-	else if (flag == 2)
-	{
-		if ((meta->tex[1].tex_path))
-			ft_exit("Duplicated information!\n");
-		meta->tex[1].tex_path = ft_strdup(tmp);
-	}	
-	else if (flag == 3)
-	{
-		if ((meta->tex[2].tex_path))
-			ft_exit("Duplicated information!\n");
-		meta->tex[2].tex_path = ft_strdup(tmp);
-	}	
-	else if (flag == 4)
-	{
-		if ((meta->tex[3].tex_path))
-			ft_exit("Duplicated information!\n");
-		meta->tex[3].tex_path = ft_strdup(tmp);
-	}		
 }
 
 int	see_flag(t_meta_data *meta, char *tmp, int flag)
@@ -138,6 +110,6 @@ int	map_direction_init(t_meta_data *meta, int flag, char *line)
 			break ;
 	}
 	if (check_direction(meta))
-		return (1);
+		ft_exit("Incorrect information!\n");
 	return (0);
 }

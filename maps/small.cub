@@ -1,14 +1,14 @@
-NO ./texture/brown_wall.xpm
-SO ./texture/stone_wall.xpm
-WE ./texture/castle_wall.xpm
-EA ./texture/future_wall.xpm
+NO ./images/NO.xpm
+SO ./images/SO.xpm
+WE ./images/WE.xpm
+EA ./images/EA.xpm
 
 F 233,150,122
 C 0,191,255
 
 
 11111
-10001
-10N01
-10001
+10001111
+10N00001
+10001111
 11111
