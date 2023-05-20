@@ -6,14 +6,14 @@
 #    By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:45:58 by gyopark           #+#    #+#              #
-#    Updated: 2023/05/19 17:21:48 by gyopark          ###   ########.fr        #
+#    Updated: 2023/05/20 21:24:36 by gyopark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3d
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -o3 -g3 #-fsanitize=address
+CFLAGS      = -Wall -Wextra -Werror -o3 -g3 -fsanitize=address
 MLX         = -L./mlx -lmlx -framework OpenGL -framework AppKit
 MLXDIR      = ./mlx
 LIBFTDIR    = ./libft
@@ -41,9 +41,7 @@ SRCS_MAN    = src/main.c					\
 			  src/map_valid2.c				\
 			  src/map_direction2.c			\
 			  src/map_setting2.c			\
-			  src/map_valid3.c				\
-			  src/for_delete.c				\
-			  src/debug.c
+			  src/map_valid3.c
 
 OBJS_MAN    = ${SRCS_MAN:.c=.o}
 

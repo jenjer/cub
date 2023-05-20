@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/19 21:40:12 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:24:54 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 
 # define GAME_WIDTH 1600
 # define GAME_HEIGHT 900
+
 typedef struct s_color
 {
 	int	red;
@@ -168,14 +169,10 @@ void	fill_squares(t_press *press, int x, int y, int color);
 int		draw_player(t_press *press);
 void	setting_map_location(t_press *press, int *x, int *y);
 void	pixel_render(t_press *press);
-int		fix_color(t_press *press, double ray_x, double ray_y);
+int		fix_color(t_press *press);
 double	distance_between_points(double x1, double y1, double x2, double y2);
 void	render_pixel_row(t_press *press, int idx, int flag);
 int		find_position_hei(t_press *press, int i, int y, int dir);
-
-//for delete
-void	print_map(t_meta_data meta);
-void	leakcheck(void);
 
 //valid_check
 void	do_dfs1(t_meta_data *meta, int r, int c);

@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 20:47:24 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:17:34 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,46 +87,25 @@ void	draw_one_ray(t_press *press, double angle, int ray_num)
 	ray_init(press->ray2, angle);
 	cal_horz_ray(press, &horz);
 	cal_vert_ray(press, &vert);
-	printf("vert dis : %f horz dis : %f\n", vert.distance, horz.distance);
 	if (vert.distance < horz.distance)
 	{
-		printf("vert dis : %f\n", vert.distance);
 		press->ray2->wall_hit_x = vert.wall_hitx;
 		press->ray2->wall_hit_y = vert.wall_hity;
-		printf("num : %d\n v-wallhitx : %f wallhity : %f\n", ray_num, vert.wall_hitx, vert.wall_hity);
-		printf("h-wallhitx : %f wallhity : %f\n", horz.wall_hitx, horz.wall_hity);
 		press->ray2->was_hit_vertical = 1;
 	}
 	else
 	{
-		printf("horz dis : %f\n", horz.distance);
 		press->ray2->wall_hit_x = horz.wall_hitx;
 		press->ray2->wall_hit_y = horz.wall_hity;
-		printf("num : %d\n h-wallhitx : %f wallhity : %f\n", ray_num, horz.wall_hitx, horz.wall_hity);
-		printf("v-wallhitx : %f wallhity : %f\n", vert.wall_hitx, vert.wall_hity);
 		press->ray2->was_hit_vertical = 0;
 	}
-	printf("final wallhit x : %f final wallhit y : %f\n", press->ray2->wall_hit_x, press->ray2->wall_hit_y);
-
 	draw_line(press, press->player2->x, press->player2->y);
 	press->ray_arr->distances[ray_num] = press->ray2->distance;
 	press->ray_arr->ray_angles[ray_num] = press->ray2->ray_angle;
 	press->ray_arr->ray_x[ray_num] = press->ray2->last_x;
 	press->ray_arr->ray_y[ray_num] = press->ray2->last_y;
-	//
-	double dx = cos(angle);
-	double dy = sin(angle);
-	press->ray_arr->colors[ray_num] = \
-		fix_color(press, dx, dy);
+	press->ray_arr->colors[ray_num] = fix_color(press);
 	press->ray_arr->colors[0] = press->ray_arr->colors[1];
-	
-	printf("ray_x : %f ray_y : %f\n", press->ray_arr->ray_x[ray_num], press->ray_arr->ray_y[ray_num]);
-	printf("color : %d\n\n", press->ray_arr->colors[ray_num]);
-	// for (int i = 0; i < RAY_COUNT; i++)
-	// {
-	// 	printf("i : %d color : %d\n", i, press->ray_arr->colors[i]);
-	// }
-	//
 }
 
 void	draw_ray(t_press *press)
@@ -140,7 +119,6 @@ void	draw_ray(t_press *press)
 	ray_range = PI / 3.0;
 	angle = press->player2->rotation_angle;
 	ft_memset(&ray_arr_, 0, sizeof(t_ray_arr));
-	// ray_arr_init(&ray_arr_);
 	press->ray_arr = &ray_arr_;
 	while (i < RAY_COUNT)
 	{

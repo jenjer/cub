@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:42:11 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/19 22:36:12 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:24:02 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 # define RU 103
 # define RD 104
 # define RAY_COUNT 400
-
-#include <stdio.h>
-extern void* __debug_tmp__;
-# define malloc(x) \
-(__debug_tmp__ = malloc(x)); \
-printf("%s:%d %p [%lubyte]\n", __FILE__, __LINE__, __debug_tmp__, x)
 
 typedef struct s_player2
 {

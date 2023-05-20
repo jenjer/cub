@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:51:09 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 20:51:34 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:25:15 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	init_map2(t_map2 *map2, t_meta_data *meta)
 
 void	map_cast_init(t_press *press)
 {
-	atexit(leakcheck);
 	press->img1 = (t_img1 *)malloc(sizeof(t_img1));
 	ft_memset(press->img1, 0, sizeof(t_img1));
 	press->img2 = (t_img2 *)malloc(sizeof(t_img2));

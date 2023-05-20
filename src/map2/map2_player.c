@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 22:04:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 20:16:43 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:31:43 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,21 @@ int	check_wall(t_press *press, double x, double y)
 {
 	int	ix;
 	int	iy;
-	// int	tx;
-	// int	ty;
+	int	tx;
+	int	ty;
 
-	if (x < 0 || x > press->map2->map_cols || \
-				y < 0 || y > press->map2->map_rows)
+	ix = floor(x + 0.1);
+	iy = floor(y + 0.1);
+	tx = floor(x - 0.1);
+	ty = floor(y - 0.1);
+	if (press->meta->sp_map[(int)floor(y)][(int)floor(x)] == '1' \
+			|| press->meta->sp_map[(int)floor(y)][(int)floor(x)] == 'X' ||
+				press->meta->sp_map[iy][ix] == '1' || \
+					press->meta->sp_map[iy][ix] == 'X' || \
+						press->meta->sp_map[ty][tx] == '1' || \
+							press->meta->sp_map[ty][tx] == 'X')
 		return (1);
-	ix = floor(x);
-	iy = floor(y);
-	return (press->meta->sp_map[iy][ix] != '0');
-	// ix = floor(x + 0.1);
-	// iy = floor(y + 0.1);
-	// tx = floor(x - 0.1);
-	// ty = floor(y - 0.1);
-	// if (press->meta->sp_map[(int)floor(y)][(int)floor(x)] == '1' \
-	// 		|| press->meta->sp_map[(int)floor(y)][(int)floor(x)] == 'X' ||
-	// 			press->meta->sp_map[iy][ix] == '1' || \
-	// 				press->meta->sp_map[iy][ix] == 'X' || \
-	// 					press->meta->sp_map[ty][tx] == '1' || \
-	// 						press->meta->sp_map[ty][tx] == 'X')
-	// 	return (1);
-	// return (0);
+	return (0);
 }
 
 void	update_player_lr(t_press *press, double *nx, double *ny, double step)

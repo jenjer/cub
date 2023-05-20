@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 19:59:57 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:06:11 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	info3_init(t_press *press, int ray_num)
 	double		wall_height;
 	double		cal_height;
 
-	//info3 = (t_3d *)malloc(sizeof(t_3d));
 	ft_memset(&info3, 0, sizeof(t_3d));
 	info3.fov_angle = 60 * (PI / 180.0);
 	info3.distance_plane = \

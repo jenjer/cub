@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/20 20:51:48 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:20:23 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	map_init_util(t_meta_data *meta)
 		if (ft_strlen(line) > 1 || line[0] != '\n')
 			ft_exit("word after feed error!\n");
 	}
+	if (!meta->map)
+		ft_exit("No map information!\n");
 }
 
 void	height_plus_free(t_meta_data *meta, char *line)
@@ -107,8 +109,6 @@ int	map_init(t_meta_data *meta, char **tmp_map, int idx, int s_flag)
 		height_plus_free(meta, line);
 	}
 	map_init_util(meta);
-	if (!meta->map)
-		ft_exit("No map information!\n");
 	make_sp_map(meta);
 	return (0);
 }

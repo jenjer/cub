@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 16:09:35 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:58:08 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,48 @@ int	find_position_hei(t_press *press, int i, int y, int dir)
 void	render_pixel_row_flag1(t_press *press, \
 			int idx, int y, int position_hei)
 {
-	if (press->img2->data[GAME_WIDTH * y + \
-			(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT))] \
-				== press->meta->c_color->all || \
-		press->img2->data[(GAME_WIDTH * y + \
-		(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] == \
-			press->meta->f_color->all)
+	if (GAME_WIDTH * y + \
+			(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)) < \
+				GAME_WIDTH * GAME_HEIGHT)
 	{
-		press->img2->data[(GAME_WIDTH * y + \
-		(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] = \
-			press->meta->tex[press->info3->dir].texture[\
-			(((int)press->info3->img_wid + \
-			(int)(press->meta->tex[press->info3->dir].width) * position_hei))];
+		if (press->img2->data[GAME_WIDTH * y + \
+				(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT))] \
+					== press->meta->c_color->all || \
+			press->img2->data[(GAME_WIDTH * y + \
+			(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] == \
+				press->meta->f_color->all)
+		{
+			press->img2->data[(GAME_WIDTH * y + \
+			(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] = \
+				press->meta->tex[press->info3->dir].texture[\
+				(((int)press->info3->img_wid + \
+				(int)(press->meta->tex[press->info3->dir].width) * \
+					position_hei))];
+		}
 	}
 }
 
 void	render_pixel_row_flag0(t_press *press, \
 			int idx, int y, int position_hei)
 {
-	if (press->img2->data[(GAME_WIDTH * y + \
-			(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] == \
-				press->meta->c_color->all || \
-		press->img2->data[(GAME_WIDTH * y + \
-			(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] == \
-				press->meta->f_color->all)
+	if (GAME_WIDTH * y + \
+			(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)) < \
+				GAME_WIDTH * GAME_HEIGHT)
 	{
-		press->img2->data[(GAME_WIDTH * y + \
-			(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] = \
-			press->meta->tex[press->info3->dir].texture[\
-				(((int)press->info3->img_hwid + \
-				(int)(press->meta->tex[press->info3->dir].width) * \
-					position_hei))];
+		if (press->img2->data[(GAME_WIDTH * y + \
+				(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] == \
+					press->meta->c_color->all || \
+			press->img2->data[(GAME_WIDTH * y + \
+				(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] == \
+					press->meta->f_color->all)
+		{
+			press->img2->data[(GAME_WIDTH * y + \
+				(press->info3->x + idx * (GAME_WIDTH / RAY_COUNT)))] = \
+				press->meta->tex[press->info3->dir].texture[\
+					(((int)press->info3->img_hwid + \
+					(int)(press->meta->tex[press->info3->dir].width) * \
+						position_hei))];
+		}
 	}
 }
 

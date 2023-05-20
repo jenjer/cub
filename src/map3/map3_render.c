@@ -6,36 +6,34 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:22:39 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 19:52:07 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:06:41 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-int	fix_color(t_press *press, double dx, double dy)
+int	fix_color(t_press *press)
 {
 	int		color;
 	double	x;
 	double	y;
 
-	(void) dx;
-	(void) dy;
 	color = 0;
 	x = press->ray2->last_x - (int)press->ray2->last_x;
 	y = press->ray2->last_y - (int)press->ray2->last_y;
 	if (y >= x)
 	{	
 		if (x + y >= 1)
-			color = 0xff00ff;//16711935
+			color = 0xff00ff;
 		else
-			color = 0x81F7D8;//8517592
+			color = 0x81F7D8;
 	}
 	else
 	{
 		if (x + y >= 1)
-			color = 0x00ffff;//65535 갈색
+			color = 0x00ffff;
 		else
-			color = 0xA9D0F5;//11129077 모래색
+			color = 0xA9D0F5;
 	}
 	return (color);
 }
