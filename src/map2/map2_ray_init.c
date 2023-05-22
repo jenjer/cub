@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:20:14 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/20 21:06:11 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/22 15:55:44 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	normalize_color(t_press *press)
 
 	ray_num = 1;
 	offset = 1;
-	while (offset <= 1)
+	while (offset <= 2)
 	{
 		while (ray_num < RAY_COUNT - offset)
 		{
@@ -64,7 +64,7 @@ void	info3_init(t_press *press, int ray_num)
 				cos(press->ray_arr->ray_angles[ray_num] - \
 						press->player2->rotation_angle);
 		wall_height = ((press->map2->mts / corr_dis) * \
-				(info3.distance_plane)) / 16;
+				(info3.distance_plane)) / 14;
 		cal_height = wall_height;
 		info3.wall_top_pixel[ray_num] = (GAME_HEIGHT / 2) - (cal_height / 2);
 		info3.wall_bot_pixel[ray_num] = (GAME_HEIGHT / 2) + (cal_height / 2);

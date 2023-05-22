@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/20 21:20:23 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/22 17:03:31 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	map_init_util(t_meta_data *meta)
 		if (!line)
 			break ;
 		if (ft_strlen(line) > 1 || line[0] != '\n')
-			ft_exit("word after feed error!\n");
+			ft_exit("Word after feed error!\n");
 	}
 	if (!meta->map)
 		ft_exit("No map information!\n");

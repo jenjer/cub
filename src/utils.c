@@ -6,23 +6,24 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/19 17:48:49 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/22 16:27:01 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-void	exit_error(char *message, int code)
-{
-	write(2, message, ft_strlen(message));
-	exit(code);
-}
-
 void	skip_space(char **str)
 {
-	while (*str[0] == '\t' || *str[0] == '\v' || \
-			*str[0] == '\f' || *str[0] == '\r' || *str[0] == ' ')
+	int	i;
+
+	i = 0;
+	while (*str[0] == ' ')
+	{
+		i++;
 		(*str)++;
+	}
+	if (i != 1)
+		ft_exit("Not following order!\n");
 }
 
 int	ft_isnum(char *str)

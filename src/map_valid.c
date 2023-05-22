@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/19 16:49:59 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/22 17:06:23 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	map_valid_check(t_meta_data *meta, int r, int flag, int first1)
 			check_wall_sp_map(meta, r, c, &first1);
 		}	
 	}
+	if (meta->player_x < 0 || meta->player_y < 0)
+		ft_exit("There's no Character on the map!\n");
 	call_dfs(meta);
 	return (flag != 1);
 }

@@ -6,29 +6,11 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:35:05 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/20 20:27:10 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/22 17:06:44 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
-
-void	meta_data_setting_zero(t_meta_data *meta)
-{
-	meta->height = 0;
-	meta->add_height = 0;
-	meta->map = 0;
-	meta->sp_map = 0;
-	meta->max_width = 0;
-	meta->f_color = NULL;
-	meta->c_color = NULL;
-	meta->player_x = 0;
-	meta->player_y = 0;
-	meta->pos1_r = 0;
-	meta->pos1_c = 0;
-	meta->num1 = 0;
-	meta->dir = 0;
-	meta->visited = NULL;
-}
 
 void	init_meta_data(char *name, t_meta_data *meta)
 {
@@ -37,10 +19,12 @@ void	init_meta_data(char *name, t_meta_data *meta)
 	i = 0;
 	meta->fd = open(name, O_RDONLY);
 	if (meta->fd <= 0)
-		ft_exit("file open error!\n");
+		ft_exit("File open error!\n");
+	meta->player_x = -1;
+	meta->player_y = -1;
 	meta->tex = (t_texture *)malloc(sizeof(t_texture) * 4);
 	if (!meta->tex)
-		ft_exit("texture allocation failed!\n");
+		ft_exit("Texture allocation failed!\n");
 	while (i < 4)
 	{
 		meta->tex[i].tex_path = NULL;
@@ -68,4 +52,3 @@ int	main(int argc, char **argv)
 	map_cast(&param, &meta);
 	return (map_free_all(meta, 0));
 }
-	// print_map(meta);

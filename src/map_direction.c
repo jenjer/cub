@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:42:38 by gyopark           #+#    #+#             */
-/*   Updated: 2023/05/19 16:19:55 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/22 16:21:33 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	check_direction(t_meta_data *meta)
 {
 	if (!meta->tex[0].tex_path || !meta->tex[1].tex_path \
 			|| !meta->tex[2].tex_path || !meta->tex[3].tex_path)
+		return (1);
+	if (!meta->f_color || !meta->c_color)
 		return (1);
 	if (meta->f_color->red == -1 || meta->f_color->green == -1
 		|| meta->f_color->blue == -1)
@@ -64,7 +66,7 @@ void	make_flag(char *line, int *flag, char **tmp)
 		(*tmp)++;
 }
 
-int	add_direction(t_meta_data *meta, char *line, int *flag_)
+int	add_direction(t_meta_data *meta, char *line, int *check)
 {
 	int		flag;
 	char	*tmp;
@@ -81,22 +83,22 @@ int	add_direction(t_meta_data *meta, char *line, int *flag_)
 		skip_space(&tmp);
 	}
 	else
-		ft_exit("Incorrect information!\n");
+		ft_exit("Incorrect Prefix!\n");
 	if (see_flag(meta, tmp, flag))
 		ft_exit("Incorrect information!\n");
 	free(for_free);
 	for_free = NULL;
-	(*flag_)++;
+	(*check)++;
 	return (0);
 }
 
-int	map_direction_init(t_meta_data *meta, int flag, char *line)
+int	map_direction_init(t_meta_data *meta, int check, char *line)
 {
 	while (1)
 	{
 		line = get_next_line(meta->fd);
 		if (!line)
-			ft_exit("getting line error!");
+			ft_exit("Getting line error!");
 		if (ft_strlen(line) == 1 && line[0] == '\n')
 		{
 			free(line);
@@ -104,12 +106,12 @@ int	map_direction_init(t_meta_data *meta, int flag, char *line)
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		add_direction(meta, line, &flag);
+		add_direction(meta, line, &check);
 		free(line);
-		if (flag == 6)
+		if (check == 6)
 			break ;
 	}
 	if (check_direction(meta))
-		ft_exit("Incorrect information!\n");
+		ft_exit("Incorrect informations!\n");
 	return (0);
 }

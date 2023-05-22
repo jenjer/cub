@@ -6,7 +6,7 @@
 /*   By: gyopark <gyopark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:33:23 by youngski          #+#    #+#             */
-/*   Updated: 2023/05/20 21:24:54 by gyopark          ###   ########.fr       */
+/*   Updated: 2023/05/22 15:35:22 by gyopark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ typedef struct s_meta_data
 {
 	t_color			*f_color;
 	t_color			*c_color;
+	t_texture		*tex;
 	int				fd;
 	int				height;
 	int				max_width;
 	int				add_height;
 	int				player_x;
 	int				player_y;
-	t_texture		*tex;
 	char			**map;
 	char			**sp_map;
 	int				pos1_r;
